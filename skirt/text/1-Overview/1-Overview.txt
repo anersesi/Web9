@@ -1,0 +1,14 @@
+/**
+
+\page SKIRT_Overview SKIRT overview
+
+This is a placeholder for the entry point for the documentation on SKIRT, which includes:
+
+- \ref SKIRT_InstallationGuide
+- \ref SKIRT_UserGuide
+- \ref SKIRT_DeveloperGuide
+- \ref SKIRT_Concepts
+
+[TBC]
+
+*/

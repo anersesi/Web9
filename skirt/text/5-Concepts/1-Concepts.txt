@@ -1,0 +1,9 @@
+/**
+
+\page SKIRT_Concepts SKIRT Concepts
+
+This is a placeholder for the index of SKIRT concepts.
+
+[TBC]
+
+*/

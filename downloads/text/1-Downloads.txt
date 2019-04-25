@@ -1,0 +1,24 @@
+/**
+
+\page Downloads Downloads
+
+This page provides a list of useful downloads for <tt>SKIRT</tt> or <tt>PTS</tt>.
+To download a file, right-click or option-click the filename and choose "Save As..."
+
+\section DownloadsResources Resource files
+
+[TBC]
+
+During setup, \c SKIRT loads built-in SEDs and dust properties from resource data files...
+
+ - <a href="http://sciences.ugent.be/skirtextdat/PolarizationProperties.tar.gz">PolarizationProperties.tar.gz</a>:
+   optical dust properties used by the \c PolarizedSilicateGrainComposition and \c PolarizedGraphiteGrainComposition
+   classes
+ - <a href="http://sciences.ugent.be/skirtextdat/FSPSVariableIMFSED.tar.gz">FSPSVariableIMFSED.tar.gz</a>:
+   template data for the SED families with variable initial mass function used by the \c FSPSVariableIMFSEDFamily class
+
+\section DownloadsTutorials Data files used in the tutorials
+
+[TBC]
+
+*/

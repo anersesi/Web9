@@ -1,0 +1,9 @@
+/**
+
+\page Benchmarks Benchmarks
+
+This is a placeholder for the documentation on Benchmarks.
+
+[TBC]
+
+*/

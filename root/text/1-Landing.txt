@@ -1,0 +1,9 @@
+/**
+
+\page Landing The home of the SKIRT project
+
+This is a placeholder for the landing page of the SKIRT project web site.
+
+[TBC]
+
+*/
