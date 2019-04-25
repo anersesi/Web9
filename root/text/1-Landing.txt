@@ -2,7 +2,22 @@
 
 \page Landing The home of the SKIRT project
 
+<center><i>© Astronomical Observatory, Ghent University.</i></center>
+
+\image html Eris.jpg
+
+<center><tt>SKIRT</tt> renderings of the simulated Eris galaxy
+(<a href="http://adsabs.harvard.edu/abs/2011ApJ...742...76G">Guedes et al. 2011</a>)
+in optical and far-infrared wavelengths.</center>
+
 This is a placeholder for the landing page of the SKIRT project web site.
+
+In addition to a welcome and introduction, there should be many references here, including links to the pages
+defined on the root level (next to this landing page):
+
+- \ref Contributing
+- \ref Publications
+- \ref LegalInfo
 
 [TBC]
 

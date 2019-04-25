@@ -1,0 +1,9 @@
+/**
+
+\page Contributing Contributing
+
+This is a placeholder for information on how to contribute to the SKIRT project, and on past and current contributors.
+
+[TBC]
+
+*/

@@ -1,6 +1,6 @@
 /**
 
-\page SKIRT_Overview SKIRT overview
+\page SKIRT SKIRT overview
 
 This is a placeholder for the entry point for the documentation on SKIRT, which includes:
 

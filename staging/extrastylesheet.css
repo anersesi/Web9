@@ -1,0 +1,72 @@
+/* The extra CSS stylesheet for the SKIRT documentation */
+
+#titlearea
+{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border-bottom: 1px solid #5373B4;
+}
+
+#projectlogo
+{
+    text-align: center;
+    vertical-align: bottom;
+    border-collapse: separate;
+}
+
+#projectlogo img
+{
+    border: 0px none;
+    width: 10rem;
+    float:left;
+}
+
+#projectname
+{
+    font-family: Helvetica, Arial, Verdana, Roboto, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0px;
+    padding: 1.95rem 0 0 1rem;
+    float:left;
+}
+
+#projectbrief
+{
+    font-family: Helvetica, Arial, Verdana, Roboto, sans-serif;
+    font-size: 1rem;
+    margin: 0px;
+    padding: 1.95rem 0 0 1rem;
+    float:left;
+    font-style: italic;
+}
+
+body, table, div, p, dl
+{
+    font-family: "Lucida Sans Unicode", Helvetica, Arial, Verdana, Roboto, sans-serif;
+    font-size: 0.9rem;
+}
+
+h1, h2, h3, h4
+{
+    font-family: Helvetica, Arial, Verdana, Roboto, sans-serif;
+    font-weight: 200;
+}
+
+code, tt
+{
+    font-family: Consolas, 'Courier New', courier, Courier, monospace;
+    font-size: 0.9rem;
+}
+
+a.el            /* for links within the same Doxygen build */
+{
+    font-weight: normal;
+}
+
+h2.memtitle     /* for member function section titles */
+{
+    color: MidnightBlue;
+    font-size: 0.9rem;
+}
