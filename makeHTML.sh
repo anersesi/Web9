@@ -5,4 +5,10 @@
 #
 
 # generate the html documentation in a folder next to the git folder
-/Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html.doxygen
+mkdir -p ../html
+/Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_skirt.doxygen
+/Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_pts.doxygen
+/Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_version.doxygen
+
+# copy redirecting index.html file
+cp doxygen/index_root.html ../html/index.html
