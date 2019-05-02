@@ -1,0 +1,359 @@
+# Title (full title)
+# Authors ("First et al." or "First and Second"; last names only)
+# Journal (abbreviation)
+# Month Year (decimal numbers seperated by space)
+# Category (Technical or Application)
+# PDF (filename body without directory nor filename extension)
+# ADS (reference body without the other portions of the URL path)
+#     (empty line)
+TRUST I. A 3D externally illuminated slab benchmark for dust radiative transfer
+Gordon et al.
+A&A
+07 2017
+Technical
+Gordon2017
+2017A%26A...603A.114G
+
+SKIRT: Hybrid parallelization of radiative transfer simulations
+Verstocken et al.
+A&C
+07 2017
+Technical
+Verstocken2017
+2017A%26C....20...16V
+
+Polarization in Monte Carlo radiative transfer and dust scattering polarization signatures of spiral galaxies
+Peest et al.
+A&A
+05 2017
+Technical
+Peest2017
+2017A%26A...601A..92P
+
+Composite biasing in Monte Carlo radiative transfer
+Baes et al.
+A&A
+05 2016
+Technical
+Baes2016
+2016A%26A...590A..55B
+
+SKIRT: The design of a suite of input models for Monte Carlo radiative transfer simulations
+Baes and Camps
+A&A
+09 2015
+Technical
+Baes2015
+2015A%26C....12...33B
+
+Benchmarking the calculation of stochastic heating and emissivity of dust grains in the context of radiative transfer simulations
+Camps et al.
+A&A
+08 2015
+Technical
+Camps2015b
+2015A%26A...580A..87C
+
+SKIRT: an advanced dust radiative transfer code with a user-friendly architecture
+Camps and Baes
+A&C
+03 2015
+Technical
+Camps2015a
+2015A%26C.....9...20C
+
+Hierarchical octree and k-d tree grids for 3D radiative transfer simulations
+Saftly et al.
+A&A
+01 2014
+Technical
+Saftly2014
+2014A%26A...561A..77S
+
+Using 3D Voronoi grids in radiative transfer simulations
+Camps et al.
+A&A
+12 2013
+Technical
+Camps2013
+2013A%26A...560A..35C
+
+Three-dimensional dust radiative transfer
+Steinacker et al.
+ARA&A
+08 2013
+Technical
+Steinacker2013
+2013ARA%26A..51...63S
+
+Using hierarchical octrees in Monte Carlo radiative transfer simulations
+Saftly et al.
+A&A
+06 2013
+Technical
+Saftly2013
+2013A%26A...554A..10S
+
+FitSKIRT: genetic algorithms to automatically fit dusty galaxies with a Monte Carlo radiative transfer code
+De Geyter et al.
+A&A
+02 2013
+Technical
+DeGeyter2013
+2013A%26A...550A..74D
+
+Efficient three-dimensional NLTE dust radiative transfer with SKIRT
+Baes et al.
+ApJS
+10 2011
+Technical
+Baes2011
+2011ApJS..196...22B
+
+Smart detectors for Monte Carlo radiative transfer
+Baes
+MNRAS
+12 2008
+Technical
+Baes2008
+2008MNRAS.391..617B
+
+Radiative equilibrium in Monte Carlo radiative transfer using frequency distribution adjustment
+Baes et al.
+NewA
+06 2005
+Technical
+Baes2005
+2005NewA...10..523B
+
+Radiative transfer in disc galaxies – III. The observed kinematics of dusty disc galaxies
+Baes et al.
+MNRAS
+08 2003
+Technical
+Baes2003
+2003MNRAS.343.1081B
+
+Optical colours and spectral indices of z = 0.1 EAGLE galaxies with the 3D dust radiative transfer code SKIRT
+Trayford et al.
+MNRAS
+09 2017
+Application
+Trayford2017
+2017MNRAS.470..771T
+
+The Herschel Exploitation of Local Galaxy Andromeda (HELGA). VII. A SKIRT radiative transfer model and insights on dust heating
+Viaene et al.
+A&A
+03 2017
+Application
+Viaene2017
+2017A%26A...599A..64V
+
+Far-infrared and dust properties of present-day galaxies in the EAGLE simulations
+Camps et al.
+MNRAS
+10 2016
+Application
+Camps2016
+2016MNRAS.462.1057C
+
+HERschel Observations of Edge-on Spirals (HEROES). III. Dust energy balance study of IC 2531
+Mosenkov et al.
+A&A
+07 2016
+Application
+Mosenkov2016
+2016A%26A...592A..71M
+
+The dust covering factor in active galactic nuclei
+Stalevski et al.
+MNRAS
+05 2016
+Application
+Stalevski2016
+2016MNRAS.458.2288S
+
+Pinwheels in the sky, with dust: 3D modeling of the Wolf-Rayet 98a environment
+Hendrix et al.
+MNRAS
+08 2016
+Application
+Hendrix2016
+2016MNRAS.460.3975H
+
+The EAGLE simulations of galaxy formation: Public release of halo and galaxy catalogues
+McAlpine et al.
+A&A
+04 2016
+Application
+McAlpine2016
+2016A%26C....15...72M
+
+Dust energy balance study of two edge-on spiral galaxies in the Herschel-ATLAS survey
+De Geyter et al.
+MNRAS
+08 2015
+Application
+DeGeyter2015
+2015MNRAS.451.1728D
+
+Non-conservative evolution in Algols: where is the matter?
+Deschamps et al.
+A&A
+05 2015
+Application
+Deschamps2015
+2015A%26A...577A..55D
+
+Large and small-scale structures and the dust energy balance problem in spiral galaxies
+Saftly et al.
+A&A
+04 2015
+Application
+Saftly2015
+2015A%26A...576A..31S
+
+Modelling ripples in Orion with coupled dust dynamics and radiative transfer
+Hendrix et al.
+A&A
+03 2015
+Application
+Hendrix2015
+2015A%26A...575A.110H
+
+The EAGLE project: simulating the evolution and assembly of galaxies and their environments
+Schaye et al.
+MNRAS
+01 2015
+Application
+Schaye2015
+2015MNRAS.446..521S
+
+High-resolution, 3D radiative transfer modeling: I. The grand-design spiral galaxy M51
+De Looze et al.
+A&A
+11 2014
+Application
+DeLooze2014
+2014A%26A...571A..69D
+
+The distribution of interstellar dust in CALIFA edge-on galaxies via oligochromatic radiative transfer fitting
+De Geyter et al.
+MNRAS
+06 2014
+Application
+DeGeyter2014
+2014MNRAS.441..869D
+
+The dust energy balance in the edge-on spiral galaxy NGC4565
+De Looze et al.
+MNRAS
+12 2012
+Application
+DeLooze2012b
+2012MNRAS.427.2797D
+
+Gravitational microlensing of active galactic nuclei dusty tori
+Stalevski et al.
+MNRAS
+09 2012
+Application
+Stalevski2012b
+2012MNRAS.425.1576S
+
+3D radiative transfer modeling of the dusty tori round active galactic nuclei as a clumpy two-phase medium
+Stalevski et al.
+MNRAS
+03 2012
+Application
+Stalevski2012a
+2012MNRAS.420.2756S
+
+Photocentric variability of quasars caused by variations in their inner structure: consequences for Gaia measurements
+Popović et al.
+A&A
+02 2012
+Application
+Popovic2012
+2012A%26A...538A.107P
+
+Panchromatic radiative transfer modeling of stars and dust in the Sombrero galaxy
+De Looze et al.
+MNRAS
+01 2012
+Application
+DeLooze2012a
+2012MNRAS.419..895D
+
+SKIRTOR - database of modelled AGN dusty torus SEDs
+Stalevski
+BlgAJ
+09 2012
+Application
+Stalevski2012c
+2012BlgAJ..18c...3S
+
+AGN dusty tori as a clumpy two-phase medium: the 10 µm silicate feature
+Stalevski et al.
+BaltA
+08 2011
+Application
+Stalevski2011
+2011BaltA..20..490S
+
+The Herschel Virgo Cluster Survey: VII. Dust in cluster dwarf elliptical galaxies
+De Looze et al.
+A&A
+07 2010
+Application
+DeLooze2010
+2010A%26A...518L..54D
+
+The Herschel Virgo Cluster Survey: VI. The far-infrared view of M87
+Baes et al.
+A&A
+07 2010
+Application
+Baes2010b
+2010A%26A...518L..53B
+
+The dust morphology of the elliptical galaxy M86 with SPIRE
+Gomez et al.
+A&A
+07 2010
+Application
+Gomez2010
+2010A%26A...518L..45G
+
+The Herschel-ATLAS: The dust energy balance in the edge-on spiral galaxy UGC 4754
+Baes et al.
+A&A
+07 2010
+Application
+Baes2010a
+2010A%26A...518L..39B
+
+Radiative transfer in disc galaxies – IV. The effect of dust attenuation on structural bulge and disc parameters
+Gadotti et al.
+MNRAS
+04 2010
+Application
+Gadotti2010
+2010MNRAS.403.2053G
+
+3D dust radiative transfer simulations in the inhomogeneous circumstellar medium
+Vidal and Baes
+BaltA
+00 2007
+Application
+Vidal2007
+2007BaltA..16..101V
+
+Efficient dust radiative transfer in a circumstellar disk environment
+Baes et al.
+BaltA
+00 2007
+Application
+Baes2007
+2007BaltA..16...92B

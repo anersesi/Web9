@@ -28,7 +28,7 @@ Please refer to the original licensing conditions for each of these third party 
 \section LegalCit Citations
 
 If you use (portions of) this program in your work, please cite one or more of the relevant papers listed in the
-\ref Publications section of this web site.
+\ref PublicationsAllDate "Publications" section of this web site.
 
 \section LegalCon Contact
 

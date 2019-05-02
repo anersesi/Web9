@@ -16,7 +16,7 @@ In addition to a welcome and introduction, there should be many references here,
 defined on the root level (next to this landing page):
 
 - \ref Contributing
-- \ref Publications
+- \ref PublicationsAllDate "Publications"
 - \ref LegalInfo
 
 [TBC]

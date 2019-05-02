@@ -34,6 +34,9 @@
 # that server, these links can be tested locally on the staged copy as well.
 #
 
+# Generate Doxygen input pages from publications database
+root/text/3-Publications/makePublicationPages.py root/text/3-Publications ../../ResourcesC/Publications
+
 # Generate html documentation in the staging area next to our git folder
 mkdir -p ../stage
 /Applications/Doxygen.app/Contents/Resources/doxygen staging/html_root.doxygen

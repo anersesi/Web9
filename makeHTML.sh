@@ -8,6 +8,7 @@
 mkdir -p ../html
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_skirt.doxygen
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_pts.doxygen
+root/text/3-Publications/makePublicationPages.py root/text/3-Publications ../../ResourcesC/Publications
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_version.doxygen
 
 # copy redirecting index.html file

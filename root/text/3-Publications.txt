@@ -1,9 +1,0 @@
-/**
-
-\page Publications Publications
-
-This is a placeholder for a list of refereed publications related to the SKIRT project.
-
-[TBC]
-
-*/
