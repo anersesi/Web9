@@ -4,8 +4,192 @@
 # Month Year (decimal numbers seperated by space)
 # Category (Technical or Application)
 # PDF (filename body without directory nor filename extension)
-# ADS (reference body without the other portions of the URL path)
-#     (empty line)
+# ADS (bibcode reference without the other portions of the URL)
+
+Dusty galaxies in the Epoch of Reionization: simulations
+Behrens et al.
+MNRAS
+06 2018
+Application
+Behrens2018
+2018MNRAS.477..552B
+
+Submillimetre flux as a probe of molecular ISM mass in high-z galaxies
+Liang et al.
+MNRAS
+07 2018
+Application
+Liang2018
+2018MNRAS.478L..83L
+
+The fate of the Antennae galaxies
+Lahén et al.
+MNRAS
+04 2018
+Application
+Lahen2018
+2018MNRAS.475.3934L
+
+Calibrated, cosmological hydrodynamical simulations with variable IMFs I: Method and effect on global galaxy scaling relations
+Barber et al.
+MNRAS
+10 2018
+Application
+Barber2018
+2018MNRAS.479.5448B
+
+Dust evolution in galaxy cluster simulations
+Gjergo et al.
+MNRAS
+09 2018
+Application
+Gjergo2018
+2018MNRAS.479.2588G
+
+Tidal dwarf galaxies in cosmological simulations
+Ploeckinger et al.
+MNRAS
+02 2018
+Application
+Ploeckinger2018
+2018MNRAS.474..580P
+
+The relation between galaxy morphology and colour in the EAGLE simulation
+Correa et al.
+MNRAS
+11 2017
+Application
+Correa2017
+2017MNRAS.472L..45C
+
+Dissecting the active galactic nucleus in Circinus - I. Peculiar mid-IR morphology explained by a dusty hollow cone
+Stalevski et al.
+MNRAS
+12 2017
+Application
+Stalevski2017
+2017MNRAS.472.3854S
+
+Shock-cloud interaction and gas-dust spatial separation
+Monceau-Baroux & Keppens
+A&A
+04 2017
+Application
+MonceauBaroux2017
+2017A&A...600A.134M
+
+Size evolution of normal and compact galaxies in the EAGLE simulation
+Furlong et al.
+MNRAS
+02 2017
+Application
+Furlong2017
+2017MNRAS.465..722F
+
+Angular momentum evolution of galaxies in EAGLE
+Lagos et al.
+MNRAS
+02 2017
+Application
+Lagos2017
+2017MNRAS.464.3850L
+
+The shape of dark matter haloes - IV. The structure of stellar discs in edge-on galaxies
+Peters et al.
+MNRAS
+01 2017
+Application
+Peters2017
+2017MNRAS.464...48P
+
+Dust effects on LGRB host galaxies in cosmological simulations
+Bignone et al.
+BAAA
+08 2016
+Application
+Bignone2016
+2016BAAA...58...30B
+
+The link between the assembly of the inner dark matter halo and the angular momentum evolution of galaxies in the EAGLE simulation
+Zavala et al.
+MNRAS
+08 2016
+Application
+Zavala2016
+2016MNRAS.460.4466Z
+
+It is not easy being green: the evolution of galaxy colour in the EAGLE simulation
+Trayford et al.
+MNRAS
+08 2016
+Application
+Trayford2016
+2016MNRAS.460.3925T
+
+Bimodality of low-redshift circumgalactic O VI in non-equilibrium EAGLE zoom simulations
+Oppenheimer et al.
+MNRAS
+08 2016
+Application
+Oppenheimer2016
+2016MNRAS.460.2157O
+
+The Fundamental Plane of star formation in galaxies revealed by the EAGLE hydrodynamical simulations
+Lagos et al.
+MNRAS
+07 2016
+Application
+Lagos2016
+2016MNRAS.459.2632D
+
+Simulated Milky Way analogues: implications for dark matter indirect searches
+Calore et al.
+JCAP
+12 2015
+Application
+Calore2015
+2015JCAP...12..053C
+
+Molecular hydrogen abundances of galaxies in the EAGLE simulations
+Lagos et al.
+MNRAS
+10 2015
+Application
+Lagos2015
+2015MNRAS.452.3815L
+
+Modelling dust rings in early-type galaxies through a sequence of radiative transfer simulations and 2D image fitting
+Bonfini et al.
+MNRAS
+07 2018
+Application
+Bonfini2018
+2018MNRAS.478.1161B
+
+HERschel Observations of Edge-on Spirals (HEROES). IV. Dust energy balance problem
+Mosenkov et al.
+A&A
+08 2018
+Application
+Mosenkov2018
+2018A&A...616A.120M
+
+Data Release of UV to Submillimeter Broadband Fluxes for Simulated Galaxies from the EAGLE Project
+Camps et al.
+ApJS
+02 2018
+Application
+Camps2018
+2018ApJS..234...20C
+
+Radiative transfer in disc galaxies - V. The accuracy of the KB approximation
+Lee et al.
+MNRAS
+12 2016
+Technical
+Lee2016
+2016MNRAS.463.2912L
+
 TRUST I. A 3D externally illuminated slab benchmark for dust radiative transfer
 Gordon et al.
 A&A

@@ -1,7 +1,6 @@
 /**
 \page PublicationsTechnicalAuthor Technical Publications by Author
 
-Show: 
 - \ref PublicationsAllDate
 - \ref PublicationsAllAuthor
 - \ref PublicationsTechnicalDate
@@ -22,6 +21,7 @@ Show:
 | Benchmarking the calculation of stochastic heating and emissivity of dust grains in the context of radiative transfer simulations | Camps et al. | Aug 2015 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Camps2015b.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2015A%26A...580A..87C/abstract) |
 | FitSKIRT: genetic algorithms to automatically fit dusty galaxies with a Monte Carlo radiative transfer code | De Geyter et al. | Feb 2013 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/DeGeyter2013.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2013A%26A...550A..74D/abstract) |
 | TRUST I. A 3D externally illuminated slab benchmark for dust radiative transfer | Gordon et al. | Jul 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Gordon2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...603A.114G/abstract) |
+| Radiative transfer in disc galaxies - V. The accuracy of the KB approximation | Lee et al. | Dec 2016 | MNRAS | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Lee2016.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2912L/abstract) |
 | Polarization in Monte Carlo radiative transfer and dust scattering polarization signatures of spiral galaxies | Peest et al. | May 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Peest2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A..92P/abstract) |
 | Using hierarchical octrees in Monte Carlo radiative transfer simulations | Saftly et al. | Jun 2013 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Saftly2013.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2013A%26A...554A..10S/abstract) |
 | Hierarchical octree and k-d tree grids for 3D radiative transfer simulations | Saftly et al. | Jan 2014 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Saftly2014.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2014A%26A...561A..77S/abstract) |

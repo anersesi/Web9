@@ -93,7 +93,6 @@ def makePage(records, mycateg, myorder):
         pg.write("\n")
 
         # write links to other pages
-        pg.write("Show: \n")
         for categ in categories:
             for order in orderings:
                 pg.write("- \\ref Publications" + categ + order + "\n")

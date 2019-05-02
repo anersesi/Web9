@@ -1,7 +1,6 @@
 /**
 \page PublicationsTechnicalDate Technical Publications by Date
 
-Show: 
 - \ref PublicationsAllDate
 - \ref PublicationsAllAuthor
 - \ref PublicationsTechnicalDate
@@ -14,6 +13,7 @@ Show:
 | SKIRT: Hybrid parallelization of radiative transfer simulations | Verstocken et al. | Jul 2017 | A&C | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Verstocken2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26C....20...16V/abstract) |
 | TRUST I. A 3D externally illuminated slab benchmark for dust radiative transfer | Gordon et al. | Jul 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Gordon2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...603A.114G/abstract) |
 | Polarization in Monte Carlo radiative transfer and dust scattering polarization signatures of spiral galaxies | Peest et al. | May 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Peest2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A..92P/abstract) |
+| Radiative transfer in disc galaxies - V. The accuracy of the KB approximation | Lee et al. | Dec 2016 | MNRAS | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Lee2016.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2912L/abstract) |
 | Composite biasing in Monte Carlo radiative transfer | Baes et al. | May 2016 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2016.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2016A%26A...590A..55B/abstract) |
 | SKIRT: The design of a suite of input models for Monte Carlo radiative transfer simulations | Baes and Camps | Sep 2015 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2015.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2015A%26C....12...33B/abstract) |
 | Benchmarking the calculation of stochastic heating and emissivity of dust grains in the context of radiative transfer simulations | Camps et al. | Aug 2015 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Camps2015b.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2015A%26A...580A..87C/abstract) |
