@@ -1,6 +1,6 @@
 /**
 
-\page SKIRT_UserGuide The SKIRT User Guide
+\page UserGuide The SKIRT User Guide
 
 This is a placeholder for the SKIRT user guide.
 

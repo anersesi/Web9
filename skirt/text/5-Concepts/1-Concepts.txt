@@ -1,6 +1,6 @@
 /**
 
-\page SKIRT_Concepts SKIRT Concepts
+\page Concepts SKIRT Concepts
 
 This is a placeholder for the index of SKIRT concepts.
 

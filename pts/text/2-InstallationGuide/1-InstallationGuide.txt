@@ -1,6 +1,6 @@
 /**
 
-\page PTS_InstallationGuide The PTS Installation Guide
+\page InstallationGuide The PTS Installation Guide
 
 This is a placeholder for the PTS installation guide.
 

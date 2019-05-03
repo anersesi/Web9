@@ -1,6 +1,6 @@
 /**
 
-\page SKIRT_DeveloperGuide The SKIRT Developer Guide
+\page DeveloperGuide The SKIRT Developer Guide
 
 This is a placeholder for the SKIRT developer guide.
 

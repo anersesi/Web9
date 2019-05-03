@@ -1,6 +1,6 @@
 /**
 
-\page PTS_UserGuide The PTS User Guide
+\page UserGuide The PTS User Guide
 
 This is a placeholder for the PTS user guide.
 

@@ -4,10 +4,10 @@
 
 This is a placeholder for the entry point for the documentation on SKIRT, which includes:
 
-- \ref SKIRT_InstallationGuide
-- \ref SKIRT_UserGuide
-- \ref SKIRT_DeveloperGuide
-- \ref SKIRT_Concepts
+- \ref InstallationGuide
+- \ref UserGuide
+- \ref DeveloperGuide
+- \ref Concepts
 
 [TBC]
 

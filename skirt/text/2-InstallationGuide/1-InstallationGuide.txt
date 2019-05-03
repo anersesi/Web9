@@ -1,6 +1,6 @@
 /**
 
-\page SKIRT_InstallationGuide The SKIRT Installation Guide
+\page InstallationGuide The SKIRT Installation Guide
 
 This is a placeholder for the SKIRT installation guide.
 

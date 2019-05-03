@@ -4,9 +4,9 @@
 
 This is a placeholder for the entry point for the documentation on PTS, which includes:
 
-  - \ref PTS_InstallationGuide
-  - \ref PTS_UserGuide
-  - \ref PTS_DeveloperGuide
+  - \ref InstallationGuide
+  - \ref UserGuide
+  - \ref DeveloperGuide
 
 
 [TBC]
