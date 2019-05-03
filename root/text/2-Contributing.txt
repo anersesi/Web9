@@ -2,8 +2,49 @@
 
 \page Contributing Contributing
 
-This is a placeholder for information on how to contribute to the SKIRT project, and on past and current contributors.
+This is a placeholder for information on how to contribute to the SKIRT project.
 
 [TBC]
+
+
+\section Contributors Contributor's hall of fame
+
+\subsection ContribCore Core team
+
+The members of the core SKIRT team are:
+
+- <a href = "https://users.ugent.be/~mbaes">Prof. dr. Maarten Baes</a>. Maarten conceived of SKIRT and wrote the first
+several versions of the code. He continues to determine the strategic direction and to supervise further development.
+Once in a while, less frequently than he would like, he contributes some nice new feature himself.
+
+- <a href = "https://users.ugent.be/~pcamps">Dr. ir. Peter Camps</a>. Peter overhauled the SKIRT code, readying the
+class design for further expansion, and initiated the Python toolkit for SKIRT. He is currently chief software
+architect and main developer for the SKIRT project, acting as a gatekeeper for new code contributions.
+
+\subsection ContribOther Other contributors
+
+The following people have contributed to the SKIRT project effort by writing code and/or by extensively using the tools
+and offering feedback. They are listed in alphabetical order on last name. If we inadvertently failed to list someone,
+please let us know.
+
+- Christopher Barber
+- Christoph Behrens
+- Killian Braun
+- Marjorie Decleir
+- Gert De Geyter
+- Ilse De Looze
+- Jacopo Fritz
+- Tom Hendrix
+- Alexander Mosenkov
+- Christian Peest
+- Waad Saftly
+- Marko Stalevski
+- James Trayford
+- Dries Van De Putte
+- Sebastiaan Vandewoude
+- Sam Verstocken
+- Sébastien Viaene
+
+Thank you, we appreciate your help!
 
 */
