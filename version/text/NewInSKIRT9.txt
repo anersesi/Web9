@@ -1,0 +1,15 @@
+/**
+
+\page NewInSKIRT9 What's new in SKIRT 9
+
+This is a placedholder.
+
+[TBC]
+
+See also:
+
+- \ref NewInPTS9
+- \ref OpenSource9
+- \ref StatusRoadmap9
+
+*/

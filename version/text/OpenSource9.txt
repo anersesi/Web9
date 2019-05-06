@@ -1,0 +1,15 @@
+/**
+
+\page OpenSource9 Open source deployment
+
+This is a placedholder.
+
+[TBC]
+
+See also:
+
+- \ref NewInSKIRT9
+- \ref NewInPTS9
+- \ref StatusRoadmap9
+
+*/

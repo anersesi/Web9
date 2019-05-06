@@ -1,0 +1,15 @@
+/**
+
+\page NewInPTS9 What's new in PTS 9
+
+This is a placedholder.
+
+[TBC]
+
+See also:
+
+- \ref NewInSKIRT9
+- \ref OpenSource9
+- \ref StatusRoadmap9
+
+*/
