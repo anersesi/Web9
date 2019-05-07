@@ -61,8 +61,10 @@ Other changes:
  - Photon packet wavelengths are sampled from the source spectrum and are not restricted to a grid.
  - Wavelength grids for various purposes (radiation field, dust emission, instruments) are uncoupled.
  - Simulation items have more generic names (e.g. Source i.o. Stellar, SpatialGrid i.o. DustGrid).
- - Optional output previously controlled by writeXXX properties has moved to a separate suite of Probe classes
- - Source anisotropy is configured independently of its spatial geometry.
+ - Optional output previously controlled by writeXXX properties has moved to a separate suite of Probe classes.
+ - Radiation field is stored also for spatial cells that don't contain dust.
+ - Indicative dust temperature (in probe output) is calculated in a more consistent way.
+ - Emission anisotropy is configured as part of the source, independently of its spatial geometry.
  - Resources must be downloaded separately.
 
 Major dropped features:
@@ -188,6 +190,35 @@ for detecting photon packets in instruments. To enable the use in instruments, S
 consisting of a list of (possibly overlapping) bands. When attached to an instrument, an arriving photon packet is
 registered for each band in the wavelength grid after multiplying its luminosity by the band’s transmission factor
 corresponding to the packet’s wavelength.
+
+\section NewInSKIRT9Radiation Radiation field
+
+When relevant for the simulation, information on the radiation field is accumulated for each spatial cell while photon
+packets are traced through the spatial domain. In SKIRT 9, the stored quantities do not depend on the properties of the
+medium residing in the cell other than through the indirect effects of attenuation by the medium in the spatial domain
+at large.
+
+This has two important benefits. Firstly, it is easier to support multiple media types in the same simulation, because
+the stored quantity does not directly depend on any one of the media types specifically. Secondly, the radiation field
+is properly accumulated even if a cell is empty, allowing output of the radiation field (e.g., for each cell or along a
+planar cut) to be more complete.
+
+\section NewInSKIRT9Temperature Indicative dust temperature
+
+A dust grain population consisting of identical grains (material type and size) which happen to be in local thermal
+equilibrium (LTE) with the embedding radiation field has a well-defined equilibrium temperature. Except for this
+idealized case, however, there is no such thing as "the temperature" of a dust mixture. Grains of different sizes are
+heated to different temperatures, and when grains are not in LTE, they even show a range of temperatures rather than a
+single equilibrium temperature.
+
+Despite of these considerations, it is sometimes useful to represent the energetic state of a dust mixture with a
+single number. For example, spatial temperature cuts may help evaluating or debugging the configuration for a new
+simulated model, even if the displayed temperatures do not have a straightforward physical interpretation.
+
+For these purposes, SKIRT 9 allows calculating an "indicative dust temperature" for each spatial cell. This value is
+obtained by mass-averaging the LTE equilibrium temperatures for the various dust populations present in the cell in a
+well-defined way. Please keep in mind that the indicative dust temperature does not really correspond to a physical
+temperature. For more information, refer to the MediumSystem::indicativeDustTemperature() function.
 
 \section NewInSKIRT9Importing Importing snapshots
 
