@@ -2,14 +2,37 @@
 
 \page StatusRoadmap9 Status and roadmap
 
-This is a placedholder.
+\section StatusRoadmap9Status Status
 
-[TBC]
+<em>May 2019</em>
+
+Version 9 of the SKIRT project has been publicly released and has reached a state where proof-reading, evaluation, and
+further testing by any interested user is highly desired. SKIRT 9 properly performs 300 handcrafted test cases and
+properly runs all benchmarks described in the SKIRT 8 web site section. However, many problems may be lurking under the
+hood, waiting to surface when the code is put to more extensive use.
+
+Unless noted otherwise (e.g. labeled as a future plan), the features described on this web site have been implemented
+in the code and are ready for further verification. The sole (and important) exception is the non-reference
+documentation on the web site. In other words, the installation guides, user guides, developer guides, tutorials, and
+benchmark results are still missing. They should become available in the coming months.
 
 See also:
 
 - \ref NewInSKIRT9
 - \ref NewInPTS9
 - \ref OpenSource9
+- \ref Version9SKIRTFeatures "SKIRT 9 features"
+- \ref Version9PTSFeatures "PTS 9 features"
+
+\section StatusRoadmap9Roadmap Roadmap
+
+There are still many items on our internal do list or wish list. Over time, the smaller ones will either be
+accomplished or entered as a issue on GitHub (e.g. in the category feature suggestion), so that the information is
+public and items may be picked up by any contributor.
+
+The roadmap for larger development projects (planned, suggested, or under consideration) will be outlined here in
+this web page section, once the remaining documentation has been completed as indicated above.
+
+The core SKIRT team.
 
 */
