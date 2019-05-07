@@ -453,9 +453,9 @@ All the metadata needed to control these capabilities are defined in the SKIRT c
 SKIRT uses various data tables representing SEDs, SED families, optical dust properties, enthalpies, and so forth.
 Implementing the planned new physics will require an ever growing set of potentially very large resource files (many
 Gigabytes). Reading and interpreting the many different third-party formats in the SKIRT C++ code is cumbersome and
-slow. Therefore, in SKIRT 9, all tabular resource data are converted to a uniform binary (SKIRT-specific) format using
-Python procedures included with PTS. The SKIRT code then needs to support just a single format, which can be optimized,
-for example, to allow memory-mapped access.
+slow. Therefore, in SKIRT 9, all tabular resource data are converted to a binary, SKIRT-specific format (called "stored
+table format") using Python procedures included with PTS. The SKIRT code then needs to support just a single format,
+which can be optimized, for example, to allow memory-mapped access.
 
 Furthermore, to avoid burdening the source code repository with large data files, resources are made available on
 the SKIRT web site and need to be downloaded separately as part of the installation procedure.
