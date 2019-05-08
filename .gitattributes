@@ -32,5 +32,6 @@
 *.nb binary
 *.save binary
 
-# Ignore python scripts for determining the main project language
+# Ignore shell and python scripts for determining the main project language
 *.py linguist-vendored
+*.sh linguist-vendored
