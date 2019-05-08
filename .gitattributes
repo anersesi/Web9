@@ -31,3 +31,6 @@
 *.ico binary
 *.nb binary
 *.save binary
+
+# Ignore python scripts for determining the main project language
+*.py linguist-vendored
