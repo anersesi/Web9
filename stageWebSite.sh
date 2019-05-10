@@ -56,8 +56,12 @@ cp staging/SkirtLogoSmall-home.png ../stage/version9/
 cp staging/SkirtLogoSmall-home.png ../stage/skirt9/
 cp staging/SkirtLogoSmall-home.png ../stage/pts9/
 
-# Copy redirecting index.html file
+# Copy redirecting index.html files
 cp staging/index_root.html ../stage/index.html
+cp staging/index_skirt8.html ../stage/skirt8/index.html
+cp staging/index_skirt9.html ../stage/skirt9/index.html
+mkdir -p ../stage/makeup8 && cp staging/index_makeup8.html ../stage/makeup8/index.html
+mkdir -p ../stage/makeup9 && cp staging/index_makeup9.html ../stage/makeup9/index.html
 
 # Obtain the MathJax repository if it is not yet present
 if [ ! -d ../stage/mathjax ]; then
