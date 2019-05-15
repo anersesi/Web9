@@ -70,3 +70,8 @@ h2.memtitle     /* for member function section titles */
     color: MidnightBlue;
     font-size: 0.9rem;
 }
+
+.image
+{
+   text-align: left;
+}

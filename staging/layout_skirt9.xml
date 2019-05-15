@@ -8,10 +8,10 @@
     <tab type="user" url="../version9/_version9.html" title="Version 9"/>
     <tab type="user" url="../skirt9/_s_k_i_r_t.html" title="SKIRT 9"/>
     <tab type="user" url="../pts9/_p_t_s.html" title="PTS 9"/>
-    <tab type="user" url="@ref SKIRT_InstallationGuide" title="Installation Guide"/>
-    <tab type="user" url="@ref SKIRT_UserGuide" title="User Guide"/>
-    <tab type="user" url="@ref SKIRT_DeveloperGuide" title="Developer Guide"/>
-    <tab type="user" url="@ref SKIRT_Concepts" title="Concepts"/>
+    <tab type="user" url="@ref InstallationGuide" title="Installation Guide"/>
+    <tab type="user" url="@ref UserGuide" title="User Guide"/>
+    <tab type="user" url="@ref DeveloperGuide" title="Developer Guide"/>
+    <tab type="user" url="@ref Concepts" title="Concepts"/>
     <tab type="pages" visible="no" title="" intro=""/>
     <tab type="modules" visible="no" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">
