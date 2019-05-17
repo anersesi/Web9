@@ -1,0 +1,123 @@
+/**
+
+\page UserParamFile The SKIRT parameter file format (ski file)
+
+\section UserParamFileStruct Structure of a ski file
+
+A \c SKIRT parameter file is an XML document stored using UTF-8 encoding. The structure of the XML elements and
+attributes closely mimics the run-time object hierarchy representing a simulation in the \c SKIRT code. For
+example:
+
+\verbatim
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A SKIRT parameter file -->
+<skirt-simulation-hierarchy type="MonteCarloSimulation" format="9">
+    <MonteCarloSimulation userLevel="Regular" simulationMode="ExtinctionOnly" numPackets="1e6">
+        <units type="Units">
+            <ExtragalacticUnits fluxOutputStyle="Frequency"/>
+        </units>
+        <sourceSystem type="SourceSystem">
+            <SourceSystem minWavelength="0.09 micron" maxWavelength="100 micron">
+
+                ... more ...
+
+            </SourceSystem>
+        </sourceSystem>
+        <instrumentSystem type="InstrumentSystem">
+            <InstrumentSystem/>
+        </instrumentSystem>
+    </MonteCarloSimulation>
+</skirt-simulation-hierarchy>
+\endverbatim
+
+An XML element called \c sample starts with a \c \<sample\> tag and ends with a \c \</sample\> tag. An empty element \c
+\<sample\>\</sample\> can also be expressed with a single \c \<sample/\> tag. XML elements can be nested inside other
+elements. An XML element can carry zero or more attributes. Attributes are specified inside the start tag in the format
+\c key="value". In ski files there is no text outside of the element tags, except for spaces and line breaks. This
+white space is not meaningful except for presentation to a human. By convention the lines are indented so as to reflect
+the nesting level of the XML elements.
+
+After the standard XML declaration (and an optional comment line), a ski file always defines the XML element \c
+skirt-simulation-hierarchy as the top-level or \em root element. The \c format attribute specifies the file format
+version number, which allows future version of \c SKIRT to detect and adjust for ski files in older formats. To
+represent a complete simulation hierarchy, further XML elements are nested recursively within the root element, and
+some of these elements carry attributes.
+
+An element with a capitalized name (i.e. the first letter is uppercase) represents an object, i.e. an instance of a C++
+class with the same name as the element. Such an element can carry attributes reflecting the scalar properties of the
+object, and can contain nested elements reflecting compound properties of the object. The value of a scalar property
+can be represented as a string (Boolean, integer number, floating point number with unit abbreviation, comma-separated
+list of such numbers, ...), while the value of a compound property is another object or a list of objects.
+
+An element with a non-capitalized name (i.e. the first letter is lowercase) represents a compound property of the
+object represented by its parent element. Such an element always has a single attribute called \c type, which
+indirectly specifies the names of the XML element or elements that can be immediately contained inside the element. The
+type corresponds to the name of an abstract C++ class, and the names of the immediately contained element(s) must
+correspond to a C++ class that inherits the specified class.
+
+The root element always has type \c MonteCarloSimulation.
+
+\section UserParamFileEdit Editing a ski file
+
+It is not a good idea to manually create a ski file from scratch, because the \c SKIRT simulation object hierarchy
+has many complexities that are easy to miss. Instead, to create a ski file use \c SKIRT's interactive mode (see
+\ref UserCmdLineInter) or the optional MakeUp utility (see \ref UserMakeUp) if it is available.
+
+Once you have created a ski file, you can use any text editor to make small changes to it, such as updating the number
+of photon packets or adding an instrument. Many text editors offer syntax coloring for XML files (although you may
+need to setup the editor so that it recognizes the ".ski" filename extension in addition to .xml). Syntax coloring is
+nice but not really needed for working with ski files.
+
+Based on the naming conventions explained in \ref UserParamFileStruct, it is fairly easy to locate the information
+about a particular option in the \c SKIRT reference documentation, even if you are not a developer:
+ - A capitalized XML element name (i.e. the first letter is uppercase) corresponds to a C++ class name. For example,
+   SourceSystem is a class name.
+ - A non-capitalized XML element name (i.e. the first letter is lowercase) corresponds to a function name
+   in the C++ class corresponding to the name of the XML element in which the non-capitalized element resides. For
+   example, sourceSystem() is a function in the MonteCarloSimulation class.
+ - An XML attribute name (except \c type) corresponds to a function name in the C++ class corresponding to the name
+   of the element carrying the attribute. For example, minWavelength() is a function in the SourceSystem class.
+
+\section UserParamFileUnits Supported units
+
+When \c SKIRT outputs a parameter file, it always uses the defaults of the units system selected by the ski file.
+
+When reading parameters in ski files and in interactive mode, \c SKIRT recognizes the folowing unit
+abbreviations for physical quantities (don't forget the space between the number and the unit abbreviation):
+
+| Quantity | Unit abbreviations |
+|----------|--------------------|
+| length or distance | <tt>m, cm, mm, km, AU, pc, kpc, Mpc</tt> |
+| wavelength or grainsize | <tt>m, cm, mm, micron, nm, Angstrom</tt> |
+| cross section | <tt>m2, cm2, mm2</tt> |
+| volume | <tt>m3, cm3, mm3, AU3, pc3</tt> |
+| velocity | <tt>m/s, cm/s, mm/s, km/s, km/h</tt> |
+| acceleration | <tt>m/s2, cm/s2, mm/s2, km/s2</tt> |
+| mass | <tt>kg, g, Msun</tt> |
+| bulk mass | <tt>kg, g</tt> |
+| bulk mass density | <tt>kg/m3, g/cm3</tt> |
+| mass surface density | <tt>kg/m2, g/cm2, Msun/AU2, Msun/pc2</tt> |
+| mass volume density | <tt>kg/m3, g/cm3, Msun/AU3, Msun/pc3</tt> |
+| mass rate | <tt>kg/s, g/s, Msun/yr</tt> |
+| number surface density | <tt>1/m2, 1/cm2, 1/AU2, 1/pc2</tt> |
+| number volume density | <tt>1/m3, 1/cm3, 1/AU3, 1/pc3</tt> |
+| mass coefficient | <tt>m2/kg, cm2/g</tt> |
+| time | <tt>s, yr, Myr, Gyr</tt> |
+| temperature | <tt>K</tt> |
+| energy | <tt>J, erg</tt> |
+| pressure | <tt>Pa, N/m2, J/m3, bar, mbar, hPa, Ba, erg/cm3, K/m3</tt> |
+| bolometric luminosity | <tt>W, erg/s, Lsun</tt> |
+| neutral monochromatic luminosity \f$(\lambda L_\lambda = \nu L_\nu)\f$ | <tt>W, erg/s, Lsun</tt> |
+| neutral flux density \f$(\lambda F_\lambda = \nu F_\nu)\f$ | <tt>W/m2, erg/s/cm2</tt> |
+| neutral surface brightness \f$(\lambda f_\lambda = \nu f_\nu)\f$, mean intensity or spectral radiance \f$(\lambda J_\lambda = \nu J_\nu)\f$ | <tt>W/m2/sr, W/m2/arcsec2, erg/s/cm2/sr, erg/s/cm2/arcsec2</tt> |
+| wavelength monochromatic luminosity \f$(L_\lambda)\f$ | <tt>W/m, W/micron, W/Angstrom, erg/s/cm, erg/s/micron, erg/s/Angstrom, Lsun/micron</tt> |
+| wavelength flux density \f$(F_\lambda)\f$ | <tt>W/m3, W/m2/micron, W/m2/Angstrom, erg/s/cm3, erg/s/cm2/micron, erg/s/cm2/Angstrom</tt> |
+| wavelength surface brightness \f$(f_\lambda)\f$, mean intensity or spectral radiance \f$(J_\lambda)\f$ | <tt>W/m3/sr, W/m2/micron/sr, W/m2/micron/arcsec2, W/m2/Angstrom/sr, W/m2/Angstrom/arcsec2, erg/s/cm3/sr, erg/s/cm2/micron/sr, erg/s/cm2/micron/arcsec2, erg/s/cm2/Angstrom/sr, erg/s/cm2/Angstrom/arcsec2</tt> |
+| frequency monochromatic luminosity \f$(L_\nu)\f$ | <tt>W/Hz, erg/s/Hz, Lsun/Hz</tt> |
+| frequency flux density \f$(F_\nu)\f$ | <tt>W/m2/Hz, erg/s/cm2/Hz, Jy, mJy, MJy</tt> |
+| frequency surface brightness \f$(f_\nu)\f$, mean intensity or spectral radiance \f$(J_\nu)\f$ | <tt>W/m2/Hz/sr, W/m2/Hz/arcsec2, erg/s/cm2/Hz/sr, erg/s/cm2/Hz/arcsec2, Jy/sr, Jy/arcsec2, MJy/sr, MJy/arcsec2</tt> |
+| angular size (for objects in the sky) | <tt>rad, deg, arcsec</tt>
+| positioning angle (for instruments) | <tt>rad, deg</tt>
+| solid angle | <tt>sr, arcsec2</tt>
+
+ */
