@@ -172,7 +172,7 @@ verify that the formatting instructions and formulae in your source code comment
 documentation, you can install the appropriate tools as described in this section.
 
 For information on how to actually generate the documentation for the \c SKIRT code after installing
-these tools, see \ref DevBuildDocs.
+these tools, see \ref DevDocs.
 
 \subsection InstallDevDoxygenVersion Version info
 

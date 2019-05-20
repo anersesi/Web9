@@ -43,10 +43,10 @@ hopefully guide you to the answer.
 <TR><TD>BUILD_SKIRT</TD>   <TD>ON</TD> <TD></TD>
         <TD>If ON, build the \c SKIRT command line program, see \ref UserGuide</TD></TR>
 <TR><TD>BUILD_SMILE_SHAPES</TD>   <TD>OFF</TD> <TD></TD>
-        <TD>If ON, build the SMILE \c shapes example (for developers, see \ref DevSmileShapes)</TD></TR>
+        <TD>If ON, build the SMILE \c shapes example (for developers, see \ref DevSmileCompShapes)</TD></TR>
 <TR><TD>BUILD_SMILE_TOOL</TD>   <TD>OFF</TD> <TD></TD>
         <TD>If ON, build the \c smiletool command-line utility (for developers and advanced users,
-        see \ref DevSmileTool)</TD></TR>
+        see \ref DevSmileCompTool)</TD></TR>
 <TR><TD>BUILD_WITH_MPI</TD>   <TD>OFF</TD> <TD></TD>
         <TD>If ON, use the message-passing interface (MPI) to enable multi-processing in \c SKIRT,
         see \ref InstallMPI</TD></TR>
