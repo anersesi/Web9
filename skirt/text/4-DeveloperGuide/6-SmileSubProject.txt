@@ -175,20 +175,25 @@ The following tables present the properties for each Smile schema item.
 <TR><TD><B>Property</B></TD>  <TD><B>Type</B></TD>  <TD><B>Description</B></TD></TR>
 <TR><TD>name</TD>       <TD>string</TD>  <TD>the name of this type in the described dataset, corresponding to the
                         name of the XML element representing an item of this type in the described dataset</TD></TR>
-<TR><TD>concrete</TD>   <TD>bool</TD>  <TD>true for concrete types (that can actually occur in the dataset),
-                        false for non-concrete types</TD></TR>
 <TR><TD>title</TD>      <TD>string</TD>  <TD>a description of this type for display to a user</TD></TR>
 <TR><TD>base</TD>       <TD>string</TD>  <TD>the name of the type from which this type directly inherits;
                         if missing or empty this type is a root type</TD></TR>
-<TR><TD>subPropertiesFirst</TD>  <TD>bool</TD>  <TD>when true, user interfaces list properties of sub-types before
-                        those of this base type; when false (the default value), properties of the base type are
-                        listed first</TD></TR>
-<TR><TD>allowedIf</TD> <TD>string</TD>  <TD>a Boolean expression using names of other types defined in the schema;
-                        the value of the expression in an actual dataset (replacing each name by true if the type
-                        is actually present in the dataset, and false if not) indicates whether this type is
-                        actually allowed in that dataset; if missing the type is always allowed; the values of
-                        \em allowedIf attributes for all direct and indirect base types of this type are ANDed with
-                        this value</TD></TR>
+<TR><TD>concrete</TD>   <TD>bool</TD>  <TD>true for concrete types (that can actually occur in the dataset),
+                        false for non-concrete types</TD></TR>
+<TR><TD>allowedIf</TD>  <TD>string</TD>  <TD>a Boolean expression that indicates whether items of the type are allowed;
+                        an empty string means always allowed; the attribute values for all direct
+                        and indirect base types of this type are ANDed with this value</TD></TR>
+<TR><TD>displayedIf</TD> <TD>string</TD>  <TD>a Boolean expression that indicates whether the type is displayed;
+                        an empty string means always displayed; the attribute values for all direct
+                        and indirect base types of this type are ANDed with this value</TD></TR>
+<TR><TD>insert</TD>     <TD>string</TD>  <TD>a conditional value expression providing a list of extra names to be
+                        inserted in the global and/or local name set when an item of this type is added to the dataset,
+                        in addition to the names of the type and its ancestors; an empty string means that no extra
+                        names will be added</TD></TR>
+<TR><TD>subPropertyIndex</TD>  <TD>bool</TD>  <TD>the index in the property list where properties of subtypes should
+                        be listed; if nonnegative, properties of subtypes must be listed just before the property
+                        with the given index; if negative, properties of subtypes must be listed after the properties
+                        of the base type</TD></TR>
 <TR><TD>properties</TD> <TD>list of Property</TD>  <TD>a list of schema items describing the
                         properties being encapsulated by this type; the list can contain any of the concrete
                         schema types that inherit from the Property schema item; the properties
@@ -204,17 +209,20 @@ The following tables present the properties for each Smile schema item.
                         name of the XML attribute (for non-compound properties) or element (for compound properties)
                         representing this property in the described dataset</TD></TR>
 <TR><TD>title</TD>      <TD>string</TD>  <TD>a description of this property for display to a user</TD></TR>
-<TR><TD>silent</TD>     <TD>bool</TD> <TD>if true, this property is silent, which means it should be hidden
-                        in user interfaces intended for non-expert users; non-compound silent properties must have a
-                        default value or be optional; compound silent properties must be optional</TD></TR>
-<TR><TD>default</TD>    <TD>string</TD>  <TD>a default value for the property in case the property is missing, as a
-                        string in a format compatible with the particular concrete property type; for compound
-                        properties this field indicates the name of a type rather than an actual value; if missing
-                        there is no default value</TD></TR>
-<TR><TD>relevantIf</TD> <TD>string</TD>  <TD>a Boolean expression using names of other properties associated with
-                        the same type; the value of the expression in an actual dataset (replacing the property
-                        names by their actual "Booleanized" values) indicates whether this property is relevant for
-                        that dataset; if missing the property is always relevant</TD></TR>
+<TR><TD>relevantIf</TD> <TD>string</TD>  <TD>a Boolean expression indicating whether this property is relevant;
+                        an empty string means always relevant</TD></TR>
+<TR><TD>displayedIf</TD> <TD>string</TD>  <TD>a Boolean expression indicating whether this property is displayed;
+                        an empty string means always displayed</TD></TR>
+<TR><TD>requiredIf</TD> <TD>string</TD>  <TD>a Boolean expression indicating whether this property is required;
+                        an empty string means always required</TD></TR>
+<TR><TD>insert</TD>     <TD>string</TD>  <TD>a conditional value expression providing a list of extra names to be
+                        inserted in the global and/or local name set when a value of this item is entered into the
+                        dataset, in addition to the name automatically associated with the property; an empty string
+                        means that no extra names will be added</TD></TR>
+<TR><TD>default</TD>    <TD>string</TD>  <TD>a conditional value expression providing a default value for the property
+                        in case the property is missing  string in a format compatible with the particular concrete
+                        property type; for compound properties the value indicates the name of a type;
+                        an empty string means there is no default value</TD></TR>
 </TABLE>
 
 <EM>Schema item:</EM> <B>StringProperty</B> -- represents a scalar, non-compound property with an unformatted
@@ -223,9 +231,6 @@ The following tables present the properties for each Smile schema item.
 <TABLE>
 <TR><TD><B>Property</B></TD>  <TD><B>Type</B></TD>  <TD><B>Description</B></TD></TR>
 <TR><TD>...</TD>        <TD>...</TD>  <TD>properties inherited from Property schema item</TD></TR>
-<TR><TD>optional</TD>   <TD>bool</TD> <TD>if true, this property is optional (i.e. the string value can be empty);
-                        if false or missing this property is required (i.e. the string value must be nonempty);
-                        an optional string property cannot have a default value other than the empty string</TD></TR>
 </TABLE>
 
 <EM>Schema item:</EM> <B>BoolProperty</B> -- represents a scalar, non-compound property with a Boolean value
@@ -253,8 +258,6 @@ The following tables present the properties for each Smile schema item.
 <TABLE>
 <TR><TD><B>Property</B></TD>  <TD><B>Type</B></TD>  <TD><B>Description</B></TD></TR>
 <TR><TD>...</TD>        <TD>...</TD>  <TD>properties inherited from Property schema item</TD></TR>
-<TR><TD>trueIf</TD>     <TD>string</TD> <TD>The enum value for which this property is considered "true" in
-                        RelevantIf tests; if missing the property is never "true"</TD></TR>
 <TR><TD>enumValues</TD> <TD>list of EnumValue</TD>  <TD>a list of schema items representing the values in the
                         enumeration range for the property</TD></TR>
 </TABLE>
@@ -311,8 +314,6 @@ The following tables present the properties for each Smile schema item.
 <TABLE>
 <TR><TD><B>Property</B></TD>  <TD><B>Type</B></TD>  <TD><B>Description</B></TD></TR>
 <TR><TD>...</TD>        <TD>...</TD>  <TD>properties inherited from Property schema item</TD></TR>
-<TR><TD>optional</TD>   <TD>bool</TD> <TD>if true, this property is optional; if false or missing this property
-                        is required (i.e. it must have a nonempty value)</TD></TR>
 <TR><TD>base</TD>       <TD>string</TD>  <TD>the name of a concrete or abstract type described in this schema;
                         the actual property value can be an instance of any concrete type equal to or
                         inheriting from the specified type</TD></TR>
@@ -324,8 +325,6 @@ The following tables present the properties for each Smile schema item.
 <TABLE>
 <TR><TD><B>Property</B></TD>  <TD><B>Type</B></TD>  <TD><B>Description</B></TD></TR>
 <TR><TD>...</TD>        <TD>...</TD>  <TD>properties inherited from Property schema item</TD></TR>
-<TR><TD>optional</TD>   <TD>bool</TD> <TD>if true, this property is optional; if false or missing this property
-                        is required (i.e. the list must be nonempty)</TD></TR>
 <TR><TD>base</TD>       <TD>string</TD>  <TD>the name of a concrete or abstract type described in this schema;
                         the actual items in the list can be instances of any concrete type equal to or
                         inheriting from the specified type</TD></TR>
@@ -388,8 +387,128 @@ types must have an unambiguous common base type. Furthermore, an item property w
 somewhere close to the top of the hierarchy. The actual subtype selected for this property in the dataset will then
 determine the default unit system for the dataset.
 
+\subsection DevSmileLangCond SMILE conditional expressions
 
-\section DevSmileComp SMILE project components revisited
+<b>Objectives</b>
+
+The SMILE schema language supports dynamically adjusting default values and displaying or hiding options based on
+choices made earlier in the configuration process. These earlier choices may represent various aspects of the
+configuration; for example, in case of the \c SKIRT client:
+
+ - The level of expertise selected by the user (e.g. basic, regular, advanced).
+ - The overall simulation mode configured (e.g. including secondary emission or not).
+ - The level of spatial symmetry in the input model (i.e. 1D, 2D or 3D).
+
+All the metadata needed to control these capabilities is defined in the SMILE schema, and thus in case of a
+client such as \c SKIRT, in the SMILE metadata declared with each class.
+
+<b>Names and namespaces</b>
+
+In this discussion, we assume that the engine driving the SMILE configuration user interface scans the type and
+property hierarchy of the SMILE schema in a sequential manner, allowing only forward navigation. If the engine allows
+the user to navigate backwards (or even randomly), it must emulate the sequential behavior for the purposes of the
+capabilities discussed here.
+
+The engine maintains two sets of names with a different scope. The global set contains names that stay around for the
+duration of the configuration session. The local set contains names that stay around only while configuring the
+properties of a particular type; a fresh local set is created for each type instance. By definition, the global set
+contains names that start with an uppercase letter, and the local set contains names that start with a lowercase
+letter. As a result, the two sets form disjoint namespaces. After the first character (which must be a letter), a name
+can include any mix of letters and digits (and no other characters). Names are never removed from a set (although the
+local set is regularly discarded and replaced by a new one as a whole). Names are inserted in each of the sets as
+follows:
+
+ - Upon creation of the global set, the engine inserts the name “True”.
+ - Upon creation of a local set, the engine inserts the name “true”.
+ - Whenever a particular type is added to the configuration (because the user selects the type as the value of a
+   compound property), the engine inserts the name of the type and the names of its ancestor types, recursively,
+   into the global set. This requires all type names to start with an uppercase letter.
+ - Whenever a particular property is given a value in the configuration (which implies that the property is relevant),
+   the engine may insert the name of the property or a name starting with the property name into the local set,
+   according to the property-type-dependent rules summarized in the following table. This requires all property names
+   to start with a lowercase letter.
+
+| Property type | Insert what | If and only if
+|---------------|-------------|---------------
+| Int | property name | numeric value is nonzero
+| Double | property name | numeric value is nonzero
+| Bool | property name | Boolean value is true
+| String | property name | string contents is not empty
+| Item | property name | item is present (i.e. not null)
+| DoubleList | property name | double list is not empty
+| ItemList | property name | item list is not empty
+| Enum | Property name + enumeration value | always
+
+In addition, the "insert" type or property attribute may cause one or more names given in the attribute value to be
+inserted whenever the value of the corresponding property or type is being configured. In that case, each name
+is inserted in the global or local set depending on the capitalization of the first letter in the name.
+
+\note The following names are reserved; any attempt to insert them through schema attributes will cause a fatal error:
+True, False, true, false.
+
+<b>Boolean expressions</b>
+
+Some type or property attributes accept an arbitrary Boolean expression that will be evaluated to true or false
+whenever the value is required. The expression is formed by combining identifiers (consisting of letters and digits) in
+the usual way with the unary negation operator #!, the binary OR operator #|, the binary AND operator #&, and
+(balanced) parenthesis. In the absence of parenthesis, the negation operator has the highest precedence; otherwise
+operations are executed from left to right.
+
+When evaluating the expression, identifiers that correspond to a name currently in the global or local set are replaced
+by the Boolean value \em true; other identifiers are replaced by \em false.
+
+<b>Conditional value expressions</b>
+
+Some type or property attributes accept a conditional value expression that will be evaluated to one of the specified
+values whenever the value is required. The syntax of a conditional value expression can be illustrated as follows:
+
+    <Boolean-expression1>:<value1>; ... ;[<Boolean-expressionN>:]<valueN>
+
+In other words, there is a sequence of one or more condition-value pairs separated by a semicolon, while the condition
+and the value are separated by a colon. In the last pair of the sequence, the condition (including the colon) may be
+missing; if so it defaults to “true”.
+
+Note that this syntax precludes the values to contain colons and semicolons. This is no problem for numerical values or
+for type names, and even for string values it will most likely not be a significant limitation.
+
+The pairs in the conditional value expression are considered from left to right. When the condition for a pair
+evaluates to true (using the Boolean expression rules explained above), the corresponding value represents the value of
+the complete expression and further evaluation is terminated.
+
+<b>Attributes</b>
+
+The following table lists the type and property attributes that support conditional values:
+
+| Attribute | Value type | Default | Available for
+|-----------|------------|---------|--------------
+| allowedIf | Boolean expression | true | type
+| relevantIf | Boolean expression | true | property
+| displayedIf | Boolean expression | true | type, property
+| requiredIf | Boolean expression | true | property
+| default | conditional value expression | - | property
+| insert | conditional value expression | - | type, property
+
+A type is listed as part of the choices for an item property if both its \em allowedIf and \em displayedIf attributes
+evaluate to true. The difference between these attributes for a type lie only in the reason for the omission of the
+type: in the first case, including the type would create an invalid configuration, in the second case, the user does
+not have the expertise to deal with the type.
+
+A property is displayed as part of the configuration for a given type instance if both its \em relevantIf and \em
+displayedIf attributes evaluate to true. The difference between these attributes for a property is similar to that for
+types: in the first case, the value of the property will not be used in the current configuration, in the second case,
+the user does not have the expertise to deal with the property. This semantic difference has some intricate
+consequences. For example, the engine must be able to derive a meaningful value for a relevant property, even if it is
+not displayed. Thus, such a property must either be optional (i.e., not required) or have a default value.
+
+Supporting a conditional value expression for the \em default attribute enables providing a different default value
+depending on the configuration so far.
+
+The value of the conditional value expression in the \em insert attribute can be a single name or a list of names
+separated by commas. The names are inserted in the global or local set depending on their first letter, as described
+before. The insert attribute facilitates managing complex dependencies in the configuration.
+
+
+\section DevSmileComp SMILE project components
 
 \subsection DevSmileCompTool The smiletool command-line utility
 
