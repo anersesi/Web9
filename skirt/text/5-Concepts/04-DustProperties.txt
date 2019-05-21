@@ -1,0 +1,45 @@
+/**
+
+\page DustProperties Handling dust properties
+
+Absorption and scattering by dust plays an important role in most \c SKIRT simulations. This concept note describes
+how \c SKIRT produces and uses the optical and calorimetric dust properties that are appropriate for a particular
+astrophysical model.
+
+\section DustOver Overview
+
+At the core of the dust story is the DustMix class hierarchy, illustrated in the following incomplete diagram
+(connections starting with a triangle denote inheritance).
+
+\dot
+digraph dustmixhierarchy {
+    rankdir=BT;
+    node [shape=rect, fontname=Helvetica, fontsize=10];
+    edge [arrowhead=empty];
+
+    MaterialMix [label="MaterialMix" URL="\ref MaterialMix"];
+      DustMix [label="DustMix" URL="\ref DustMix" color=red];
+        SingleGrainDustMix [label="SingleGrainDustMix" URL="\ref SingleGrainDustMix"];
+          MeanInterstellarDustMix [label="MeanInterstellarDustMix" URL="\ref MeanInterstellarDustMix"];
+        MultiGrainDustMix [label="MultiGrainDustMix" URL="\ref MultiGrainDustMix"];
+          DraineLiDustMix [label="DraineLiDustMix" URL="\ref DraineLiDustMix"];
+          ZubkoDustMix [label="ZubkoDustMix" URL="\ref ZubkoDustMix"];
+          ThemisDustMix [label="ThemisDustMix" URL="\ref ThemisDustMix"];
+          ConfigurableDustMix [label="ConfigurableDustMix" URL="\ref ConfigurableDustMix"];
+
+    DustMix -> MaterialMix;
+      SingleGrainDustMix -> DustMix;
+        MeanInterstellarDustMix -> SingleGrainDustMix;
+      MultiGrainDustMix -> DustMix;
+        DraineLiDustMix -> MultiGrainDustMix;
+        ZubkoDustMix -> MultiGrainDustMix;
+        ThemisDustMix -> MultiGrainDustMix;
+        ConfigurableDustMix -> MultiGrainDustMix;
+}
+\enddot
+
+More text to be inserted...
+
+[TBC]
+
+*/

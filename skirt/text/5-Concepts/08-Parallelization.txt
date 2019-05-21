@@ -1,0 +1,9 @@
+/**
+
+\page Parallelization Parallelization
+
+This is a placeholder for a concept note on Parallelization in \c SKIRT.
+
+[TBC]
+
+*/

@@ -1,0 +1,9 @@
+/**
+
+\page Wavelengths Wavelengths
+
+This is a placeholder for a concept note on Wavelengths in \c SKIRT.
+
+[TBC]
+
+*/
