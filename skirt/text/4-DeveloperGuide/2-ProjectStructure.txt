@@ -217,7 +217,7 @@ digraph inheritance {
       MonteCarloSimulation -> Simulation;
     Source -> SimulationItem;
       ParticleSource -> Source;
-      OtherSource -> Source;
+      OtherSources -> Source;
     MaterialMix -> SimulationItem;
       ThemisDustMix -> MaterialMix;
       OtherMixes -> MaterialMix;

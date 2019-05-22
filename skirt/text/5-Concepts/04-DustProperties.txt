@@ -1,9 +1,9 @@
 /**
 
-\page DustProperties Handling dust properties
+\page DustProperties Dust properties
 
 Absorption and scattering by dust plays an important role in most \c SKIRT simulations. This concept note describes
-how \c SKIRT produces and uses the optical and calorimetric dust properties that are appropriate for a particular
+how \c SKIRT obtains and uses the optical and calorimetric dust properties that are appropriate for a particular
 astrophysical model.
 
 \section DustOver Overview

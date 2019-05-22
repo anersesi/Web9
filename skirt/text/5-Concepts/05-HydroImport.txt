@@ -11,25 +11,25 @@ snapshot define the state of the simulated system at a particular time in its ev
 distribution and other relevant properties of the dynamical components, such as for example the stars and the
 interstellar medium in a galaxy.
 
-Because of the nonlocal and nonlinear behavior of the radiative transfer (RT) problem, predicting the observable
-properties of these hydrodynamical models requires a full 3D RT simulation in all but the most trivial cases. Assuming
-that the radiation crossing times are much shorter than the dynamical time scales, and that radiation pressure is
-negligible, the RT and hydrodynamical simulations can be completely uncoupled. In other words, the RT simulation can
-then be performed as a \em post-processing step based solely on the information contained in a particular snapshot. The
-RT code extracts the spatial distribution of the radiation sources (e.g., stars) and the obscuring medium (e.g., dust),
-plus the corresponding properties, from the hydrodynamical snapshot data, and then performs a RT simulation on the
-resulting setup.
+Because of the nonlocal and nonlinear behavior of radiation transport, predicting the observable properties of these
+hydrodynamical models requires a full, three-dimensional radiative transfer simulation in all but the most trivial
+cases. Assuming that the radiation crossing times are much shorter than the dynamical time scales, and that radiation
+pressure is negligible, the radiative transfer and hydrodynamical simulations can be completely uncoupled. In other
+words, the radiative transfer simulation can then be performed as a \em post-processing step based solely on the
+information contained in a particular snapshot. The post-processing procedure extracts the spatial distribution of the
+radiation sources (e.g., stars) and the obscuring medium (e.g., dust), plus the corresponding properties, from the
+hydrodynamical snapshot data, and then performs a radiative transfer simulation on the resulting setup.
 
-The radiation sources and the obscuring medium are obviously handled differently during a Monte Carlo RT simulation,
-implying different needs for the corresponding data structures. The most frequent demand on the data structure
-representing the radiation sources (\ref HydroSources) is to generate a photon package launch position that is randomly
-sampled from the luminosity distribution at a given wavelength. This operation usually occurs millions or even billions
-of times during a single simulation, and thus should execute fairly quickly. On the other hand, the key operation for
-the dusty medium (\ref HydroDust) is to determine the dust density at a given location, or the dust mass in a given
-volume. These functions are needed while constructing the dust grid, i.e. for deciding where to subdivide cells in
-adaptive grids, and for calculating the dust mass in each cell of the final dust grid. Although this is an intensive
-process, it is limited to the setup phase of the simulation, because, once constructed, the dust grid includes all
-information required for tracing photon packages through the spatial domain.
+The radiation sources and the obscuring medium are obviously handled differently during a \c SKIRT simulation, implying
+different needs for the corresponding data structures. The most frequent demand on the data structure representing the
+radiation sources is to randomly sample a photon packet launch position (from the spatial luminosity distribution) and
+wavelength (from the spectral energy distribution at that position). This operation usually occurs millions or even
+billions of times during a simulation, and thus should execute fairly quickly. On the other hand, the key operation for
+the obscuring medium is to determine its density at a given location, or its mass in a given volume. These functions
+are needed while constructing the spatial grid, i.e. for deciding where to subdivide cells in adaptive grids, and for
+calculating the medium mass in each cell of the final dust grid. Although this is an intensive process, it is limited
+to the setup phase of the simulation, because, once constructed, the spatial grid includes all information required for
+tracing photon packets through its domain.
 
 Hydrodynamical simulation codes historically employ one of two schemes: a Lagrangian formulation based on moving
 particles (smoothed particle hydrodynamics or SPH), for example Gadget and Gasoline; or a Eulerian approach based on a
@@ -38,165 +38,197 @@ AMR-VAC. Recent codes including AREPO, TESS, and Shadowfax introduce a new schem
 Voronoi tessellation of the spatial domain. This new scheme is claimed to combine the best features of SPH and the
 traditional Eulerian approach, and it is becoming increasingly popular.
 
-In this note we discuss SKIRT's mechanisms for importing distributions of radiation sources (\ref HydroSources) and
-dust (\ref HydroDust) from snapshots produced by each of these three schemes. The final section (\ref HydroConclusions)
-offers some conclusions.
+In this note we discuss SKIRT's mechanisms for importing radiation sources and obscuring media from snapshots produced
+by each of these three schemes. The discussion is organized in sections as follows:
+ - \ref HydroSnapshot
+ - \ref HydroSources
+ - \ref HydroMedia
+ - \ref HydroConclusions
 
 
-\section HydroSources Radiation sources
+\section HydroSnapshot Snapshots
 
-A SKIRT simulation always includes one or more stellar components describing the radiation sources in the model (see
-the StellarSystem and StellarComp classes). Each stellar component defines (a) the spatial density distribution of the
-sources and (b) the spectral energy distribution (%SED) at each location. In the context of post-processing
-hydrodynamical simulations, there are three distinct ways of accomplishing this:
+\subsection HydroSnapshotFile Snapshot file formats
+
+All snapshot data must be provided to \c SKIRT for import in a predefined column text format. In other words, an
+external procedure (usually a Python script) is needed to extract the appropriate information from the native snapshot
+data format and output the result as an ASCII column text file. While this seems harsh, it is almost never an issue in
+practice. In most cases, one needs to perform some additional processing anyway, such as locating the proper data
+files, performing a coordinate transformation, limiting the imported data to a given aperture, calculating indirectly
+derived properties, etc. Furthermore, the alternative would be to implement a variety of data formats and point \c
+SKIRT to the relevant data through a potentially very complex configuration mechanism that would never be as flexible
+as the Python language.
+
+There are three supported snapshot paradigmns (particle, adaptive mesh, and Voronoi mesh), each with their own format
+for describing the spatial geometry. In addition to describing the spatial geometry, the input file must contain the
+properties required by the component (e.g. source, medium or geometry) being imported. The number and type of such
+properties depends on the component's type and on its configured options. This results in the following formats:
+
+ - Particle (SPH): the input file has a line for each particle, listing its position and smoothing length
+   plus the component-specific properties.
+ - Adaptive mesh (AMR): the input file has lines defining the nonleaf/leaf structure of the mesh,
+   plus a line for each leaf cell with its component-specific properties.
+ - Voronoi mesh: the input file has a line for each generating site, listing its position plus the
+   component-specific properties.
+
+In all cases, columns must be in the fixed order prescribed by the \c SKIRT component controlling import of the file
+(see \ref HydroSnapshotClass, \ref HydroSources, and \ref HydroMedia). Values are either in the default units
+prescribed by that \c SKIRT component, or in the units defined through header lines in the data file being imported
+(see the documentation of the TextInFile class). In the latter case, any of the ski file units corresponding to the
+imported quantity can be used (see \ref UserParamFileUnits).
+
+\subsection HydroSnapshotClass Snapshot classes
+
+The heart of the \c SKIRT snapshot import mechanism is implemented by the classes in the following hierarchy:
+
+\dot
+digraph snapshothierarchy {
+    rankdir=BT;
+    node [shape=rect, fontname=Helvetica, fontsize=10];
+    edge [arrowhead=empty];
+
+    Snapshot [label="Snapshot" URL="\ref Snapshot"];
+      ParticleSnapshot [label="ParticleSnapshot" URL="\ref ParticleSnapshot"];
+      AdaptiveMeshSnapshot [label="AdaptiveMeshSnapshot" URL="\ref AdaptiveMeshSnapshot"];
+      VoronoiMeshSnapshot [label="VoronoiMeshSnapshot" URL="\ref VoronoiMeshSnapshot"];
+
+    ParticleSnapshot -> Snapshot;
+    AdaptiveMeshSnapshot -> Snapshot;
+    VoronoiMeshSnapshot -> Snapshot;
+}
+\enddot
+
+Snapshot is an abstract base class for representing snapshot data imported from a column text file. It can be used to
+define the properties of primary sources or transfer media. This base class offers facilities to handle the input
+options, such as determining which columns are to be imported from the text file, and defines a common interface for
+all snapshot types, for example to obtain the density at a given position. The actual implementation is provided in a
+derived class for each snapshot type (ParticleSnapshot, AdaptiveMeshSnapshot, and VoronoiMeshSnapshot).
+
+The Snapshot classes are \em not exposed to the user through the configuration file. Instead, they are invoked under
+the hood by the various components that \em are configured as part of the simulation. Three distinct class hierarchies
+actually make use of the Snapshot classes:
+
+    Source                  Medium                  Geometry
+      ImportedSource          ImportedMedium          ImportedGeometry
+        ParticleSource          ParticleMedium          ParticleGeometry       --> ParticleSnapshot
+        AdaptiveMeshSource      AdaptiveMeshMedium      AdaptiveMeshGeometry   --> AdaptiveMeshSnapshot
+        VoronoiMeshSource       VoronoiMeshMedium       VoronoiMeshGeometry    --> VoronoiMeshSnapshot
+
+Each of these class hierarchies implements the appropriate layer of functionality on top of the Snapshot classes.
+For example, sources can launch photo packets, media can quickly find the material density at a given location,
+and geometries offer a density distribution normalized to unity.
+
+
+\section HydroSources Sources
+
+A \c SKIRT simulation always includes one or more components describing the radiation sources in the model (see the
+SourceSystem and Source classes). Each source component defines (a) the spatial density distribution of the sources and
+(b) the spectral energy distribution (%SED) at each location. In the context of post-processing hydrodynamical
+simulations, there are three distinct ways of accomplishing this:
 
 - The imported snapshot defines the spatial density distribution and provides additional properties for each smoothed
-particle or grid cell from which an appropriate %SED can be determined. For this purpose, SKIRT includes two
-parameterized %SED families. The Bruzual-Charlot family (the BruzualCharlotSEDFamily class) represents young and
-evolved stellar populations. The Mappings III %SED family (the MappingsSEDFamily class) represents star-forming
-regions. More families can be added with minimal programming effort, provided the data for the %SED templates is
-available in analytical or tabulated form.
+particle or grid cell from which an appropriate %SED can be determined. For this purpose, \c SKIRT includes several
+parameterized %SED families. For example, the Bruzual-Charlot family (the BruzualCharlotSEDFamily class) represents
+young and evolved stellar populations. The Mappings III %SED family (the MappingsSEDFamily class) represents
+star-forming regions. New families can be added with minimal programming effort, provided the data for the %SED
+templates is available in tabulated form.
 
 - The imported snapshot defines just the spatial density distribution, and a particular %SED (constant throughout the
-spatial domain) is configured from the %SED components built into SKIRT (subclasses of the StellarSED class).
+spatial domain) is configured from the %SED components built into \c SKIRT (subclasses of the SED class).
 
-- The radiation sources are completely defined within SKIRT by configuring a built-in geometry (subclasses of the
-Geometry class) and %SED (subclasses of the StellarSED class). In case a hydrodynamical simulation does not include any
-sources, this option can be used to complete the RT model by adding, for example, a central star to a stellar dust
-disk, or background radiation to the dust in a molecular cloud.
+- The radiation sources are completely defined within \c SKIRT by configuring a built-in geometry (subclasses of the
+Geometry class) and %SED (subclasses of the SED class). In case a hydrodynamical simulation does not include any
+sources, this option can be used to complete the model by adding, for example, a central source to a dust disk, or
+background radiation to the dust in a molecular cloud.
 
-One can even combine these options by using two different stellar components, for example, for adding an active
-galactic nucleus to a spiral galaxy snapshot.
+One can even combine these options by using multiple source components, for example, for adding an active galactic
+nucleus to a spiral galaxy snapshot.
 
-\subsection HydroSourcesSph Smoothed particles
+\subsection HydroSourcesSph Particle sources
 
-In spite of claims that the technique suffers from fundamental problems, SPH is still a popular hydrodynamics
-technique, especially for cosmological simulations of galaxy formation. An SPH snapshot consists of a set of \em
-particles (or rather anchor points in a co-moving grid), each characterized by a large suite of physical quantities, of
-which only a selected few are relevant for SKIRT. Rather than attempting to support a wide variety of file formats,
-SKIRT reads the properties for a list of SPH particles from a text file in a simple format that can be easily generated
-by a conversion script, for example in a programming language such as Python. As an added benefit, this allows
-additional processing such as unit conversions to occur along the way.
+A particle snapshot consists of a set of smoothed particles (or rather anchor points in a co-moving grid), each
+characterized by a suite of properties. Formally, the spatial luminosity distribution in a particle snapshot is defined
+by a list of \f$N\f$ particles and an assumed smoothing kernel \f$W(r,h)\f$, with each smoothed particle characterized
+by a position \f$\mathbf{r}_j\f$, a smoothing length \f$h_j\f$, and a luminosity contribution \f$L_j\f$. The total
+luminosity density at an arbitrary position \f$\mathbf{r}\f$ is then given by \f[ \Sigma(\mathbf{r}) = \sum_{j=1}^N L_j
+\, W(|\mathbf{r}-\mathbf{r}_j|,h_j) \f]
 
-The spatial luminosity distribution in an SPH snapshot is defined by a list of \f$N\f$ smoothed particles and an
-assumed smoothing kernel \f$W(r,h)\f$, with each smoothed particle characterized by a position \f$\mathbf{r}_j\f$, a
-smoothing length \f$h_j\f$, and a luminosity contribution \f$L_j\f$. The total luminosity density at an arbitrary
-position \f$\mathbf{r}\f$ is then given by \f[ \Sigma(\mathbf{r}) = \sum_{j=1}^N L_j \,
-W(|\mathbf{r}-\mathbf{r}_j|,h_j) \f]
+The ParticleSource class allows configuring one of several (spherically symmetric) smoothing kernels, including the
+frequently-used cubic spline kernel (the CubicSplineSmoothingKernel class) and a scaled Gaussian smoothing kernel (the
+ScaledGaussianSmoothingKernel class). If needed, implementing a new smoothing kernel should be fairly straightforward.
 
-In practice, the kernels used in SPH simulations almost always have a finite support so that only a relatively small
-number of terms in the sum have a non-zero contribution. SKIRT employs smoothing kernel implementations optimized for
-each specific task. For shooting photon packages, the code needs to generate random launch positions sampled from the
-radiation source's density distribution. This is rather straightforward in this case, thanks to the composition method.
-The first step is the choice of a random smoothed particle, based on a discrete distribution where each particle is
-weighted by its relative luminosity contribution. The second step is generating a random position according to the
-luminosity distribution of the chosen particle. Although it is in principle possible to sample from any kernel using
-tabulated values, SKIRT samples a random position from a scaled Gaussian smoothing kernel, \f[ W(r,h) =
-\frac{a^3}{\pi^{3/2}\,h^3} \,\exp({-\frac{a^2 r^2}{h^2}}) \f] with the value of the scaling factor set to
-\f$a=2.42\approx2\pi^{1/6}\f$. Sampling from a Gaussian kernel can be implemented easily using the inversion method.
-For consistency, the value of \f$a\f$ has been chosen so that the scaled Gaussian kernel approximates (within a few per
-cent across the domain) the cubic spline kernel which is used in SKIRT for determining dust densities (see \ref
-HydroDustSph).
+For launching photon packets, \c SKIRT needs to generate random positions sampled from the radiation source's density
+distribution. This is rather straightforward thanks to the composition method. The first step is the choice of a random
+particle, based on a discrete distribution where each particle is weighted by its relative luminosity contribution. The
+second step is generating a random position according to the luminosity distribution of the chosen particle, using the
+configured smoothing kernel.
 
 \subsubsection HydroSourcesSphSnapsed Spatial distribution and SED from snapshot
 
 We first consider the case where both the spatial distribution and the %SED at each location are determined from the
-SPH snapshot. The SPHStellarComp class in SKIRT expects a text file with a single line for each SPH particle. The first
-four columns specify the \f$x\f$, \f$y\f$ and \f$z\f$ coordinates and the smoothing length \f$h\f$ for the particle
-(all in parsec). The number and interpretation of the subsequent columns depends on the %SED family configured for this
-SPHStellarComp instance.
+SPH snapshot. The ParticleSource class expects a text file with a single line for each particle. The first four columns
+specify the \f$x\f$, \f$y\f$ and \f$z\f$ coordinates and the smoothing length \f$h\f$ for the particle. The number and
+interpretation of the subsequent columns depends on the %SED family configured for this ParticleSource instance. For
+example, for the Bruzual-Charlot %SED family (BruzualCharlotSEDFamily), the remaining three columns provide the
+properties of the stellar population represented by the particle. The first extra column specifies the initial mass of
+the stellar population, i.e. the particle's mass \f$M_\mathrm{init}\f$ at the time it was born. The second extra column
+specifies the metallicity \f$Z\f$ of the stellar population, and the third extra column represents the age \f$t\f$ of
+the stellar population.
 
-For the Bruzual-Charlot %SED family (BruzualCharlotSEDFamily), the remaining three columns provide the properties of
-the stellar population represented by the particle. The first extra column specifies the initial mass of the stellar
-population, i.e. the particle's mass \f$M_\mathrm{init}\f$ at the time it was born (in \f$\mathrm{M}_\odot\f$). The
-second extra column specifies the metallicity \f$Z\f$ of the stellar population (as a dimensionless fraction), and the
-third extra column represents the age \f$t\f$ of the stellar population (in years).
+The ParticleSource class can also be configured to take into account the Doppler shift caused by the velocity of the
+radiation sources relative to the model coordinate system. If this option is enabled, the input text file must provide
+three additional columns (after the smoothing length and before the additional properties for the %SED family),
+specifying the \f$v_\mathrm{x}\f$, \f$v_\mathrm{y}\f$ and \f$v_\mathrm{z}\f$ components of the particle's velocity.
+Given this velocity \f$\mathbf{v}\f$, the redshift \f$z\f$ experienced by a photon packet launched from the particle in
+direction \f$\mathbf{k}\f$ (given as a unit vector) is determined by \f[ z = -\frac{\mathbf{v}\cdot\mathbf{k}}{c} \f]
+where \f$c\f$ is the speed of light in vacuum. As a function of the rest wavelength \f$\lambda_0\f$, the redshifted
+wavelength \f$\lambda_z\f$ is given by \f$\lambda_z=(1+z)\,\lambda_0\f$. Since the redshift value depends on the angle
+between the particle and photon packet trajectories, the emission is no longer isotropic.
 
-For the Mappings III %SED family (MappingsSEDFamily), the remaining five columns provide the properties of the
-star-bursting region represented by the particle, in the following order: the star formation rate \f$\dot{M}\f$,
-assumed to be constant over the past 10 Myr (in \f$\mathrm{M}_\odot\,{\mathrm{yr}}^{-1}\f$); the metallicity \f$Z\f$
-(as a dimensionless fraction); the logarithm of the compactness \f$\log C\f$ (dimensionless); the pressure of the
-surrounding medium \f$p\f$ (in Pa); and the photo-dissociation-region covering factor \f$f_{\mathrm{PDR}}\f$
-(dimensionless).
+For example, here is an input file describing just a single source particle placed at the origin of the model
+coordinate system:
 
-Using these properties as parameters for the appropriate set of built-in %SED templates, SKIRT calculates the
-luminosity contribution \f$(L_j)_\ell\f$ of each particle for each wavelength bin \f$\ell\f$ in the simulation's
-wavelength grid. This information is stored in memory during setup, and is used during the Monte Carlo cycle to
-determine the (wavelength-dependent) probability that a given particle will be selected as the launch site for a new
-photon package.
-
-\subsubsection HydroSourcesSphVelocity Velocity and Doppler shift
-
-The SPHStellarComp class can be configured to take into account the Doppler shift caused by the velocity of the
-radiation sources relative to the center of mass of the system. If this option is enabled, the input text file must
-provide three additional columns (after the smoothing length and before the additional properties for the %SED family),
-specifying the \f$v_\mathrm{x}\f$, \f$v_\mathrm{y}\f$ and \f$v_\mathrm{z}\f$ components of the particle's velocity (in
-km/s). Given this velocity \f$\mathbf{v}\f$, the redshift \f$z\f$ experienced by a photon package launched from the
-particle in direction \f$\mathbf{k}\f$ (given as a unit vector) is determined by \f[ z =
--\frac{\mathbf{v}\cdot\mathbf{k}}{c} \f] where \f$c\f$ is the speed of light in vacuum. In function of the rest
-wavelength \f$\lambda_0\f$, the redshifted wavelength \f$\lambda_z\f$ is given by \f$\lambda_z=(1+z)\,\lambda_0\f$. For
-\f$z\ll1\f$, the observed luminosity at each wavelength in the simulation's wavelength grid can then be written as
-\f$L_z[\lambda_\ell] = L_0[(1-z)\,\lambda_\ell]\f$.
-
-Since the redshift value depends on the angle between the particle and photon package trajectories, the emission is no
-longer isotropic. When launching a photon package from a given particle, the Monte Carlo code must randomly pick a
-direction from a non-uniform distribution. To this end, we express the photon package's direction in spherical
-coordinates \f$(\theta,\phi)\f$ relative to a polar axis along the particle's trajectory. While the azimuth \f$\phi\f$
-is still distributed uniformly, the probability distribution of the polar angle \f$\theta\f$ for wavelength bin
-\f$\ell\f$ is determined by the form of the %SED assigned to the particle in the wavelength range
-\f$[(1-v/c)\,\lambda_\ell, (1+v/c)\,\lambda_\ell]\f$, where \f$v=||\mathbf{v}||\f$ is the magnitude of the particle's
-velocity. The need to store this distribution at an acceptable resolution of, say, 1 degree in \f$\theta\f$, for each
-particle and for each wavelength bin substantially boosts memory requirements. Otherwise the implementation is fairly
-straightforward.
+    # Star particle for testing SED family
+    # Column 1: position x (pc)
+    # Column 2: position y (pc)
+    # Column 3: position z (pc)
+    # Column 4: smoothing length (pc)
+    # Column 5: mass (Msun)
+    # Column 6: metallicity (1)
+    # Column 7: age (Gyr)
+    0 0 0 1   10  0.04  5
 
 \subsubsection HydroSourcesSphBuiltsed Spatial distribution from snapshot with built-in SED
 
 If the hydrodynamical simulation does not track the relevant properties for defining the local emission spectrum, we
 can still import the spatial luminosity distribution from the snapshot and assign a built-in %SED that is constant
-across the spatial domain. In this case, we use the GeometricStellarComp class, and we configure it with an instance of
-the SPHGeometry class to import the snapshot. Similar to the SPHStellarComp class described in \ref
-HydroSourcesSphSnapsed, the SPHGeometry class expects a text file with a single line for each SPH particle. The first
-four columns specify the \f$x\f$, \f$y\f$ and \f$z\f$ coordinates and the smoothing length \f$h\f$ for the particle
-(all in parsec). The product of the values in the fifth and sixth columns specifies the density contribution of this
-particle, in arbitrary units since the SPHGeometry class normalizes the total weight of the density distribution to
-unity. (The definition uses two columns for compatibility with dust density distributions; see \ref
-HydroDustSphLoadsnap).
+across the spatial domain. In this case, we use the GeometricSource class, and we configure it with an instance of the
+ParticleGeometry class to import the snapshot. Similar to the ParticleSource class described earlier, the
+ParticleGeometry class expects a text file with a single line for each particle. The first four columns specify the
+\f$x\f$, \f$y\f$ and \f$z\f$ coordinates and the smoothing length \f$h\f$ for the particle. The fifth column specifies
+the luminosity contribution of this particle, in arbitrary units since the ParticleGeometry class normalizes the total
+density to unity. Because of this normalization, we need to separately supply the actual luminosity of the source
+through one of the regular options offered by the GeometricSource class.
 
-Because the SPHGeometry class normalizes the spatial distribution to unity, we need to separately supply the actual
-luminosity of the source through one of the standard normalization options offered in SKIRT. Because the %SED is
-constant across the spatial domain, it is sufficient to set, for example, the luminosity at one particular wavelength.
+\subsection HydroSourcesAmr Adaptive mesh sources
 
-\subsection HydroSourcesAmr Hierarchical grids
+Simulations with an a adaptive mesh paradigm use a hierarchical grid that is refined to a variable level depending on
+the resolution requirements in various regions of the model. While the resolution requirements and thus the grid may
+change as the system evolves, each particular snapshot corresponds to a unique and well-defined hierarchical grid.
+Thus, an adaptive mesh snapshot includes some description of the structure of the hierarchical grid, implicitly or
+explicitly defining the spatial extent of each grid cell, and for each cell the values of a suite of physical
+properties.
 
-Apart from smoothed particle hydrodynamics, the main other technique that is used to perform hydrodynamics simulations
-is Eulerian mesh-based hydrodynamics. A fundamental ingredient of this technique is the use of adaptive mesh refinement
-(AMR), where the hierarchical grid is adjusted depending on the resolution requirements in various regions of the
-model. While the resolution requirements and thus the AMR grid may change as the system evolves, each particular
-snapshot corresponds to a unique and well-defined hierarchical grid. The SKIRT class names and documentation do not
-properly make this distinction and use the terms \em AMR, \em adaptive \em mesh and \em hierarchical \em grid
-interchangeably.
-
-A hierarchical grid can be defined using spherical or cylindrical coordinates, perhaps to benefit from certain
-quasi-symmetries in the model, however, we will limit the discussion here to grids using Cartesian coordinates. In a
+While it is possible to use this technique with spherical or cylindrical coordinate systems, perhaps to benefit from
+certain quasi-symmetries in the model, \c SKIRT only supports adaptive mesh snapshots using Cartesian coordinates. In a
 Cartesian hierarchical grid, the cuboidal spatial domain is recursively subdivided into smaller cuboids according to
-some scheme until the desired resolution in each area is reached. Thus, an AMR snapshot includes some description of
-the structure of the hierarchical grid, implicitly or explicitly defining the spatial extent of each grid cell, and for
-each cell the values of a suite of physical quantities of which only a selected few are relevant for SKIRT.
+some scheme until the desired resolution in each region is reached.
 
 \subsubsection HydroSourcesAmrSnapshot Snapshot data format
 
-SKIRT can directly read the binary data format generated by the mesh-based MPI-AMRVAC code developed by Keppens et al.
-The specifics of this import mechanism are described in the documentation for the AdaptiveMeshAmrvacFile class and
-related classes. In this section we discuss a more general import mechanism based on a plain text file format
-specifically designed for this purpose. For most mesh-based snapshots (including the MPI-AMRVAC snapshots), writing a
-conversion script to generate this format should be rather straightforward.
-
-The text file format we designed (see the AdaptiveMeshFile and AdaptiveMeshAsciiFile classes) describes the structure
-of the hierarchical grid and lists the relevant physical properties in each cell. In other words, a file in this format
-represents one or more scalar fields over a given cubodial spatial domain (assuming Cartesian coordinates) which is
-recursively subdivided into cuboidal cells. The size of the spatial domain, the meaning of the fields, and the units in
-which the values are expressed, must be defined elsewhere (i.e. this information is not part of the data format
-itself).
+The AdaptiveMeshSource class expects a text file in a format that describes the topological structure of the Cartesian
+hierarchical grid and lists the relevant physical properties in each cell. The size of the spatial domain must be
+defined separately in the \c SKIRT configuration file, i.e. this information is not part of the imported data.
 
 The hierarchical grid structure is organized into a tree. Each tree node represents a cuboidal portion of the domain,
 called its \em extent. The \em root node's extent is the complete domain. A \em nonleaf node distributes its extent
@@ -219,8 +251,10 @@ Morton index 0 and performing a depth-first traversal with each nonleaf node vis
 
 \image html HydroMortonGrid.png
 
+XXX
+
 The overall makeup of the snapshot text file reflects this structure and ordering. Below is a text representation of
-the 2D grid shown in the above figure. Because SKIRT deals with 3D grids, we've added a third dimension that is never
+the 2D grid shown in the above figure. Because  \c SKIRT deals with 3D grids, we've added a third dimension that is never
 subdivided. The lines starting with an exclamation mark indicate a subdivided node, e.g., the root node is subdivided
 in \f$4\times3\times1\f$ cells. The other lines specify the field values for a particular cell. In this example, the
 first field value specifies the serial number or \em Morton \em index of the cell, and the second value specifies the
@@ -276,12 +310,12 @@ fields in the cell represented by this leaf node. All leaf node lines in the fil
 values.
 
 Note that there is no need to provide the cell positions because the geometry follows from the Morton order (and the
-total domain size, which is passed to SKIRT independently of the snapshot file).
+total domain size, which is passed to  \c SKIRT independently of the snapshot file).
 
 \subsubsection HydroSourcesAmrSnapsed Spatial distribution and SED from snapshot
 
 As before, we first consider the case where both the spatial distribution and the %SED at each location are determined
-from the snapshot. The AdaptiveMeshStellarComp class in SKIRT expects a snapshot data file in the format described
+from the snapshot. The AdaptiveMeshStellarComp class in  \c SKIRT expects a snapshot data file in the format described
 above, supplemented with the size of the spatial domain in each direction, because that information is not stored in
 the file. In addition, the user must configure which of the scalar fields in the snapshot file carry the relevant
 physical quantities for determining the %SED assigned to each cell.
@@ -290,9 +324,9 @@ The current implementation supports just the Bruzual-Charlot %SED family, so the
 three values, respectively specifying the initial stellar density \f$\rho_\mathrm{init}\f$ (in
 \f$\mathrm{M}_\odot\,\mathrm{pc}^{-3}\f$), the metallicity \f$Z\f$ of the stellar population (dimensionless fraction),
 and the age \f$t\f$ of the stellar population (in years). Using these properties as parameters for the Bruzual-Charlot
-%SED templates, SKIRT calculates the luminosity contribution of each cell for each wavelength bin. This information is
+%SED templates,  \c SKIRT calculates the luminosity contribution of each cell for each wavelength bin. This information is
 used during the Monte Carlo cycle to determine the (wavelength-dependent) probability that a given cell will be
-selected as the launch site for a new photon package. Generating a random launch position from a uniform distribution
+selected as the launch site for a new photon packet. Generating a random launch position from a uniform distribution
 within the selected cuboidal cell is of course trivial.
 
 When the need arises, we can add support for other %SED families, similar to what was described for the SPHStellarComp
@@ -318,14 +352,14 @@ galaxy formation and evolution.
 
 Due to the nature of a Voronoi tesselation, the geometry of the grid is completely defined by the positions of the
 generating sites. It is hence not necessary for a snapshot to store all the vertices and edges of each of the cells.
-Similar to our approach for other snapshot types, SKIRT reads the properties for a list of Voronoi cells from a text
-file in a simple format that can be easily generated by a conversion script. SKIRT constructs the Voronoi grid from the
+Similar to our approach for other snapshot types,  \c SKIRT reads the properties for a list of Voronoi cells from a text
+file in a simple format that can be easily generated by a conversion script.  \c SKIRT constructs the Voronoi grid from the
 positions of the generating sites, and assigns the corresponding physical values to each cell, assuming that the values
 are constant across the cell's extent.
 
-\subsubsection HydroSourcesVoroLaunch Launching photon packages
+\subsubsection HydroSourcesVoroLaunch Launching photon packets
 
-The generation of random positions for launching photon packages is similar to the procedure for hierarchical grids. In
+The generation of random positions for launching photon packets is similar to the procedure for hierarchical grids. In
 the first step, we pick a random cell using a discrete distribution where each cell is weighted by its relative
 (possibly wavelength-dependent) luminosity contribution. The second step, generating a random position from within the
 chosen cell, is significantly more complex than in the case of a cuboidal cell. To the best of our knowledge, there are
@@ -336,7 +370,7 @@ discrete distribution where every tetrahedron is weighted by its relative volume
 position from the selected tetrahedron. Specific algorithms are available for both the tetrahedrization of convex
 polyhedra and the generation of random positions from a tetrahedron.
 
-The second option, which is more straightforward and which we adopted in SKIRT, is to use the rejection technique. As
+The second option, which is more straightforward and which we adopted in  \c SKIRT, is to use the rejection technique. As
 the reference distribution we use a uniform density in a cuboidal volume, defined as the 3D bounding box of the cell.
 During construction of the Voronoi grid, for each cell, we store the cell bounding box (easily obtained from the cell
 vertices because Voronoi cells are convex polyhedra) and a list of all neighboring cells. After generating a candidate
@@ -349,7 +383,7 @@ average rejection rate for the random position generation.
 
 \subsubsection HydroSourcesVoroLoadsnap Loading snapshots
 
-The procedures for loading a spatial and/or spectral distribution from a Voronoi-tesselation-based snapshot into SKIRT
+The procedures for loading a spatial and/or spectral distribution from a Voronoi-tesselation-based snapshot into  \c SKIRT
 are very similar to what was described for the other snapshot types in \ref HydroSourcesSph and \ref HydroSourcesAmr.
 
 The VoronoiStellarComp class expects a snapshot data file in a straightforward text column format, containing one line
@@ -363,12 +397,12 @@ The VoronoiGeometry class imports just the spatial luminosity distribution from 
 separately assign a built-in %SED that is constant across the spatial domain. The file format is similar as described
 above, however the density contribution of each Voronoi cell is now given by the product of two field values with
 configurable indices. Because the class normalizes the spatial distribution to unity, we need to separately supply the
-actual luminosity of the source through one of the standard normalization options offered in SKIRT.
+actual luminosity of the source through one of the standard normalization options offered in  \c SKIRT.
 
 
-\section HydroDust Dust properties
+\section HydroMedia Media
 
-Apart from radiation sources, any nontrivial SKIRT simulation also includes a \em dust \em system with one or more \em
+Apart from radiation sources, any nontrivial  \c SKIRT simulation also includes a \em dust \em system with one or more \em
 dust \em components describing the dusty medium in the model (see the DustSystem and DustComp classes). Each dust
 component defines (a) the spatial density distribution of the dust and (b) the relevant material properties of the
 dust. In addition, a dust system also configures a \em dust \em grid that will be used to discretize the dusty medium
@@ -391,7 +425,7 @@ snapshot.
 
 Each of the dust components configured as described above must be assigned a specific \em dust \em mixture, which
 defines the optical and calorimetric properties of the dust grains (see the DustMix class and its subclasses, and also
-\ref DustProp). The dust properties are considered to be constant across the spatial domain of the dust component, but
+\ref DustProperties). The dust properties are considered to be constant across the spatial domain of the dust component, but
 evidently different dust components can be assigned different dust mixtures.
 
 Note that the stellar system and the dust system each have their own distinct import mechanism. It is perfectly
@@ -403,7 +437,7 @@ Finally, a dust grid must be properly configured to provide adequate spatial res
 densities or large density gradients. When importing a hydrodynamical simulation snapshot, the best option is to select
 an adaptive grid, such as a hierarchical octree grid (OctTreeDustGrid), a k-d tree grid (BinTreeDustGrid), or a Voronoi
 grid (VoronoiDustGrid). To help evaluate and configure the quality of a dust grid, it is instructive to review the dust
-density cuts along the coordinate planes generated by SKIRT upon request (see the documentation of the DustSystem
+density cuts along the coordinate planes generated by  \c SKIRT upon request (see the documentation of the DustSystem
 class). The \em theoretical density maps shows the dust density as it is defined through one of the DustDistribution
 classes, while the \em gridded density shows the dust density after discretization in the dust grid.
 
@@ -414,19 +448,24 @@ for radiation sources. There are, however, some differences and additional consi
 arbitrary position is obtained through \f[ \rho(\mathbf{r}) = \sum_{j=1}^N M_j \, W(|\mathbf{r}-\mathbf{r}_j|,h_j) \f]
 where \f$M_j\f$ now indicates the dust mass contribution for each particle. This value may simply be provided in the
 snapshot as a particle property, but just as likely, the hydrodynamical simulation traces the evolution of the gas
-medium as a whole rather than the dust per se. To facilitate those cases, SKIRT can calculate the dust mass from the
+medium as a whole rather than the dust per se. To facilitate those cases,  \c SKIRT can calculate the dust mass from the
 gas mass in the input data, assuming that the amount of dust is proportional to the metal fraction in the gas, except
 in areas where the gas is too hot to form dust. In other words, dropping the particle index, we have \f[
 M_\mathrm{dust} = \begin{cases} f_\mathrm{dust}\,Z\,M_\mathrm{gas} & \mathrm{if}\; T<T_\mathrm{max} \\ 0 &
 \mathrm{otherwise} \end{cases} \f] where \f$M_\mathrm{gas}\f$, \f$Z\f$, and \f$T\f$ are the gas mass, metallicity, and
 temperature given by the gas particle's properties in the snapshot, and \f$f_\mathrm{dust}\f$ and \f$T_\mathrm{max}\f$
-are constant parameters specified when configuring SKIRT. A fixed dust-to-metal fraction \f$f_\mathrm{dust}\f$ is
+are constant parameters specified when configuring  \c SKIRT. A fixed dust-to-metal fraction \f$f_\mathrm{dust}\f$ is
 widely assumed to be an appropriate approximation for a variety of environments, although observed values range from
 \f$f_\mathrm{dust}=0.2\f$ to \f$0.4\f$. If the cutoff temperature \f$T_\mathrm{max}\f$ is set to zero, the temperature
 criterion is ignored and the gas temperature does not need to be specified in the snapshot data.
 
-As already mentioned in \ref HydroSourcesSph, SKIRT employs implementations for the smoothing kernel \f$W(r,h)\f$ that
-are optimized for each specific task. To calculate the dust density at a given location, SKIRT uses the cubic spline
+In practice, the kernels used in SPH simulations almost always have a finite support so that only a relatively small
+number of terms in the sum have a non-zero contribution.
+
+
+
+As already mentioned in \ref HydroSourcesSph,  \c SKIRT employs implementations for the smoothing kernel \f$W(r,h)\f$ that
+are optimized for each specific task. To calculate the dust density at a given location,  \c SKIRT uses the cubic spline
 kernel \f[ W(r,h) = \frac{8}{\pi\,h^3} \times \begin{cases} 1 - 6\,u^2\,(1-u) & \mathrm{for}\;0<u<\tfrac12 \\
 2\,(1-u)^3 & \mathrm{for}\;\tfrac12<u<1 \\ 0 & \mathrm{otherwise} \end{cases} \f] with \f$u=r/h\f$ (see the class
 SPHGasParticle). This kernel has a finite support so that the operation can be limited to particles that potentially
@@ -462,19 +501,19 @@ dust regardless of the temperature cutoff value \f$T_\mathrm{max}\f$.
 We can also configure the CompDustDistribution class with an an instance of the SPHGeometry class. The text file
 expected by this class has the same format as the one expected by the SPHDustDistribution class. However, the
 SPHGeometry class normalizes the total weight of the density distribution to unity, which means that we need to supply
-the total dust mass through one of the standard normalization mechanisms offered by SKIRT. Note that the SPHGeometry
+the total dust mass through one of the standard normalization mechanisms offered by  \c SKIRT. Note that the SPHGeometry
 class can also be configured as part of a stellar system (see \ref HydroSourcesSphBuiltsed). In that case, the values
 in the fifth and sixth columns no longer have the meaning of mass and metallicity, and their product simply defines the
 relative luminosity contribution.
 
 \subsection HydroDustGrid Hierarchical grids and Voronoi grids
 
-The SKIRT classes for importing grid-based snapshots currently do not implement the temperature cutoff criterion
+The  \c SKIRT classes for importing grid-based snapshots currently do not implement the temperature cutoff criterion
 described in \ref HydroDustSph. For each cell in the grid, the dust density is thus simply calculated according to \f[
 \rho_\mathrm{dust} = f_\mathrm{dust}\,Z\,\rho_\mathrm{gas} \f] where \f$\rho_\mathrm{gas}\f$ and \f$Z\f$ are the gas
 density and metallicity given by the cell properties in the snapshot, and \f$f_\mathrm{dust}\f$ is a constant parameter
-specified when configuring SKIRT. In case the hydrodynamical simulation directly traces a dust population, we can
-configure SKIRT to use \f$f_\mathrm{dust}=1\f$ and to ignore metallicity (effectively setting \f$Z=1\f$ as well).
+specified when configuring  \c SKIRT. In case the hydrodynamical simulation directly traces a dust population, we can
+configure  \c SKIRT to use \f$f_\mathrm{dust}=1\f$ and to ignore metallicity (effectively setting \f$Z=1\f$ as well).
 
 Determining the dust density at an arbitrary position comes down to identifying the cell that contains that position
 and returning the density associated with this cell. For a hierarchical grid this entails a simple search that starts
@@ -482,7 +521,7 @@ at the root node and recursively descends into the child node that happens to co
 node has been reached. With the cuboidal cells in a Cartesian grid this is rather straightforward. In the case of a
 Voronoi grid, however, the cell identification is not as simple. Due to the nature of Voronoi grids, locating the
 appropriate cell is essentially a nearest neighbor search. Rather than looping over all possible cells (or
-equivalently, all generating sites), SKIRT implements an approach using cuboidal blocks (see the VoronoiMesh class).
+equivalently, all generating sites),  \c SKIRT implements an approach using cuboidal blocks (see the VoronoiMesh class).
 
 \subsubsection HydroDustGridLoadsnap Loading snapshots
 
@@ -493,27 +532,27 @@ The properties determining the %SED for radiation sources are in this case repla
 
 Alternatively, we can configure an instance of the AdaptiveMeshGeometry or VoronoiGeometry} classes, which normalize
 the total weight of the density distribution to unity, so that we need to supply the total dust mass through one of the
-standard normalization mechanisms offered by SKIRT.
+standard normalization mechanisms offered by  \c SKIRT.
 
 \subsubsection HydroDustGridConfig Configuring the RT dust grid
 
-For grid-based hydrodynamical snapshots, SKIRT offers the option to perform the RT simulation using the imported grid
+For grid-based hydrodynamical snapshots,  \c SKIRT offers the option to perform the RT simulation using the imported grid
 (see the AdaptiveMeshDustGrid class). In this case, rather than constructing a RT dust grid using some configured
-scheme based on sampling the density in the imported distribution, SKIRT directly adopts the grid on which the snapshot
+scheme based on sampling the density in the imported distribution,  \c SKIRT directly adopts the grid on which the snapshot
 has been defined. However, while this seems a logical thing to do, it is often not the best choice for several reasons.
 
 Most importantly, the resolution requirements for the RT treatment usually differ from those for the hydrodynamical
 simulation. We might not need the same overall resolution, and fine-grained cells may be needed in different areas of
-the domain. Also, sometimes the SKIRT dust grid can be made smaller than the full snapshot domain, cutting off the
+the domain. Also, sometimes the  \c SKIRT dust grid can be made smaller than the full snapshot domain, cutting off the
 outer areas that do not contain significant amounts of dust anyway. And finally, the octree and k-d tree dust grids in
-SKIRT (OctTreeDustGrid and BinTreeDustGrid) are highly optimized for photon package shooting, so the grid construction
+SKIRT (OctTreeDustGrid and BinTreeDustGrid) are highly optimized for photon packet shooting, so the grid construction
 time is usually easily regained during the actual RT simulation phase.
 
 
 \section HydroConclusions Conclusions
 
-We described the various mechanisms implemented in SKIRT for importing snapshots generated by hydrodynamical simulation
-codes. We can conclude that SKIRT's capabilities are very flexible and enable RT post-processing of snapshots from
+We described the various mechanisms implemented in  \c SKIRT for importing snapshots generated by hydrodynamical simulation
+codes. We can conclude that  \c SKIRT's capabilities are very flexible and enable RT post-processing of snapshots from
 essentially any hydrodynamical code with minimal data conversion and little or no programming requirements.
 
 At the same time, it is fair to point out some limitations. As it stands, several capabilities are implemented only for
@@ -521,11 +560,11 @@ SPH snapshots, e.g., support for a configurable %SED family (\ref HydroSourcesSp
 (\ref HydroSourcesSphVelocity), and other capabilities are implemented only for grid-based snapshots, e.g., support for
 binary data formats (\ref HydroSourcesAmrSnapshot). Adding these capabilities for the other snapshot types would be
 fairly straightforward, but doing so within the current class structure would cause substantial code duplication and
-maintenance headaches. Similarly, the smoothed particle kernels employed in SKIRT are hard-coded and optimized for each
+maintenance headaches. Similarly, the smoothed particle kernels employed in  \c SKIRT are hard-coded and optimized for each
 use case, e.g., sampling random locations (\ref HydroSourcesSph) or calculating the density at a given location (\ref
 HydroDustSph). Instead, the user should be able to select a kernel that matches the kernel used in the originating SPH
 simulation, even if this would have some performance implications.
 
-To address these issues, we should design and implement a cleaner structure of SKIRT's import modules in the future.
+To address these issues, we should design and implement a cleaner structure of  \c SKIRT's import modules in the future.
 
 */

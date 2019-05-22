@@ -2,7 +2,7 @@
 
 \page Concepts SKIRT Concepts
 
-The \em concept notes below offer more in depth information on various aspects or features of the \c SKIRT code:
+The \em concept \em notes below offer more in depth information on various aspects or features of the \c SKIRT code:
 
   - \ref Wavelengths discusses wavelength sampling and discretization in \c SKIRT.
   - \ref SpatialGrids introduces the spatial grids used for discretizing the transfer medium in \c SKIRT.
