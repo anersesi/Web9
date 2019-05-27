@@ -2,8 +2,165 @@
 
 \page Parallelization Parallelization
 
-This is a placeholder for a concept note on Parallelization in \c SKIRT.
+This concept note describes the hydrid parallelization implementation in \c SKIRT to some level of detail.
+Topics discussed below include:
+ - \ref ParallelizationIntro
+ - \ref ParallelizationClasses
+ - \ref ParallelizationUsage
+
+For information on how to use and configure the parallelization capabilities of \c SKIRT, refer to:
+ - \ref UserCmdLine
+ - \ref UserMPI
+
+For an introduction to parallel computing concepts in general, refer to:
+ - \ref ParallelComputing
+ - \ref ParallelScaling
+
+For an introduction to the message passing interface (MPI) used to implement multi-processing, refer to:
+ - \ref ParallelMessaging
+
+
+\section ParallelizationIntro Hybrid parallelization in SKIRT
+
+\c SKIRT allows both multi-threading and multi-processing parallelization, in any combination. This is illustrated
+in the following diagram:
+
+\image html UserHybridSkirt.png
+
+With multi-threading, the code executed by the different processors uses the same memory locations. The threads share
+the entire process state, with all variables and functions. Multiple threads may attempt to read from and write to the
+same memory location at the same time, which may lead to <em>race conditions</em> and unpredictable behavior. There are
+mechanisms to avoid these problems, but the fact remains that, with a large number of threads, performance goes down
+because all threads are competing for a common resource.
+
+With multi-processing, the execution of parallel code is performed by multiple, independent processes, each with their
+own memory addresses and process state. This avoids the performance issues from which multi-threading suffers. On the
+other hand, this kind of parallelization requires the implementation of explicit calls to a Message Passing Interface
+(MPI) at any point where communication is needed between processes. If implemented efficiently with a minimal amount of
+communication, multi-processing can scale much better for large number of processors than multi-threading. Also,
+processes can be allocated to different compute nodes, distributing the workload across a potentially large system
+with a distributed memory architecture.
+
+The combination of multi-threading and multi-processing, called \em hybrid parallelization, allows \c SKIRT to perform
+efficiently on a wide range of system architectures, from laptops to supercomputers.
+
+\note In the current implementation, \c SKIRT requires all memory data structures to be duplicated in each process. In
+other words, there is no domain composition or other mechanism to distribute the data structures of the simulation
+across multiple processes. See \ref UserMpiWhen for more information on how to best configure \c SKIRT in a
+multi-processing context.
+
+
+\section ParallelizationClasses The SKIRT parallelization support classes
+
+\subsection ParallelizationClassesParallel The Parallel class hierarchy
+
+Parallel is an abstract base class for subclasses that implement various parallelization schemes using one or more
+execution threads and/or one or more processes. A Parallel subclass instance can be created only through the
+ParallelFactory class, which constructs the appropriate Parallel subclass instance depending on the requested task
+allocation mode and the available parallel resources (see below). The client accesses the returned Parallel subclass
+instance using the common interface defined in this abstract Parallel base class.
+
+The Parallel::call() function offered by the base class interface executes a specified target function \f$N\f$ times as
+if it were part of a for loop over a range of indices from zero to \f$N-1\f$. Each index in the range represents a
+particular task. To reduce the overhead of handing out the tasks, the loop is actualy chopped into \em chunks of
+consecutive indices. Rather than a single index, the target function is handed the first index of the chunk and the
+number of indices (tasks) in the chunk, and it is expected to iterate over the specified index range. The chunk sizes
+are determined automatically to achieve optimal load balancing given the available parallel resources, while still
+maximally reducing the overhead of handing out the chunks.
+
+The Parallel subclasses and the parallelization schemes they implement are listed in the table below.
+
+Shorthand | %Parallel subclass | Description
+----------|-----------------|------------
+S | SerialParallel | Single thread in the current process; isolated from any other processes
+MT | MultiThreadParallel | Multiple coordinated threads in the current process; isolated from any other processes
+MP | MultiProcessParallel | Single thread in each of multiple, coordinated processes
+MTP | MultiHybridParallel | Multiple threads in each of multiple processes, all coordinated as a group
+0 | NullParallel | No operation; any requests for performing tasks are ignored
+
+The level of overhead differs substantially between the various schemes, so implementing each scheme separately allows
+optimizing performance in all use cases. For example, with the SerialParallel scheme all tasks are simply serialized
+and overhead is minimal.
+
+In the subclasses that actually do implement parallelism, the chunks of tasks are handed out dynamically as the work
+progresses. This approach maximizes load balancing even if some task chunks take longer to complete than others.
+Depending on the parallelization scheme, one or more extra threads are used to serve work to the other threads and/or
+processes. These extra threads are not counted towards the number of threads specified by the user because they do not
+consume significant resources.
+
+\subsection ParallelizationClassesFactory The ParallelFactory class
+
+An instance of the ParallelFactory class serves as a factory for instances of Parallel subclasses, called its children.
+An important property of a factory object is the maximum number of parallel execution threads per process to be handed
+to its children, which is set during construction to the value of the number of threads per process specified by the
+user on the command line (or to the default number of threads determined from the hardware). A factory object assumes
+ownership for all its children. If a child of the appropriate type and with the appropriate number of threads already
+exists, it will be handed out again. As a result, a particular Parallel instance may be reused several times, reducing
+the overhead of creating and destroying the threads.
+
+ParallelFactory clients can request a Parallel instance for one of the three task allocation modes described in the
+table below.
+
+Task mode | Description
+----------|------------
+Distributed | All threads in all processes perform the tasks in parallel
+Duplicated | Each process performs all tasks; the results should be identical on all processes
+RootOnly | All threads in the root process perform the tasks in parallel; the other processes ignore the tasks
+
+Depending on the requested task mode and the current run-time configuration (number of processes and number of threads
+in each process), a ParallelFactory object hands out the appropriate Parallel subclass as listed in the table below:
+ - in the table header: P=process, T=thread, 1=one, M=multiple.
+ - in the table body: shorthand refers to the table with Parallel subclasses above; slash means "root/other processes".
+
+Mode/Runtime | 1P 1T | 1P MT | MP 1T | MP MT |
+-------------|-------|-------|-------|-------|
+Distributed  |  S    |  MT   |  MP#  |  MTP# |
+Duplicated   |  S    |  MT   |  S    |  S*   |
+RootOnly     |  S    |  MT   |  S/0  |  MT/0 |
+
+(#) In Distributed mode with multiple processes, all threads require different random number
+    sequences. Therefore, the MultiProcessParallel and MultiHybridParallel classes swith the Random
+    instance associated with the simulation to arbitrary mode before performing tasks, and back to
+    predictable mode after performing the tasks.
+
+(*) In Duplicated mode with multiple processes, all tasks are performed by a single thread
+    (in each process) because parallel threads executing tasks in an unpredictable order would
+    see different random number sequences, possibly causing differences in the calculated results.
+
+
+\subsection ParallelizationClassesManager The ProcessManager class
+
+The ProcessManager class is an interface to the Message Passing Interface (MPI) library (see \ref ParallelMessaging).
+Its implementation is the only place in the \c SKIRT code where explicit calls to this library are allowed.
+
+The ProcessManager class offers functions for the following purposes:
+- Initializing and finalizing the MPI library.
+- Obtaining information on the multi-processing environment, such as the number of parallel processes.
+- Handing out chunks of tasks to other processes using a master-slave communication paradigm.
+- Synchronizing computed data between processes using collective communication operations.
+
+Some of these functions are obviously used extensively by the implementations of the Parallel and ParallelFactory
+(sub)classes. The data synchronization functions are also called from other places in the \c SKIRT code.
+
+
+\section ParallelizationUsage Use of parallelization in SKIRT
+
+Photon shooting in \c SKIRT is fully parallelized. However, some of the tasks performed during the setup and output
+phases of a simulation cannot be distributed across multiple processes or even across multiple threads. As a result,
+speedup (compared to single-thread single-process execution) during these phases may be limited, regardless of the
+number of processes and threads per process in use.
+
+\subsection ParallelizationUsagePhoton The photon life cycle
 
 [TBC]
+
+\subsection ParallelizationUsageSetup Setup
+
+[TBC]
+
+\subsection ParallelizationUsageProbes Probes
+
+[TBC]
+
 
 */
