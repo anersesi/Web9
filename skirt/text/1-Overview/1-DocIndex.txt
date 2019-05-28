@@ -24,6 +24,7 @@ The \c SKIRT documentation is structured as follows:
   - \ref Polarization describes the implementation of polarized radiation transfer in \c SKIRT.
   - \ref PerspectiveInstr provides details on \c SKIRT's perspective instrument, used mostly for making movies.
   - \ref Parallelization explains how \c SKIRT supports parallel computing.
+  - \ref Cfitsio introduces the library included with \c SKIRT to read and write FITS files.
   - \ref VoroPlusPlus introduces the library included with \c SKIRT to construct Voronoi tesselations.
 
 <b> Part III: Reference -- documentation on every class, namespace and function. </b>
