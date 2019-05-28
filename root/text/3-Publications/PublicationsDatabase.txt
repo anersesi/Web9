@@ -6,6 +6,94 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+Multi-wavelength de-blended Herschel view of the statistical properties of dusty star-forming galaxies across cosmic time
+Wang et al.
+A&A
+04 2019
+Application
+Wang2019
+2019A&A...624A..98W
+
+Dissecting the active galactic nucleus in Circinus - II. A thin dusty disc and a polar outflow on parsec scales
+Stalevski et al.
+MNRAS
+04 2019
+Application
+Stalevski2019
+2019MNRAS.484.3334S
+
+Ly α emission from galaxies in the Epoch of Reionization
+Behrens et al.
+MNRAS
+06 2019
+Application
+Behrens2019
+2019MNRAS.486.2197B
+
+The diverse evolutionary pathways of post-starburst galaxies
+Pawlik et al.
+Nature Astronomy
+03 2019
+Application
+Pawlik2019
+2019NatAs...3..440P
+
+The optical morphologies of galaxies in the IllustrisTNG simulation: a comparison to Pan-STARRS observations
+Rodriguez-Gomez et al.
+MNRAS
+03 2019
+Application
+Rodriguez2019
+2019MNRAS.483.4140R
+
+The Fornax 3D project: dust mix and gas properties in the centre of early-type galaxy FCC 167
+Viaene et al.
+A&A
+02 2019
+Application
+Viaene2019
+2019A&A...622A..89V
+
+Ring galaxies in the EAGLE hydrodynamical simulations
+Elagali et al.
+MNRAS
+12 2018
+Application
+Elagali2018
+2018MNRAS.481.2951E
+
+Far-reaching dust distribution in galaxy discs
+Smith et al.
+MNRAS
+10 2016
+Application
+Smith2016
+2016MNRAS.462..331S
+
+The cosmic spectral energy distribution in the EAGLE simulation
+Baes et al.
+MNRAS
+04 2019
+Application
+Baes2019
+2019MNRAS.484.4069B
+
+The nature of the UV halo around the spiral galaxy NGC 3628
+Baes and Viaene
+A&A
+03 2016
+Application
+Baes2016b
+2016A&A...587A..86B
+
+NGC 4370: a case study for testing our ability to infer dust distribution and mass in nearby galaxies
+Viaene et al.
+A&A
+07 2015
+Application
+Viaene2015
+2015A&A...579A.103V
+
 Dusty galaxies in the Epoch of Reionization: simulations
 Behrens et al.
 MNRAS
