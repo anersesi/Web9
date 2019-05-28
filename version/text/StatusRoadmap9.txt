@@ -12,9 +12,9 @@ properly runs all benchmarks described in the SKIRT 8 web site section. However,
 hood, waiting to surface when the code is put to more extensive use.
 
 Unless noted otherwise (e.g. labeled as a future plan), the features described on this web site have been implemented
-in the code and are ready for further verification. The sole (and important) exception is the non-reference
-documentation on the web site. In other words, the installation guides, user guides, developer guides, tutorials, and
-benchmark results are still missing. They should become available in the coming months.
+in the code and are ready for further verification. The sole (and important) exception is some of the non-reference
+documentation on the web site. The tutorials, benchmark results, and the PTS installation, user and developer guides
+are still missing. They should become available in the coming months.
 
 See also:
 

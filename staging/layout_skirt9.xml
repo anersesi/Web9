@@ -14,19 +14,19 @@
     <tab type="user" url="@ref Concepts" title="Concepts"/>
     <tab type="pages" visible="no" title="" intro=""/>
     <tab type="modules" visible="no" title="" intro=""/>
-    <tab type="namespaces" visible="yes" title="">
-      <tab type="namespacelist" visible="yes" title="" intro=""/>
-      <tab type="namespacemembers" visible="yes" title="" intro=""/>
-    </tab>
     <tab type="classes" visible="yes" title="">
       <tab type="classlist" visible="yes" title="" intro=""/>
       <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/>
       <tab type="hierarchy" visible="yes" title="" intro=""/>
-      <tab type="classmembers" visible="yes" title="" intro=""/>
+      <tab type="classmembers" visible="no" title="" intro=""/>
     </tab>
-    <tab type="files" visible="yes" title="">
-      <tab type="filelist" visible="yes" title="" intro=""/>
-      <tab type="globals" visible="yes" title="" intro=""/>
+    <tab type="namespaces" visible="yes" title="">
+      <tab type="namespacelist" visible="yes" title="" intro=""/>
+      <tab type="namespacemembers" visible="no" title="" intro=""/>
+    </tab>
+    <tab type="files" visible="yes" title="Macros">
+      <tab type="filelist" visible="yes" title="Macro List" intro="Macro List"/>
+      <tab type="globals" visible="no" title="" intro=""/>
     </tab>
     <tab type="examples" visible="no" title="" intro=""/>
   </navindex>
