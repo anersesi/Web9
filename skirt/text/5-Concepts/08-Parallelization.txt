@@ -142,25 +142,127 @@ The ProcessManager class offers functions for the following purposes:
 Some of these functions are obviously used extensively by the implementations of the Parallel and ParallelFactory
 (sub)classes. The data synchronization functions are also called from other places in the \c SKIRT code.
 
+\subsection ParallelizationClassesPattern Parallel coding pattern
+
+The code block below illustrates the typical coding pattern for a parallel calculation.
+
+\code{.cpp}
+size_t numT = ...;
+Array Tv(numT);     // result array is initialized to zeros
+find<ParallelFactory>()->parallelDistributed()->call(numT, [this,&Tv] (size_t firstIndex, size_t numIndices)
+{
+    for (size_t p=firstIndex; p!=firstIndex+numIndices; ++p)
+    {
+        ...
+        Tv[p] = ...;
+    }
+});
+ProcessManager::sumToAll(Tv);
+\endcode
+
+If the calculation may take longer than a few seconds to complete, the coding pattern should be extended with
+facilities to perform progress logging, as shown in the code block below.
+
+\code{.cpp}
+size_t numT = ...;
+auto log = find<Log>();
+log->info("Calculating " + std::to_string(numT) + " temperatures...");
+log->infoSetElapsed(numT);
+Array Tv(numT);     // result array is initialized to zeros
+find<ParallelFactory>()->parallelDistributed()->call(numT, [this,log,&Tv] (size_t firstIndex, size_t numIndices)
+{
+    const size_t logProgressChunkSize = ...;
+    while (numIndices)
+    {
+        size_t currentChunkSize = min(logProgressChunkSize, numIndices);
+        for (size_t p=firstIndex; p!=firstIndex+currentChunkSize; ++p)
+        {
+            ...
+            Tv[p] = ...;
+        }
+        log->infoIfElapsed("Calculated temperatures: ", currentChunkSize);
+        firstIndex += currentChunkSize;
+        numIndices -= currentChunkSize;
+    }
+});
+ProcessManager::sumToAll(Tv);
+\endcode
+
 
 \section ParallelizationUsage Use of parallelization in SKIRT
 
-Photon shooting in \c SKIRT is fully parallelized. However, some of the tasks performed during the setup and output
-phases of a simulation cannot be distributed across multiple processes or even across multiple threads. As a result,
-speedup (compared to single-thread single-process execution) during these phases may be limited, regardless of the
-number of processes and threads per process in use.
-
 \subsection ParallelizationUsagePhoton The photon life cycle
 
-[TBC]
+For most \c SKIRT simulations, nearly all of the execution time is spent performing the photon life cycle. This is thus
+the most important code loop to be parallelized. The topmost level of the photon life cycle is implemented in the
+MonteCarloSimulation::performLifeCycle() function. This function is invoked as the target of a Parallel::call() from a
+separate function for each simulation phase. For example, the MonteCarloSimulation::runPrimaryEmission() function
+implements the primary emission phase.
+
+As can be expected, the photon life cycle loop indirectly calls on a large number of classes in many areas of the code
+base, including sources, SEDs, geometries, material mixes, spatial grids, medium state, and instruments. Many of the
+data structures in the simulation are fully initialized during setup and are immutable during the photon life cycle
+phases. These data structures can be accessed from parallel execution threads without further concern. On the other
+hand, some data structures are updated during the photon life cycle; notably the data structures tracking the radiation
+field in every spatial cell and those recording observed fluxes in the instruments. Special care must be taken when
+updating these mutable data structures from parallel execution threads.
+
+Fortunately, the layout and size of most mutable data structures can be determined and initialized during setup. As a
+result, the only updates happening in parallel consist of accumulating floating point values in shared locations. These
+updates are accomplished by calling the LockFree:add() function, which uses efficient low-level atomic operations
+(rather than high-level software locking) to avoid data races. There are, however, two situations where things are more
+complicated.
+
+The first complexity arises with the calculation of emission spectra for imported primary sources and for secondary
+sources. Both types of sources consist of many separate entities (smoothed particles or spatial cells) for which
+distinct emission spectra must be determined. Obtaining these spectra may be time-consuming because of the
+interpolation in an %SED template family or a complex stochastic heating calculation. Usually, multiple photon packets
+are emitted from the same entity, and recalculating the spectrum for each photon packet would be very inefficient. The
+solution to this problem has two components. Firstly, each source entity (particle or cell) is assigned a number of
+photon packets ahead of time, and all packets for a particular entity are emitted consecutively. Secondly, the
+calculated emission spectra are cached between photon packet launches in thread-local storage, so that each execution
+thread manages its own cache. For more information, see the SourceSystem, ImportedSource and SecondarySourceSystem
+classes.
+
+The second complexity arises when recording statistics for observed fluxes in the instruments (an optional feature that
+can be enabled as part of the user configuration). This process requires accumulating the contributions of each
+indvidual photon packet to a given flux bin (for example, caused by the peel-off from multiple scattering events). The
+intermediate result for each photon packet, and per flux bin, must thus be cached during the packet's life cycle. In
+this case, we need a copy of the cache for each execution thread \em and \em for \em each \em instrument. To achieve
+this, the FluxRecorder class uses the ThreadLocalMember class template, which provides a thread-local instance data
+member using some fairly sophisticed C++ machinery.
 
 \subsection ParallelizationUsageSetup Setup
 
-[TBC]
+For a typical "production" simulation, the setup phase usually represents only a small fraction of the total execution
+time. However, designing a new simulation configuration often requires many iterations, in which case reducing the
+number of photon packets being launched can help speed up the process. Similarly, when testing new features during a
+development cycle, a limited number of photon packets is often sufficient. For those use cases, it is still relevant to
+speed up time-consuming setup calculations through parallelization.
+
+Many of the tasks performed during the setup phase are not worth considering for parallelization because they complete
+in a short time. Several other tasks cannot be parallelized easily because they involve creating and adjusting complex
+data structures. Some time-consuming tasks, however, can be parallelized with limited effort. For example, setup tasks
+that have been parallelized (using the Distributed task allocation mode discussed in the previous section) include:
+
+- Calculating the subdivision requirements for nodes in a tree-based spatial grid;
+  see the DensityTreePolicy::constructTree() function.
+- Calculating densities, bulk velocities, and volumes for all cells in the spatial grid;
+  see the MediumSystem::setupSelfAfter() function.
+- Integrating dust properties over the grain size distribution;
+  see the MultiGrainDustMix::getOpticalProperties() and MultiGrainDustMix::initializeExtraProperties() functions.
+- Pre-calculating information derived from dust properties for dust emission calculations;
+  see the EquilibriumDustEmissionCalculator::precalculate()
+  and StochasticDustEmissionCalculator::precalculate() functions.
 
 \subsection ParallelizationUsageProbes Probes
 
-[TBC]
+Similarly, the time consumed by the various Probe subclasses is usually not overly significant, but in some cases it is
+still worth the limited effort to implement parallelization. For example, probe tasks that have been parallelized
+(using the RootOnly task allocation mode discussed in the previous section) include:
 
+- Calculating the optical depth maps produced by the OpticalDepthMapProbe class.
+- Calculating the various planar cuts through the spatial domain produced by the DefaultMediaDensityCutsProbe,
+  DefaultDustTemperatureCutsProbe, and DefaultRadiationFieldCutsProbe classes.
 
 */
