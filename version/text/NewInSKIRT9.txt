@@ -167,7 +167,7 @@ By default, the procedure has a bias factor of 0.5 and a bias distribution that 
 
 A simulation uses multiple wavelength grids, each specialized for a particular purpose:
  - Wavelength-dependent properties of transfer media are tabulated in resource files on some private wavelength grid.
- - For each primary source, the user defines a wavelength range (no grid) in which the SED assigned to the source must
+ - For the primary sources, the user defines a wavelength range (no grid) in which the SED assigned to each source must
    be considered. The SED is tabulated on some private wavelength grid.
  - For each instrument, the user defines the wavelength grid that will be used for binning detected photon packets.
    To avoid repetition, a default instrument wavelength grid can be configured for the instrument system.

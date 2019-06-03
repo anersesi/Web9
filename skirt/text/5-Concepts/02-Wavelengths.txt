@@ -2,8 +2,272 @@
 
 \page Wavelengths Wavelengths
 
-This is a placeholder for a concept note on Wavelengths in \c SKIRT.
+\section WaveIntro Introduction
 
-[TBC]
+With few exceptions, the cross sections for interactions between matter and radiation depend heavily on the radiation's
+wavelength. Furthermore, some processes affect the wavelength of an interacting photon (e.g. Doppler shifts caused by
+relative motion) or drastically "convert" a given amount of radiative energy from one wavelength to another (e.g.
+absorption and re-emission by dust grains). As a result, wavelength plays an important role in a radiative transfer
+simulation code such as \c SKIRT.
+
+In general, the process goes like this. When a photon packet is launched, it receives a certain amount of energy at a
+given wavelength. While the packet moves through the spatial domain of the simulation, some of its energy is absorbed
+by the transfer medium, and its wavelength may be adjusted by interactions with the medium. At each scattering event, a
+fraction of the packet's energy is peeled-off towards each instrument to record the observed flux. The energy absorbed
+by the medium is re-emitted at a later stage by launching new photon packets at different wavelengths.
+
+This brief summary passes over a lot of details and complexities, but even so it hints at the many areas in the
+simulation where wavelength-related aspects need to be handled and configured. Also, not every simulation requires this
+full general treatment. For example, when studying dust extinction in the optical wavelength range, there is no need
+for handling dust emission.
+
+This concept note describes many of these issues in more detail:
+- \ref WavePackets
+- \ref WaveEmit
+- \ref WaveGrids
+- \ref WaveModes
+
+
+\section WavePackets Photon packet properties
+
+\subsection WavePacketsWave Wavelength and weight
+
+The fundamental properties of a photon packet include its wavelength and its weight. The wavelength property specifies
+the wavelength (or equivalently, the frequency) of all photons in the packet. The weight property specifies the number
+of photons carried by the packet, or more precisely the number of photons per unit of time. Refer to the PhotonPacket
+class for more details.
+
+At launch (from a primary or secondary source), a photon packet receives a wavelength (sampled from the source
+spectrum) and a luminosity (its share of the total luminosity of the source). The wavelength is stored as given. The
+luminosity is converted to a weight (number of photons) for storage in the photon packet.
+
+During a photon packet’s life cycle, updates can occur to both its weight (e.g. because of biasing) and its wavelength
+(e.g. after scattering by a moving medium). Because these updates can be fractional, both wavelength and weight are
+stored as floating-point values. Adjusting a photon packet's wavelength indirectly affects the luminosity represented
+by the packet, because the latter is directly proportional to the frequency and thus inversely proportional to the
+wavelength.
+
+\subsection WavePacketsKinem Kinematics
+
+The wavelength of a photon packet is defined relative to the model coordinate system (i.e. a medium at rest relative to
+the model coordinate system sees this wavelength). Velocities of sources and media are also defined relative to the
+model coordinate system. The bulk velocity of the aggregate medium in a spatial grid cell is determined by averaging
+the bulk velocities of all media components weighed by density. Instruments are considered to be at rest relative to
+the model coordinate system.
+
+When a photon packet is launched, its wavelength is Doppler shifted according to the component of the source velocity
+in the photon packet’s direction. When a photon packet interacts with a medium, the perceived wavelength is derived by
+Doppler shifting the packet’s wavelength according to the component of the aggregate medium bulk velocity in the photon
+packet’s incoming direction. Specifically, registration of a photon packet’s contribution to the radiation field uses
+this perceived wavelength.
+
+After a scattering interaction, the photon packet’s wavelength is replaced by the perceived wavelength, Doppler shifted
+according to the component of the medium velocity in the photon packet’s outgoing direction.
+
+
+\section WaveEmit Emitting photon packets
+
+\subsection WaveEmitDistributingPackets Distributing photon packets among sources
+
+The source system (see the SourceSystem class) distributes the emitted photon packets among the primary sources in the
+simulation based on three types of information: the luminosity weight of each source, a user-configured weight for each
+source (defaulted to equal weight for all sources), and a user-configured bias factor (defaulted to 0.5) that shifts
+between distributing according to the above weights and simply allocating an equal number of packets to each source.
+
+In turn, each source (see the Source class) determines how to further distribute the photon packets allocated to it.
+For example, a geometric source distributes photon packets according to its (built-in) spatial density distribution. An
+imported source has a scheme similar to the source system, using a user-configured composite bias factor to shift
+between a distribution according to the luminosity weights of each sub-source (particle or cell) and a linear
+equal-weight allocation.
+
+The secondary source system (see the SecondarySourceSystem class) also uses the latter scheme to distribute photon
+packets among the cells of the spatial grid configured for the simulation.
+
+\subsection WaveEmitSamplingWavelengths Sampling wavelengths
+
+Each radiation source provides a mechanism to sample a random wavelength from its spectral energy distribution (see the
+SED class and its subclasses) and assign a corresponding luminosity such that the bolometric luminosity of the source
+is properly distributed across the photon packets.
+
+All currently implemented SEDs employ the inversion method using the tabulated cumulative distribution to sample
+wavelengths. It would be possible, however, to employ a specialized sampling routine for analytically defined SEDs.
+
+It is important that all aspects of the %SED are properly sampled, for example wavelength ranges with low luminosities
+or narrow line features. To this end, the sampling procedure employs composite biasing to combine sampling from two
+distributions: the %SED itself (favoring wavelengths that carry a lot of energy) and a custom bias distribution
+(favoring specific wavelength areas). Both the composite bias factor and the bias distribution are user-configurable.
+By default, the procedure has a bias factor of 0.5 and a bias distribution that is logarithmic in wavelength.
+
+
+\section WaveGrids Wavelength grids
+
+\subsection WaveGridsDiscret Wavelength discretizations
+
+As described in a previous section, photon packets can have an arbitrary wavelength value in some continuous range.
+However, the only practical option in other areas of the simulation, such as defining material properties or recording
+fluxes, is to discretize the wavelength range. These various discretizations are essentially uncoupled, which leads to
+a potentially large number of different wavelength grids, each specialized for a particular purpose:
+
+ - Wavelength-dependent properties of transfer media are tabulated in resource files on some private wavelength grid.
+ - Spectra that can be assigned to primary sources are tabulated on some private wavelength grid.
+ - Each instrument requires a wavelength grid for binning detected photon packets.
+ - A radiation field wavelength grid is required to register the radiation field during primary and secondary emission.
+ - A dust emission grid is required to store the dust emission spectra calculated “on the fly” for each cell during
+   secondary emission.
+
+While some of these discretizations are defined by the input resource (e.g. material properties and %SEDs), the other
+discretizations (most notably those for the instruments) must be configured by the user. To this end, \c SKIRT includes
+a number of wavelength grids as presented in the next subsection.
+
+\subsection WaveGridsClass Wavelength grid class hierarchy
+
+The following diagram shows a portion of the class inheritance tree for wavelength grids (connections starting with a
+triangle denote inheritance).
+
+\dot
+digraph wavelengthgridhierarchy {
+    rankdir=BT;
+    node [shape=rect, fontname=Helvetica, fontsize=10];
+    edge [arrowhead=empty];
+
+    WavelengthGrid [label="WavelengthGrid" URL="\ref WavelengthGrid"];
+        DisjointWavelengthGrid [label="DisjointWavelengthGrid" URL="\ref DisjointWavelengthGrid"];
+            LogWavelengthGrid [label="LogWavelengthGrid" URL="\ref LogWavelengthGrid"];
+            NestedLogWavelengthGrid [label="NestedLogWavelengthGrid" URL="\ref NestedLogWavelengthGrid"];
+            FileWavelengthGrid [label="FileWavelengthGrid" URL="\ref FileWavelengthGrid"];
+        BandWavelengthGrid [label="BandWavelengthGrid" URL="\ref BandWavelengthGrid"];
+            PredefinedBandWavelengthGrid [label="PredefinedBandWavelengthGrid" URL="\ref PredefinedBandWavelengthGrid"];
+
+    DisjointWavelengthGrid -> WavelengthGrid;
+        LogWavelengthGrid -> DisjointWavelengthGrid;
+        NestedLogWavelengthGrid -> DisjointWavelengthGrid;
+        FileWavelengthGrid -> DisjointWavelengthGrid;
+    BandWavelengthGrid -> WavelengthGrid;
+        PredefinedBandWavelengthGrid -> BandWavelengthGrid;
+}
+\enddot
+
+The DisjointWavelengthGrid class represents wavelength grids with non-overlapping bins and constant transmission across
+each bin. There are currently two kinds of disjoint wavelength grids. The first kind has adjacent bins discretizing a
+wavelength range by filling it with consecutive bins that, together, cover all wavelengths in the range. The
+LogWavelengthGrid and NestedLogWavelengthGrid classes are examples of this kind of grid. The second kind has a number
+of distinct, non-adjacent wavelength bins each enveloping a characteristic wavelength with a bin width that is smaller
+than the separation between the characteristic wavelengths. The FileWavelengthGrid class can be configured to represent
+either adjacent or non-adjacent wavelength grids. For more information, refer to the documentation of these respective
+classes.
+
+The BandWavelengthGrid class represents wavelength grids where each bin is defined by the transmission curve of a
+particular broadband. The intervals in which the transmission is nonzero are allowed to overlap, so the bins are not
+necessarily disjoint. Standard broadbands such as the Johnson filters and transmission curves for actual observatories
+are represented in \c SKIRT by the BroadBand class. Refer to the documentation of the BroadBand class for a list of
+supported bands. The PredefinedBandWavelengthGrid class offers a list of predefined bands comprising the GALEX, SDSS,
+2MASS, WISE and HERSCHEL broadbands. Each of these sets can be included or excluded through configuration flags. The
+ConfigurableBandWavelengthGrid class (not shown in the diagram above) allows configuring an arbitrary list of bands.
+
+As an aside, note that Band instances can be also used for luminosity normalization of a primary source. For more
+information, see the NormalizedSource and BandLuminosityNormalization classes.
+
+\subsection WaveGridsConfig Configuring wavelength grids
+
+As mentioned above, each \c SKIRT instrument requires a wavelength grid for binning the observed fluxes contributed by
+detected photon packets. Each instrument can be configured with its own distinct wavelength grid. To avoid repetition
+in configurations with several instruments, a default wavelength grid can be configured for the instrument system. The
+default grid is adopted by instruments for which no individual grid has been specified.
+
+Instruments can use any of the wavelength grids discussed in the previous section. For disjoint grids the binning
+process is straightforward. In case a BandWavelengthGrid has been specified, an arriving photon packet is registered
+for each band in the wavelength grid after multiplying its luminosity contribution by the band’s transmission factor
+corresponding to the packet’s wavelength.
+
+The current implementation also requires the radiation field wavelength grid and the dust emission grid to be
+configured by the user (at least for simulation configurations that need these grids). Only disjoint wavelength grids
+with adjacent bins can be used for these purposes. Future implementations may allow determining these grids
+automatically using some heuristic.
+
+The radiation field wavelength grid is used to register the radiation field during primary and secondary emission.
+Memory usage is proportional to the product of the number of wavelength points in this grid and the number of spatial
+cells in the simulation. Limiting the resolution of the radiation field wavelength grid can thus be important.
+
+The dust emission grid is used to store the dust emission spectra calculated “on the fly” for each cell during
+secondary emission. Because the secondary source system handles one spatial cell at a time, it needs to store just one
+secondary spectrum per parallel execution thread. The resolution of the dust emission grid thus has no significant
+effect on memory usage, but it may still impact performance.
+
+
+\section WaveModes Simulation modes
+
+With respect to the treatment of wavelengths, \c SKIRT has two distinct simulation modes called \em panchromatic and
+\em oligochromatic. One of these modes must be selected early on in the simulation configuration process, and the
+choice affects many of the other options in the configuration. The following two subsections describe each of these
+wavelength modes. The third subsection describes an advanced, specialized panchromatic mode that is intended for use in
+benchmarks or similar comparisons with the results of other radiative transfer simulation codes.
+
+\subsection WaveModesPan Panchromatic simulation mode
+
+Panchromatic simulation mode is the most powerful and commonly used mode in \c SKIRT. A panchromatic simulation
+operates with a continuous range of wavelengths that often spans ultraviolet, optical, infrared and submillimeter
+bands. Such a simulation supports the full \c SKIRT feature set, including for example thermal emission by dust grains
+and the effects of kinematics. If the wavelength range is limited to (part of) the ultraviolet and/or optical spectrum,
+it obviously doesn't make sense to include thermal emission, but the other features (such as kinematics) remain
+available.
+
+In panchromatic mode, the user must specify a primary source wavelength range (no grid) in which the %SED assigned to
+each source must be considered, and configure wavelength grids for instruments, radiation field, and dust emission as
+discussed in \ref WaveGridsConfig.
+
+\subsection WaveModesOligo Oligochromatic simulation mode
+
+Oligochromatic simulation mode is used for studying extinction effects (i.e. absorption and scattering) at a limited
+number of specific wavelengths (or just a single wavelength) in the ultraviolet and/or optical spectrum. The simulation
+operates at these discrete wavelength values only, and is therefore unable to calculate wavelength-integrated
+quantities such as dust temperatures or thermal emission, or to properly handle wavelength shifts such as those caused
+by kinematics. On the other hand, because of the small number of wavelengths in use, the total number of photon packets
+launched can usually be substantially smaller than for panchromatic simulations. In other words, one trades speed for a
+reduction of the supported feature set.
+
+In oligochromatic mode, the user must specify the list of discrete wavelengths to be used in the simulation. The
+luminosity of each source is still derived from its associated %SED or %SED family, and luminosity normalization
+proceeds as usual (and may even happen at wavelengths that differ from the oligochromatic wavelengths). However, newly
+emitted photon packets are automatically assigned one of oligochromatic wavelengths. Furthermore, all instruments are
+forced to use a special wavelength grid with narrow bins around the oligochromatic wavelengths (see the
+OligoWavelengthGrid class).
+
+\subsection WaveModesDiscrete Discrete panchromatic simulation mode
+
+In the regular -- and highly recommended -- panchromatic simulation mode, the current \c SKIRT version samples all
+wavelengths in a given wavelength bin. In contract, previous \c SKIRT versions and many other codes only sample a
+single characteristic wavelength within the bin. Depending on the form of the involved spectra, these two methods may
+(and often will) produce different results. While the current \c SKIRT method is designed to more closely reflect the
+physical reality, these differences can be very annoying when comparing \c SKIRT results with those of other radiative
+transfer simulation codes as part of, for example, a benchmark effort.
+
+\c SKIRT therefore includes the DiscreteWavelengthDistribution class, which creates the ability to mimick codes that
+emit photon packets at discrete wavelengths rather than across a continuous range, while still using panchromatic
+simulation mode. Configuring such a simulation, however, involves some advanced options and requires great care, as
+described in more detail below.
+
+When a DiscreteWavelengthDistribution instance is used as the wavelength bias distribution for a source with a
+composite bias factor of one, the source will emit photon packets only at the characteristic wavelengths of the
+configured grid, and the photon packets will be distributed with equal probability among those wavelengths. In this
+situation, it makes little sense to configure wavelength grids with different bins for detecting photon packets in
+other areas of the simulation. Doing so might cause unexpected results. For example, some bins might receive no photon
+packets at all and thus incorrectly report zero influx. It is therefore best to configure the same wavelength grid
+throughout the simulation.
+
+To configure a simulation that uses discrete wavelengths in panchromatic mode, follow these guidelines:
+
+- Choose a wavelength grid with adjacent bins (i.e. representing a continuous range), such as a LogWavelengthGrid or a
+FileWavelengthGrid with \em relativeHalfWidth set to zero.
+
+- Configure all primary and secondary sources (including, e.g. dust emission) with a wavelength bias factor of one, and
+a wavelength bias distribution of type DiscreteWavelengthDistribution using the chosen wavelength grid.
+
+- Explicitly configure all wavelength grids in the simulation to be the same chosen wavelength grid. This includes the
+radiation field wavelength grid, the dust emission wavelength grid, and the wavelength grids for all instruments and
+probes.
+
+- Avoid using kinematics in the simulation. Small Doppler shifts from the emitted discrete wavelengths will stay within
+the same wavelength bin anyway. Larger shifts will cause photon packets to move between wavelength bins in a
+discontinuous way.
 
 */
