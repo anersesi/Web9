@@ -2,7 +2,7 @@
 
 \page DeveloperGuide The PTS Developer Guide
 
-This page offers some guidance for users and developers who whish to adjust or extend \c PTS capabilities.
+This page offers some guidance for users and developers who wish to adjust or extend \c PTS capabilities.
 It is organized in the following topics:
 
 - \ref DevStruct
@@ -88,9 +88,10 @@ Data member  | Leading underscore plus variable name (all data members are priva
 \subsection DevStyleDep Dependencies
 
 Any \c PTS code may depend on any of the standard Python 3.7 packages without further mention. In addition, some of the
-\c PTS facilities may require non-standard python packages to be installed. Developers are urged to avoid additional
+\c PTS facilities may require non-standard Python packages to be installed. Developers are urged to avoid additional
 dependencies where possible, and to use only packages that are readily available from the common distribution channels.
 
+See \ref InstallPackages for a list of the required non-standard packages at the time of writing.
 To obtain a list of the current package dependencies, make sure that \c PTS is properly installed and enter the
 following terminal command:
 
