@@ -13,9 +13,9 @@
     <tab type="user" url="@ref DeveloperGuide" title="Developer Guide"/>
     <tab type="pages" visible="no" title="" intro=""/>
     <tab type="modules" visible="no" title="" intro=""/>
-    <tab type="namespaces" visible="yes" title="">
-      <tab type="namespacelist" visible="yes" title="" intro=""/>
-      <tab type="namespacemembers" visible="yes" title="" intro=""/>
+    <tab type="namespaces" visible="yes" title="Modules">
+      <tab type="namespacelist" visible="yes" title="Module list" intro="Module list"/>
+      <tab type="namespacemembers" visible="yes" title="Module members" intro="Module members"/>
     </tab>
     <tab type="classes" visible="yes" title="">
       <tab type="classlist" visible="yes" title="" intro=""/>
