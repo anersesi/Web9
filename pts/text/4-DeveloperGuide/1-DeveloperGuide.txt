@@ -9,9 +9,36 @@ It is organized in the following topics:
 - \ref DevStyle
 - \ref DevBuildDocs
 
-\section DevStruct Packages, modules and directory structure
+\section DevStruct Packages, modules and directories
 
-The following table lists some important packages in \c PTS with an indication of their functionality.
+The \c PTS source code is contained in an online repository and can be obtained as described in \ref InstallationGuide.
+guide. Your local copy of this repository is usually placed inside a directory called \c PTS in your home directory.
+The resulting directory structure may look as follows:
+
+    ~/PTS
+        pts
+            admin
+                do
+            band
+                data
+                do
+            do
+            docs
+            simulation
+            ...
+            visual
+                do
+        run
+
+The optional \c run directory may contain input/output files involved in actually running PTS. This information
+obviously does not belong in the source code repository, which is why the \c run directory is \em not inside the \c pts
+directory. The contents of the \c pts directory is an identical clone of the online \c PTS repository. Immediately
+inside the \c pts directory resides a shell script for building the documentation (see \ref DevBuildDocs) and a number
+of subdirectories holding the source and documentation files.
+
+A \c PTS \em package is represented as a top-level subdirectory of the \c PTS repository. Each Python source file
+within a package is called a \em module. \c PTS has no nested packages. The following table lists some important
+packages in \c PTS with an indication of their functionality.
 
 | Package | Description
 |---------|------------
@@ -23,10 +50,6 @@ The following table lists some important packages in \c PTS with an indication o
 | utils | Basic utilities for use by other sub-packages
 | visual | Visualizing SKIRT results including image frames, SEDs, density cuts, temperature cuts, polarization maps, and more.
 
-
-A \c PTS \em package is represented as a top-level subdirectory of the \c PTS repository. Each Python source file
-within a package is called a \em module. \c PTS has no nested packages.
-
 In addition to the package subdirectories, the following subdirectories may occur in the repository directory hierarchy
 as needed:
 
@@ -36,6 +59,7 @@ Subdirectory | Where | Presence | Description
 \c do | Top-level | Mandatory | Implementation of command line facilities, i.e. locating and executing scripts in \c do subdirectories
 \c do | Inside package | Optional | Command scripts that can be executed directly from the \c PTS command line
 \c data | Inside package | Optional | Data resources required by the module containing this directory
+
 
 \section DevStyle Coding style
 
