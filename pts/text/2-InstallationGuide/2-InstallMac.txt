@@ -6,6 +6,7 @@ The [Anaconda distribution](https://www.anaconda.com/distribution/) is an open s
 an extensive Python package manager. It offers many additional features, including the option to define and switch
 between multiple Python environments. This allows, for example, Python 2 and Python 3 versions to coexist peacefully on
 the same computer.
+
 This page describes how to install Anaconda using the graphical installer on Mac OS X. The installation procedure using
 the graphical installer on other operating systems is probably very similar.
 

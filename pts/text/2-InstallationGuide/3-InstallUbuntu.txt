@@ -46,8 +46,8 @@ outlined below to install the Anaconda distribution.
 
   again replacing the file name by the current installer file name.
 
-- Follow the instructions displayed by the installer, accepting the default install location, and responding "yes" when
-  asked whether the installer should initialize Anaconda3 by running conda init.
+- Follow the instructions displayed by the installer, accepting the default install location, and responding
+  affirmative when asked whether the installer should initialize Anaconda3 by running conda init.
 
   \note The Anaconda installer adds several lines of commands to your login script; do \em not remove these lines.
 
@@ -87,7 +87,7 @@ To install extra Python packages in your Anaconda environment, follow the steps 
       conda install reportlab
 
   The conda command will display a list of packages to be installed and/or updated, including any dependencies of the
-  requested package. Enter "yes" when asked whether to proceed.
+  requested package. Enter affirmative when asked whether to proceed.
 
 - Repeat the previous steps to install additional packages, or specify multiple packages in the \c conda \c install
   command to install all of them in one go.
