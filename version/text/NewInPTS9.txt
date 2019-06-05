@@ -46,7 +46,7 @@ See also:
 
 \section NewInPTS9Features Features
 
-The following table lists the current and planned Python sub-packages in PTS 9 with an indication of the functionality
+The following table lists the current Python sub-packages in PTS 9 with an indication of the functionality
 offered by each.
 
 | Package | Description
