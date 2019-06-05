@@ -63,7 +63,7 @@ Subdirectory | Where | Presence | Description
 
 \section DevStyle Coding style
 
-\subsection DevStyleConv Conventions
+\subsection DevStyleConv Basic conventions
 
 \c PTS is written in Python 3.7 and, in general, uses the coding style, language capabilities and standard library
 functions corresponding to that language version.
@@ -85,7 +85,44 @@ Function | Camel case starting with lower case letter | performSimulation()
 Variable | Camel case starting with lower case letter; or all lowercase letters, no separators | nx, fluxDensity
 Data member  | Leading underscore plus variable name (all data members are private) | _nx, _fluxDensity
 
-\subsection DevStyleDep Dependencies
+\subsection DevStyleExpose Organizing package functionality
+
+Each \c PTS package (a directory, see \ref DevStruct) exposes all public functions and classes (i.e. those intended for
+use outside of the package) at the package level. The functionality is implemented in various modules (python source
+files) residing inside the package. The initialization file for each package places the public names into the package
+namespace using explicit imports.
+
+\subsection DevStyleImport Importing packages
+
+Default style for importing external packages (including standard-library packages):
+
+    import some.package           # each reference must include full package name
+
+External packages imported with a local name:
+
+    import astropy.constants as const
+    import astropy.io.fits as fits
+    import astropy.units as u
+    import lxml.etree as etree
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+Importing other PTS packages (or same package from within do subdirectory):
+
+    import pts.admin as adm
+    import pts.band as bnd
+    import pts.do as do
+    import pts.simulation as sm
+    import pts.storedtable as stab
+    import pts.utils as ut
+    import pts.visual as vis
+
+Importing symbols from within the same package, including initialization file:
+
+    from .module import name      # default style is to use explicit import
+    from .module import *         # exceptional style, for example in conversionspec.py
+
+\subsection DevStyleDep External dependencies
 
 Any \c PTS code may depend on any of the standard Python 3.7 packages without further mention. In addition, some of the
 \c PTS facilities may require non-standard Python packages to be installed. Developers are urged to avoid additional
