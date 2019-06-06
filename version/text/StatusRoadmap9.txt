@@ -4,7 +4,7 @@
 
 \section StatusRoadmap9Status Status
 
-<em>May 2019</em>
+<em>June 2019</em>
 
 Version 9 of the SKIRT project has been publicly released and has reached a state where proof-reading, evaluation, and
 further testing by any interested user is highly desired. SKIRT 9 properly performs 300 handcrafted test cases and
@@ -12,8 +12,7 @@ properly runs all benchmarks described in the SKIRT 8 web site section. However,
 hood, waiting to surface when the code is put to more extensive use.
 
 Unless noted otherwise (e.g. labeled as a future plan), the features described on this web site have been implemented
-in the code and are ready for further verification. The sole (and important) exception is some of the non-reference
-documentation on the web site. The tutorials, benchmark results, and the PTS installation, user and developer guides
+in the code and are ready for further verification. The major exception is that the tutorials and the benchmark results
 are still missing. They should become available in the coming months.
 
 See also:
