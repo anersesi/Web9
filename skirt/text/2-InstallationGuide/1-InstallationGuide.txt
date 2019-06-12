@@ -51,5 +51,6 @@ scenario and operating system can hopefully be inferred by picking and choosing 
 - \ref InstallDev
 - \ref InstallOptions
 - \ref InstallMPI
+- \ref InstallFITS
 
 */
