@@ -5,9 +5,9 @@
 \image html TutorialBasicsMonoBrightness.png
 
 In this tutorial you will use \c SKIRT to produce a nearly edge-on V-band image of a dusty disk galaxy model (see
-illustration). You will create a \em ski file containing the appropriate simulation parameters, and then you will
-actually perform the simulation. Finally you will adjust the \em ski file and perform a second simulation with slightly
-different parameters.
+illustration above). You will create a \em ski file containing the appropriate simulation parameters, and then you will
+actually perform the simulation and review its results. Finally you will adjust the \em ski file and perform a second
+simulation with slightly different parameters.
 
 \section TutorialBasicsMonoPre Getting ready
 
@@ -80,7 +80,7 @@ A \em ski file always describes a Monte Carlo simulation, so this question is pr
  ? Enter one of these numbers [1,3] (2): 1
 \endverbatim
 
-The Q&A session can  be tailored to the experience level of the user:
+The Q&A session can be tailored to the experience level of the user:
  - \em Basic: hides many options and provides appropriate default values where needed; only the basic \c SKIRT
    capabilities can be configured in this mode.
  - \em Regular: hides esoteric options that would be relevant only to expert users in rare use cases; essentially all
@@ -579,7 +579,7 @@ All probes are part of the probe system. Because there is only one type of probe
       2. The primary source luminosities
       3. Data files for plotting the structure of the grid
       4. Convergence information on the spatial grid
-      5. Cuts of the media densities along the coordinate axes
+      5. Cuts of the media densities along the coordinate planes
       6. Aggregate optical material properties for each medium
  ? Enter one of these numbers or zero to terminate the list [0,6] (4): 4
  ? Enter the name for this probe: cnv
@@ -593,7 +593,7 @@ All probes are part of the probe system. Because there is only one type of probe
 
    Possible choices for item #3 in the probes list:
       ...
-      5. Cuts of the media densities along the coordinate axes
+      5. Cuts of the media densities along the coordinate planes
       ...
  ? Enter one of these numbers or zero to terminate the list [0,6] (4): 5
  ? Enter the name for this probe: cut
@@ -610,14 +610,14 @@ All probes are part of the probe system. Because there is only one type of probe
  ? Enter one of these numbers or zero to terminate the list [0,6] (4): 0
 \endverbatim
 
-Select three of the offered probes, in arbitrary order, and specify their names as follows.
+Configure the following probes, in arbitrary order, and specify their names as follows.
 
 | Probe type | Probe name
 |------------|-----------
-| Convergence information on the spatial grid           | cnv
-| Aggregate optical material properties for each medium | opt
-| Cuts of the media densities along the coordinate axes | cut
-| Data files for plotting the structure of the grid     | grid
+| Convergence information on the spatial grid             | cnv
+| Aggregate optical material properties for each medium   | opt
+| Cuts of the media densities along the coordinate planes | cut
+| Data files for plotting the structure of the grid       | grid
 
 Finally, when asked for the subsequent probe, enter zero to terminate the list.
 
