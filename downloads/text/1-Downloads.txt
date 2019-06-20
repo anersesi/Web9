@@ -23,6 +23,14 @@ installation guide for further instructions.
 
 \section DownloadsTutorials Data files used in the tutorials
 
-[TBC]
+Some of the <a href="../version9/_tutorials.html">SKIRT tutorials</a> require one or more input data files to be
+present on your computer, as described in the "Getting ready" section of each tutorial. These data files are provided
+here.
+
+<TABLE>
+<TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/kh_amr.txt">kh_amr.txt</a>
+</TD><TD>Dust distribution in Kelvin-Helmholtz instability produced by MPI-AMRVAC
+</TD></TR>
+</TABLE>
 
 */

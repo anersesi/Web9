@@ -1,0 +1,7 @@
+/**
+
+\page TutorialDevelopGeom Adding a new geometry class to SKIRT
+
+[To be completed]
+
+*/

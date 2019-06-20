@@ -1,0 +1,7 @@
+/**
+
+\page TutorialGridsTreeVoro Building a proper SKIRT dust grid for a spiral galaxy
+
+[To be completed]
+
+*/

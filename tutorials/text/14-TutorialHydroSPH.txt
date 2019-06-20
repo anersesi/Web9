@@ -1,0 +1,7 @@
+/**
+
+\page TutorialHydroSPH Stochastic heating in an SPH-simulated galaxy with SKIRT
+
+[To be completed]
+
+*/
