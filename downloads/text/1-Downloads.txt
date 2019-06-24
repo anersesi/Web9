@@ -31,6 +31,12 @@ here.
 <TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/kh_amr.txt">kh_amr.txt</a>
 </TD><TD>Dust distribution in Kelvin-Helmholtz instability produced by MPI-AMRVAC
 </TD></TR>
+<TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/eagle_stars.txt">eagle_stars.txt</a>
+</TD><TD>Stellar particles from EAGLE SPH simulation snapshot
+</TD></TR>
+<TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/eagle_gas.txt">eagle_gas.txt</a>
+</TD><TD>Gas particles from EAGLE SPH simulation snapshot
+</TD></TR>
 </TABLE>
 
 */
