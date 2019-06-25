@@ -258,7 +258,7 @@ is limited, but there will still be an impact on performance.
 
 In this tutorial simulation, you will include the effects of stochastically heated dust
 grains, which manifest themselves as specific spectral features at infrared wavelengths. To properly captures these
-features, the dust emission wavelenght grid must have sufficient resolution in the relevant range.
+features, the dust emission wavelength grid must have sufficient resolution in the relevant range.
 
 For calculating the dust emission spectrum in this tutorial simulation, select a nested logarithmic wavelength grid
 ranging from 1 to 1000 \f$\mu\f$m, with a finer subgrid in the range from 3 to 30 \f$\mu\f$m. Specify 75 points in the
@@ -508,17 +508,99 @@ skirt -i ../in PanEagle
 
 \subsection TutorialHydroSphOutput Output files
 
+The output files for this tutorial are similar to those already described for a previous tutorial (see \ref
+TutorialBasicsMonoOutput and \ref TutorialBasicsPanOutput). Because the geometry in this simulation is truly
+three-dimensional (i.e. it has no axial or spherical symmetries), there are now three cuts through the dust density
+(one along each of the coordinate planes) rather than two. Similarly, there are now three cuts through the indicative
+dust temperature of the dust medium.
+
+The instruments used in this tutorial each produce an SED file. \c PanEagle_eo_sed.dat and \c PanEagle_fo_sed.dat are
+short text data files representing the spectral energy distribution of the photon packets detected by the instruments.
+In addition to the wavelength column, there are several corresponding flux columns:
+ - total flux: the total flux detected by the instrument (in each wavelength bin).
+ - transparent flux: the flux that would have been detected by the instrument if there were no medium in the system.
+ - direct primary flux: the flux resulting from photon packets originating from a primary source (in this case, one of
+   the stellar particles) that directly reach the instrument without being scattered.
+ - scattered primary flux: the flux resulting from primary photon packets (in this case, one of the stellar particles)
+   that were scattered by the medium (in this case, the imported dust distribution) before reaching the instrument.
+ - direct secondary flux: the flux resulting from photon packets originating from a secondary source (in this case, the
+   imported dust heated by the stellar radiation) that directly reach the instrument without being scattered.
+ - scattered secondary flux: the flux resulting from secondary photon packets (in this case, the imported dust heated
+   by the stellar radiation) that were scattered by the medium (in this case, the same imported dust distribution)
+   before reaching the instrument.
+
+\subsection TutorialHydroSphDens Dust density
+
+As always it is a good idea to open the file \c PanEagle_cnv_convergence.dat in a text editor and check the dust grid
+convergence metrics. With the spatial grid configuration recommended above for this tutorial, the convergence is not so
+good. The input ("theoretical") and gridded values differ by up to 25 per cent. In an actual research setting, you
+would want to tweak the settings for the adaptive octree grid, creating more cells in the appropriate places, to obtain
+better convergence. Also, in this example, some of the imported gas particles lie outside the domain of the spatial
+grid. The dust derived from those particles counts towards the input dust mass, but is excluded from the gridded dust
+mass.
+
+
+It is also instructive to compare the theoretical and gridded dust density cuts (e.g. \c ScatAMR_dns_dust_t_xy.fits and
+\c PanTorus_dns_dust_g_xy.fits) in an interactive FITS viewer or by plotting them using the following \c PTS command:
+
+\verbatim
+pts plot_density_cuts . --prefix=PanEagle --dex 4
+\endverbatim
+
+It is quite apparent from this comparison that the octree grid indeed forms smaller cells in areas of higher dust
+density, but that - with the current settings - these cells are often too large to properly discretize the density
+distribution.
+
+\subsection TutorialHydroSphTemp Dust temperature
+
+Open the temperature maps (e.g. \c PanEagle_tmp_dust_T_xz.fits) in an interactive FITS viewer or by plotting them using
+the following \c PTS command:
+
+\verbatim
+pts plot_temperature_cuts . --prefix=PanEagle
+\endverbatim
+
+The cut through the \f$xz\f$ coordinate plane should look similar to the figure shown at the start of this tutorial:
+
+\image html TutorialHydroSPHTemp.png
+
+Consider the temperature gradient in the dust, and look up the minimum and maximum temperature values. As noted in a
+previous tutorial (see \ref TutorialBasicsPanOutput), the indicative dust temperature shown in these maps does not
+correspond to a physical temperature, but rather reflects one of the many ways to obtain a representative temperature
+for a dust mixture.
+
+\subsection TutorialHydroSphSpectra Spectra
+
+\c PTS offers commands to create PDF files plotting the SEDs produced by a \c SKIRT simulation. By default, the
+SEDs for all instruments are combined on the same figure. The following command produces the plot shown below:
+
+\verbatim
+pts plot_seds . --prefix=PanEagle --dex=4
+\endverbatim
+
 \image html TutorialHydroSPHSED1.png
+
+For UV, optical and near-infrared wavelengths (up to about \f$8\,\mu\mathrm{m}\f$) the dust extinction is
+substantially larger in the edge-on sight line than in the face-on sight line. This is expected since the edge-on
+radiation has to penetrate a lot more dust before it reaches the observer. At longer wavelengths, the interaction cross
+section is sufficiently small that the dust becomes almost transparent and the spectrum is essentially isotropic. Also,
+note the spectral features in the \f$3-20\,\mu\mathrm{m}\f$ wavelength range, mostly resulting from the emission of
+stochastically heated dust grains.
+
+The same \c PTS command can also plot the various flux components detected by a single instrument. For example, the
+following command produces the plot shown below:
+
+\verbatim
+pts plot_seds . --prefix=PanEagle --instr=eo --wmin=0.1 --wmax=50 --dex=3
+\endverbatim
+
 \image html TutorialHydroSPHSED2.png
+
+The dotted line indicates the unattenuated stellar flux, i.e. as if there were no dust in the model. It is evident that
+there is a dramatic amount of extinction for this sight line. The plot also nicely indicates the respective
+contributions of primary (stellar) and secondary (dust) emission across the wavelength range.
 
 
 <b><i>Congratulations, you made it to the end of this tutorial!</i></b>
 
 */
-
-pts plot_temperature_cuts . --prefix=PanEagle
-pts plot_density_cuts . --prefix=PanEagle
-
-pts plot_seds . --prefix=PanEagle --dex=4
-pts plot_seds . --prefix=PanEagle --instr=fo --wmin=0.1 --wmax=50 --dex=3
-pts plot_seds . --prefix=PanEagle --instr=eo --wmin=0.1 --wmax=50 --dex=3
