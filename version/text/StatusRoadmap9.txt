@@ -8,12 +8,12 @@
 
 Version 9 of the SKIRT project has been publicly released and has reached a state where proof-reading, evaluation, and
 further testing by any interested user is highly desired. SKIRT 9 properly performs 300 handcrafted test cases and
-properly runs all benchmarks described in the SKIRT 8 web site section. However, many problems may be lurking under the
-hood, waiting to surface when the code is put to more extensive use.
+properly runs all benchmarks described in the SKIRT 8 web site section. However, unknown problems may be lurking under
+the hood, waiting to surface when the code is put to more extensive use.
 
 Unless noted otherwise (e.g. labeled as a future plan), the features described on this web site have been implemented
-in the code and are ready for further verification. The major exception is that the tutorials and the benchmark results
-are still missing. They should become available in the coming months.
+in the code and are ready for further verification. The major exception is that the benchmark results (and the roadmap
+information below) are still missing. They should become available in the coming months.
 
 See also:
 
