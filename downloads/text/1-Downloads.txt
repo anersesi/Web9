@@ -37,6 +37,9 @@ here.
 <TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/eagle_gas.txt">eagle_gas.txt</a>
 </TD><TD>Gas particles from EAGLE SPH simulation snapshot
 </TD></TR>
+<TR><TD><a href="http://sciences.ugent.be/skirtextdat/SKIRT9/Tutorials/polarization_config.xml">polarization_config.xml</a>
+</TD><TD>Configuration file serving as a basis for the tutorial on polarization
+</TD></TR>
 </TABLE>
 
 */

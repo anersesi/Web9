@@ -15,7 +15,7 @@ Python toolkit for \c SKIRT (\c PTS).
 
 To avoid spending time creating yet another \c SKIRT configuration file from scratch, the \c SKIRT web site offers a
 fully configured \em ski file for download that will serve as a basis for this tutorial. Download the file \c
-tutorial_polarization_config.xml from the <a href="../version9/_downloads.html">SKIRT downloads page</a> and put it
+polarization_config.xml from the <a href="../version9/_downloads.html">SKIRT downloads page</a> and put it
 into your local working directory.
 
 
@@ -152,7 +152,7 @@ Rather than spending time creating yet another \c SKIRT configuration file from 
 preconfigured \em ski file offered for download on the \c SKIRT web site (see \ref TutorialPolarizationPre).
 As a second step you will then enable polarization in this configuration.
 
-Rename the downloaded file from \c tutorial_polarization_config.xml to a (shorter) name of your liking ending with
+Rename the downloaded file from \c polarization_config.xml to a (shorter) name of your liking ending with
 the ".ski" filename extension, for example \c Spiral.ski. Run this \em ski file with \c SKIRT. While it is running,
 open the ski file in a text editor and examine its contents. You should recognize the
 following configuration elements (not in this order):
