@@ -16,6 +16,5 @@ The best way to begin using \c SKIRT is to run through (at least some of) the tu
 <b>For SKIRT developers</b>
 
   - \ref TutorialDevelopGeom
-  - \ref TutorialDevelopDust
 
 */

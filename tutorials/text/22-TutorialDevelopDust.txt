@@ -1,7 +1,0 @@
-/**
-
-\page TutorialDevelopDust Adding a toy dust mixture class to SKIRT to study scattering
-
-[To be completed]
-
-*/

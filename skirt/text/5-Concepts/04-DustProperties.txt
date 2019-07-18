@@ -136,7 +136,7 @@ the complete dust mix is usually considered to be acceptable.
 The DustMix class in turn has three abstract subclasses, each implementing a different approach to obtaining the
 relevant dust properties:
 
-- TabulatedGrainDustMix implements a dust mix described by tabulated properties for a single representative grain using
+- TabulatedDustMix implements a dust mix described by tabulated properties for a single representative grain using
 the Henyey-Greenstein scattering mode. The optical dust properties are read from a user-supplied input file or can be
 listed directly inside the configuration file. This class and its subclasses are provided mostly for testing and
 benchmarking purposes.
@@ -150,7 +150,7 @@ composition and size distribution, and with or without support for polarization 
 facilities to its subclasses to add dust grain populations to the dust mix. Based on this information it calculates the
 representative optical properties required for the common interface.
 
-The information offered by the SingleGrainDustMix and TabulatedGrainDustMix classes is insufficient to accurately
+The information offered by the SingleGrainDustMix and TabulatedDustMix classes is insufficient to accurately
 calculate dust emission spectra for the dust mixture. This is so because the emission spectrum is a nonlinear function
 of the grain size (among many other things), and thus a single grain cannot accurately represent a population with a
 (potentialy large) range of grain sizes. The MultiGrainDustMix class therefore implements additional functionality to
