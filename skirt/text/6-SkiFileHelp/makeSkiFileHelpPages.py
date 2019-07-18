@@ -18,7 +18,7 @@ import lxml.etree as etree
 
 # -----------------------------------------------------------------
 
-## This function returns an attribute value or element tag as a string. The first argument is an XPath expression
+# This function returns an attribute value or element tag as a string. The first argument is an XPath expression
 # relative to the document root that selects exactly one element. The second argument is an attribute name string
 # or None. In the latter case, the element tag (corresponding to the SMILE property or type name) is returned.
 # If the element is not found, there are multiple elements, or the selected element does not have the specified
@@ -37,7 +37,7 @@ def getStringAttribute(smiletree, xpath, attribute):
                                                     .format(xpath, attribute))
     return value
 
-## This function returns a list including the string values of a particular attribute for a number of elements.
+# This function returns a list including the string values of a particular attribute for a number of elements.
 # The first argument is an XPath expression relative to the document root that selects one or more elements.
 # The second argument is the attribute name (the attribute must be present for all selected elements).
 # If the attribute argument is None, the element tags (corresponding to SMILE type names) are returned instead.
@@ -57,7 +57,7 @@ def getStringAttributes(smiletree, xpath, attribute):
 
 # -----------------------------------------------------------------
 
-# returns True if the candidate item inherits the base item, or False if not.
+# This function returns True if the candidate item inherits the base item, or False if not.
 def inheritsItem(smiletree, candidate, base):
 
     while True:
@@ -69,6 +69,34 @@ def inheritsItem(smiletree, candidate, base):
             return False
         # replace the candidate by the candidate's base type and try again
         candidate = getStringAttribute(smiletree, "//Type[@name='{}']".format(candidate), "base")
+
+# -----------------------------------------------------------------
+
+# This function returns a list of XML elements representing the properties of the given item,
+# including inherited properties, in the order they would appear in the Q&A
+def propertiesForItem(smiletree, item):
+    propelems = [ ]
+
+    while len(item) > 0:
+        # get the XML element for the given item
+        itemelem = smiletree.xpath("//Type[@name='{}']".format(item))[0]
+
+        # get the index of the first base property that should be added *after* the sub-properties, or None
+        subPropertyIndex = itemelem.get("subPropertyIndex")
+
+        # get the properties for this item
+        propelemsbase = itemelem.xpath("properties/*".format(item))
+
+        if subPropertyIndex is None:
+            propelems = propelemsbase + propelems
+        else:
+            subPropertyIndex = int(subPropertyIndex)
+            propelems = propelemsbase[:subPropertyIndex] + propelems + propelemsbase[subPropertyIndex:]
+
+        # replace the item by the item's base type and loop again
+        item = itemelem.get("base")
+
+    return propelems
 
 # -----------------------------------------------------------------
 
@@ -110,9 +138,16 @@ for baseItem in baseItems:
     for item in inheritingItems:
         print ("     ", item)
 
-        # get a list of XML elements representing the properties of this item, including inherited properties,
-        # split between scalar and compound properties, and otherwise in the order they would appear in the Q&A
-        # ...
-
+        # get a list of XML elements representing the properties of this item, including inherited properties
+        properties = propertiesForItem(smiletree, item)
+        for property in properties:
+            if "Item" in property.tag:
+                print("        ", property.tag[:-8], property.get("base"), property.get("name"), property.get("title"))
+            elif "Enum" in property.tag:
+                print("        ", property.tag[:-8], property.get("name"), property.get("title"))
+                for enumValue in property.xpath("enumValues/*"):
+                    print("           ", enumValue.get("name"), enumValue.get("title"))
+            else:
+                print("        ", property.tag[:-8], property.get("name"), property.get("title"))
 
 # -----------------------------------------------------------------
