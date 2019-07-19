@@ -1,0 +1,489 @@
+/**
+\page SkiFileHelpSubclasses List of subclasses for each base class
+<em>SKIRT v9.0 (git 63a5263-dirty built on 19/07/2019 at 15:06:46)</em>
+\section SkiFileHelpSubclassesIntro Introduction
+This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
+             The sections are listed alphabetically on class name. To quickly locate the section for a given class,
+             use your browser's find function and precede the class name with a - (dash).
+             
+\subsection SkiFileHelpBaseAllSkyProjection -AllSkyProjection
+[\ref AllSkyProjection "docs"] : an all-sky projection 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %HammerAitoffProjection | \ref SkiFileHelpConcreteHammerAitoffProjection "props" | \ref HammerAitoffProjection "docs"| the Hammer-Aitoff all-sky projection |
+| %MollweideProjection | \ref SkiFileHelpConcreteMollweideProjection "props" | \ref MollweideProjection "docs"| the Mollweide all-sky projection |
+
+\subsection SkiFileHelpBaseAngularDistribution -AngularDistribution
+[\ref AngularDistribution "docs"] : an angular emission profile 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ConicalAngularDistribution | \ref SkiFileHelpConcreteConicalAngularDistribution "props" | \ref ConicalAngularDistribution "docs"| an anisotropic conical emission profile |
+| %IsotropicAngularDistribution | \ref SkiFileHelpConcreteIsotropicAngularDistribution "props" | \ref IsotropicAngularDistribution "docs"| an isotropic emission profile |
+| %LaserAngularDistribution | \ref SkiFileHelpConcreteLaserAngularDistribution "props" | \ref LaserAngularDistribution "docs"| a laser emission profile |
+| %NetzerAngularDistribution | \ref SkiFileHelpConcreteNetzerAngularDistribution "props" | \ref NetzerAngularDistribution "docs"| a Netzer AGN accretion disk emission profile |
+
+\subsection SkiFileHelpBaseAxGeometry -AxGeometry
+[\ref AxGeometry "docs"] : an axisymmetric geometry 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %BrokenExpDiskGeometry | \ref SkiFileHelpConcreteBrokenExpDiskGeometry "props" | \ref BrokenExpDiskGeometry "docs"| a broken exponential disk geometry |
+| %ConicalShellGeometry | \ref SkiFileHelpConcreteConicalShellGeometry "props" | \ref ConicalShellGeometry "docs"| a conical shell geometry |
+| %ExpDiskGeometry | \ref SkiFileHelpConcreteExpDiskGeometry "props" | \ref ExpDiskGeometry "docs"| an exponential disk geometry |
+| %HyperboloidGeometry | \ref SkiFileHelpConcreteHyperboloidGeometry "props" | \ref HyperboloidGeometry "docs"| a hyperboloid geometry |
+| %HyperboloidShellGeometry | \ref SkiFileHelpConcreteHyperboloidShellGeometry "props" | \ref HyperboloidShellGeometry "docs"| a hyperboloid shell geometry |
+| %MultiGaussianExpansionGeometry | \ref SkiFileHelpConcreteMultiGaussianExpansionGeometry "props" | \ref MultiGaussianExpansionGeometry "docs"| a multi-gaussian expansion geometry |
+| %ParaboloidGeometry | \ref SkiFileHelpConcreteParaboloidGeometry "props" | \ref ParaboloidGeometry "docs"| a paraboloid geometry |
+| %ParaboloidShellGeometry | \ref SkiFileHelpConcreteParaboloidShellGeometry "props" | \ref ParaboloidShellGeometry "docs"| a paraboloid shell geometry |
+| %RingGeometry | \ref SkiFileHelpConcreteRingGeometry "props" | \ref RingGeometry "docs"| a ring geometry |
+| %SpheroidalGeometryDecorator | \ref SkiFileHelpConcreteSpheroidalGeometryDecorator "props" | \ref SpheroidalGeometryDecorator "docs"| a decorator that constructs a spheroidal variant of any spherical geometry |
+| %TTauriDiskGeometry | \ref SkiFileHelpConcreteTTauriDiskGeometry "props" | \ref TTauriDiskGeometry "docs"| a T Tauri disk geometry |
+| %TorusGeometry | \ref SkiFileHelpConcreteTorusGeometry "props" | \ref TorusGeometry "docs"| a torus geometry |
+
+\subsection SkiFileHelpBaseBand -Band
+[\ref Band "docs"] : a wavelength band (transmission curve) 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %BroadBand | \ref SkiFileHelpConcreteBroadBand "props" | \ref BroadBand "docs"| a standard built-in broadband (transmission curve) |
+| %FileBand | \ref SkiFileHelpConcreteFileBand "props" | \ref FileBand "docs"| a wavelength band (transmission curve) loaded from a text file |
+| %ListBand | \ref SkiFileHelpConcreteListBand "props" | \ref ListBand "docs"| a wavelength band (transmission curve) specified inside the configuration file |
+
+\subsection SkiFileHelpBaseDisjointWavelengthGrid -DisjointWavelengthGrid
+[\ref DisjointWavelengthGrid "docs"] : a wavelength grid with non-overlapping bins 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %FileWavelengthGrid | \ref SkiFileHelpConcreteFileWavelengthGrid "props" | \ref FileWavelengthGrid "docs"| a wavelength grid loaded from a text file |
+| %LinWavelengthGrid | \ref SkiFileHelpConcreteLinWavelengthGrid "props" | \ref LinWavelengthGrid "docs"| a linear wavelength grid |
+| %ListWavelengthGrid | \ref SkiFileHelpConcreteListWavelengthGrid "props" | \ref ListWavelengthGrid "docs"| a list of one or more wavelengths |
+| %LogWavelengthGrid | \ref SkiFileHelpConcreteLogWavelengthGrid "props" | \ref LogWavelengthGrid "docs"| a logarithmic wavelength grid |
+| %NestedLogWavelengthGrid | \ref SkiFileHelpConcreteNestedLogWavelengthGrid "props" | \ref NestedLogWavelengthGrid "docs"| a nested logarithmic wavelength grid |
+
+\subsection SkiFileHelpBaseDustEmissionOptions -DustEmissionOptions
+[\ref DustEmissionOptions "docs"] : a set of options related to secondary emission from dust 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %DustEmissionOptions | \ref SkiFileHelpConcreteDustEmissionOptions "props" | \ref DustEmissionOptions "docs"| a set of options related to secondary emission from dust |
+
+\subsection SkiFileHelpBaseDustMix -DustMix
+[\ref DustMix "docs"] : a dust mix 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ConfigurableDustMix | \ref SkiFileHelpConcreteConfigurableDustMix "props" | \ref ConfigurableDustMix "docs"| a configurable dust mix with one or more grain populations |
+| %DraineLiDustMix | \ref SkiFileHelpConcreteDraineLiDustMix "props" | \ref DraineLiDustMix "docs"| a Draine and Li (2007) dust mix |
+| %MRNDustMix | \ref SkiFileHelpConcreteMRNDustMix "props" | \ref MRNDustMix "docs"| an MRN (1997) dust mix |
+| %MeanFileDustMix | \ref SkiFileHelpConcreteMeanFileDustMix "props" | \ref MeanFileDustMix "docs"| a dust mix with mean properties loaded from a text file |
+| %MeanInterstellarDustMix | \ref SkiFileHelpConcreteMeanInterstellarDustMix "props" | \ref MeanInterstellarDustMix "docs"| a typical interstellar dust mix (mean properties) |
+| %MeanIvezicBenchmarkDustMix | \ref SkiFileHelpConcreteMeanIvezicBenchmarkDustMix "props" | \ref MeanIvezicBenchmarkDustMix "docs"| an Ivezic 1D benchmark dust mix (mean properties) |
+| %MeanListDustMix | \ref SkiFileHelpConcreteMeanListDustMix "props" | \ref MeanListDustMix "docs"| a dust mix with mean properties specified inside the configuration file |
+| %MeanPascucciBenchmarkDustMix | \ref SkiFileHelpConcreteMeanPascucciBenchmarkDustMix "props" | \ref MeanPascucciBenchmarkDustMix "docs"| a Pascucci 2D benchmark dust mix (mean properties) |
+| %MeanPinteBenchmarkDustMix | \ref SkiFileHelpConcreteMeanPinteBenchmarkDustMix "props" | \ref MeanPinteBenchmarkDustMix "docs"| a Pinte 2D benchmark dust mix (mean properties, optionally with polarization at 1 micron) |
+| %MeanTrustBenchmarkDustMix | \ref SkiFileHelpConcreteMeanTrustBenchmarkDustMix "props" | \ref MeanTrustBenchmarkDustMix "docs"| a TRUST benchmark dust mix (mean properties, optionally with polarization) |
+| %ThemisDustMix | \ref SkiFileHelpConcreteThemisDustMix "props" | \ref ThemisDustMix "docs"| a THEMIS (Jones et al. 2017) dust mix |
+| %TrustBenchmarkDustMix | \ref SkiFileHelpConcreteTrustBenchmarkDustMix "props" | \ref TrustBenchmarkDustMix "docs"| a TRUST benchmark dust mix |
+| %WeingartnerDraineDustMix | \ref SkiFileHelpConcreteWeingartnerDraineDustMix "props" | \ref WeingartnerDraineDustMix "docs"| a Weingartner and Draine (2001) dust mix |
+| %ZubkoDustMix | \ref SkiFileHelpConcreteZubkoDustMix "props" | \ref ZubkoDustMix "docs"| a Zubko et al. (2004) dust mix |
+
+\subsection SkiFileHelpBaseDustSelfAbsorptionOptions -DustSelfAbsorptionOptions
+[\ref DustSelfAbsorptionOptions "docs"] : a set of options related to calculating dust self-absorption 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %DustSelfAbsorptionOptions | \ref SkiFileHelpConcreteDustSelfAbsorptionOptions "props" | \ref DustSelfAbsorptionOptions "docs"| a set of options related to calculating dust self-absorption |
+
+\subsection SkiFileHelpBaseExtinctionOnlyOptions -ExtinctionOnlyOptions
+[\ref ExtinctionOnlyOptions "docs"] : a set of options related to extinction-only simulation modes 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ExtinctionOnlyOptions | \ref SkiFileHelpConcreteExtinctionOnlyOptions "props" | \ref ExtinctionOnlyOptions "docs"| a set of options related to extinction-only simulation modes |
+
+\subsection SkiFileHelpBaseGeometry -Geometry
+[\ref Geometry "docs"] : a geometry 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AdaptiveMeshGeometry | \ref SkiFileHelpConcreteAdaptiveMeshGeometry "props" | \ref AdaptiveMeshGeometry "docs"| a geometry imported from data represented on an adaptive mesh (AMR grid) |
+| %BoxClipGeometryDecorator | \ref SkiFileHelpConcreteBoxClipGeometryDecorator "props" | \ref BoxClipGeometryDecorator "docs"| a decorator that clips another geometry using a cubodial box |
+| %BrokenExpDiskGeometry | \ref SkiFileHelpConcreteBrokenExpDiskGeometry "props" | \ref BrokenExpDiskGeometry "docs"| a broken exponential disk geometry |
+| %ClumpyGeometryDecorator | \ref SkiFileHelpConcreteClumpyGeometryDecorator "props" | \ref ClumpyGeometryDecorator "docs"| a decorator that adds clumpiness to any geometry |
+| %CombineGeometryDecorator | \ref SkiFileHelpConcreteCombineGeometryDecorator "props" | \ref CombineGeometryDecorator "docs"| a decorator that combines two different geometries |
+| %ConicalShellGeometry | \ref SkiFileHelpConcreteConicalShellGeometry "props" | \ref ConicalShellGeometry "docs"| a conical shell geometry |
+| %CylindricalClipGeometryDecorator | \ref SkiFileHelpConcreteCylindricalClipGeometryDecorator "props" | \ref CylindricalClipGeometryDecorator "docs"| a decorator that clips another geometry using a cylinder |
+| %EinastoGeometry | \ref SkiFileHelpConcreteEinastoGeometry "props" | \ref EinastoGeometry "docs"| an Einasto geometry |
+| %ExpDiskGeometry | \ref SkiFileHelpConcreteExpDiskGeometry "props" | \ref ExpDiskGeometry "docs"| an exponential disk geometry |
+| %GammaGeometry | \ref SkiFileHelpConcreteGammaGeometry "props" | \ref GammaGeometry "docs"| a gamma geometry |
+| %GaussianGeometry | \ref SkiFileHelpConcreteGaussianGeometry "props" | \ref GaussianGeometry "docs"| a Gaussian geometry |
+| %HyperboloidGeometry | \ref SkiFileHelpConcreteHyperboloidGeometry "props" | \ref HyperboloidGeometry "docs"| a hyperboloid geometry |
+| %HyperboloidShellGeometry | \ref SkiFileHelpConcreteHyperboloidShellGeometry "props" | \ref HyperboloidShellGeometry "docs"| a hyperboloid shell geometry |
+| %MultiGaussianExpansionGeometry | \ref SkiFileHelpConcreteMultiGaussianExpansionGeometry "props" | \ref MultiGaussianExpansionGeometry "docs"| a multi-gaussian expansion geometry |
+| %OffsetGeometryDecorator | \ref SkiFileHelpConcreteOffsetGeometryDecorator "props" | \ref OffsetGeometryDecorator "docs"| a decorator that adds an offset to any geometry |
+| %ParaboloidGeometry | \ref SkiFileHelpConcreteParaboloidGeometry "props" | \ref ParaboloidGeometry "docs"| a paraboloid geometry |
+| %ParaboloidShellGeometry | \ref SkiFileHelpConcreteParaboloidShellGeometry "props" | \ref ParaboloidShellGeometry "docs"| a paraboloid shell geometry |
+| %ParticleGeometry | \ref SkiFileHelpConcreteParticleGeometry "props" | \ref ParticleGeometry "docs"| a geometry imported from smoothed particle data |
+| %PlummerGeometry | \ref SkiFileHelpConcretePlummerGeometry "props" | \ref PlummerGeometry "docs"| a Plummer geometry |
+| %PseudoSersicGeometry | \ref SkiFileHelpConcretePseudoSersicGeometry "props" | \ref PseudoSersicGeometry "docs"| a pseudo-Sérsic geometry |
+| %ReadFitsGeometry | \ref SkiFileHelpConcreteReadFitsGeometry "props" | \ref ReadFitsGeometry "docs"| a geometry read from a FITS file |
+| %RingGeometry | \ref SkiFileHelpConcreteRingGeometry "props" | \ref RingGeometry "docs"| a ring geometry |
+| %RotateGeometryDecorator | \ref SkiFileHelpConcreteRotateGeometryDecorator "props" | \ref RotateGeometryDecorator "docs"| a decorator that adds a rotation to any geometry |
+| %SersicGeometry | \ref SkiFileHelpConcreteSersicGeometry "props" | \ref SersicGeometry "docs"| a Sérsic geometry |
+| %ShellGeometry | \ref SkiFileHelpConcreteShellGeometry "props" | \ref ShellGeometry "docs"| a shell geometry |
+| %SphericalClipGeometryDecorator | \ref SkiFileHelpConcreteSphericalClipGeometryDecorator "props" | \ref SphericalClipGeometryDecorator "docs"| a decorator that clips another geometry using a sphere |
+| %SpheroidalGeometryDecorator | \ref SkiFileHelpConcreteSpheroidalGeometryDecorator "props" | \ref SpheroidalGeometryDecorator "docs"| a decorator that constructs a spheroidal variant of any spherical geometry |
+| %SpiralStructureGeometryDecorator | \ref SkiFileHelpConcreteSpiralStructureGeometryDecorator "props" | \ref SpiralStructureGeometryDecorator "docs"| a decorator that adds spiral structure to any axisymmetric geometry |
+| %TTauriDiskGeometry | \ref SkiFileHelpConcreteTTauriDiskGeometry "props" | \ref TTauriDiskGeometry "docs"| a T Tauri disk geometry |
+| %TorusGeometry | \ref SkiFileHelpConcreteTorusGeometry "props" | \ref TorusGeometry "docs"| a torus geometry |
+| %TriaxialGeometryDecorator | \ref SkiFileHelpConcreteTriaxialGeometryDecorator "props" | \ref TriaxialGeometryDecorator "docs"| a decorator that constructs a triaxial variant of any spherical geometry |
+| %UniformBoxGeometry | \ref SkiFileHelpConcreteUniformBoxGeometry "props" | \ref UniformBoxGeometry "docs"| a geometry with uniform density inside a box |
+| %VoronoiMeshGeometry | \ref SkiFileHelpConcreteVoronoiMeshGeometry "props" | \ref VoronoiMeshGeometry "docs"| a geometry imported from data represented on a Voronoi mesh |
+
+\subsection SkiFileHelpBaseGrainComposition -GrainComposition
+[\ref GrainComposition "docs"] : a dust grain composition 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %CrystalEnstatiteGrainComposition | \ref SkiFileHelpConcreteCrystalEnstatiteGrainComposition "props" | \ref CrystalEnstatiteGrainComposition "docs"| a crystalline Enstatite dust grain composition |
+| %CrystalForsteriteGrainComposition | \ref SkiFileHelpConcreteCrystalForsteriteGrainComposition "props" | \ref CrystalForsteriteGrainComposition "docs"| a crystalline Forsterite dust grain composition |
+| %DraineGraphiteGrainComposition | \ref SkiFileHelpConcreteDraineGraphiteGrainComposition "props" | \ref DraineGraphiteGrainComposition "docs"| a Draine graphite dust grain composition |
+| %DraineIonizedPAHGrainComposition | \ref SkiFileHelpConcreteDraineIonizedPAHGrainComposition "props" | \ref DraineIonizedPAHGrainComposition "docs"| a Draine ionized PAH dust grain composition |
+| %DraineNeutralPAHGrainComposition | \ref SkiFileHelpConcreteDraineNeutralPAHGrainComposition "props" | \ref DraineNeutralPAHGrainComposition "docs"| a Draine neutral PAH dust grain composition |
+| %DraineSilicateGrainComposition | \ref SkiFileHelpConcreteDraineSilicateGrainComposition "props" | \ref DraineSilicateGrainComposition "docs"| a Draine silicate dust grain composition |
+| %DustEmGrainComposition | \ref SkiFileHelpConcreteDustEmGrainComposition "props" | \ref DustEmGrainComposition "docs"| a dust grain composition based on DustEM data |
+| %MieSilicateGrainComposition | \ref SkiFileHelpConcreteMieSilicateGrainComposition "props" | \ref MieSilicateGrainComposition "docs"| a MieX-based Draine silicate dust grain composition |
+| %MinSilicateGrainComposition | \ref SkiFileHelpConcreteMinSilicateGrainComposition "props" | \ref MinSilicateGrainComposition "docs"| a Min 2007 amorphous silicate dust grain composition |
+| %PolarizedGraphiteGrainComposition | \ref SkiFileHelpConcretePolarizedGraphiteGrainComposition "props" | \ref PolarizedGraphiteGrainComposition "docs"| a graphite dust grain composition with support for polarization |
+| %PolarizedSilicateGrainComposition | \ref SkiFileHelpConcretePolarizedSilicateGrainComposition "props" | \ref PolarizedSilicateGrainComposition "docs"| a silicate dust grain composition with support for polarization |
+| %TrustGraphiteGrainComposition | \ref SkiFileHelpConcreteTrustGraphiteGrainComposition "props" | \ref TrustGraphiteGrainComposition "docs"| a TRUST benchmark graphite dust grain composition |
+| %TrustNeutralPAHGrainComposition | \ref SkiFileHelpConcreteTrustNeutralPAHGrainComposition "props" | \ref TrustNeutralPAHGrainComposition "docs"| a TRUST benchmark neutral PAH dust grain composition |
+| %TrustSilicateGrainComposition | \ref SkiFileHelpConcreteTrustSilicateGrainComposition "props" | \ref TrustSilicateGrainComposition "docs"| a TRUST benchmark silicate dust grain composition |
+
+\subsection SkiFileHelpBaseGrainPopulation -GrainPopulation
+[\ref GrainPopulation "docs"] : a dust grain population 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %GrainPopulation | \ref SkiFileHelpConcreteGrainPopulation "props" | \ref GrainPopulation "docs"| a dust grain population |
+
+\subsection SkiFileHelpBaseGrainSizeDistribution -GrainSizeDistribution
+[\ref GrainSizeDistribution "docs"] : a dust grain size distribution 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %LogNormalGrainSizeDistribution | \ref SkiFileHelpConcreteLogNormalGrainSizeDistribution "props" | \ref LogNormalGrainSizeDistribution "docs"| a log-normal dust grain size distribution |
+| %ModifiedLogNormalGrainSizeDistribution | \ref SkiFileHelpConcreteModifiedLogNormalGrainSizeDistribution "props" | \ref ModifiedLogNormalGrainSizeDistribution "docs"| a modified log-normal dust grain size distribution |
+| %ModifiedPowerLawGrainSizeDistribution | \ref SkiFileHelpConcreteModifiedPowerLawGrainSizeDistribution "props" | \ref ModifiedPowerLawGrainSizeDistribution "docs"| a modified power-law dust grain size distribution |
+| %PowerLawGrainSizeDistribution | \ref SkiFileHelpConcretePowerLawGrainSizeDistribution "props" | \ref PowerLawGrainSizeDistribution "docs"| a power-law dust grain size distribution |
+| %SingleGrainSizeDistribution | \ref SkiFileHelpConcreteSingleGrainSizeDistribution "props" | \ref SingleGrainSizeDistribution "docs"| a single-size dust grain size distribution |
+| %ZubkoGraphiteGrainSizeDistribution | \ref SkiFileHelpConcreteZubkoGraphiteGrainSizeDistribution "props" | \ref ZubkoGraphiteGrainSizeDistribution "docs"| a Zubko, Dwek & Arendt size distribution for graphite dust grains |
+| %ZubkoPAHGrainSizeDistribution | \ref SkiFileHelpConcreteZubkoPAHGrainSizeDistribution "props" | \ref ZubkoPAHGrainSizeDistribution "docs"| a Zubko, Dwek & Arendt size distribution for PAH molecules |
+| %ZubkoSilicateGrainSizeDistribution | \ref SkiFileHelpConcreteZubkoSilicateGrainSizeDistribution "props" | \ref ZubkoSilicateGrainSizeDistribution "docs"| a Zubko, Dwek & Arendt size distribution for silicate dust grains |
+
+\subsection SkiFileHelpBaseInstrument -Instrument
+[\ref Instrument "docs"] : an instrument 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AllSkyInstrument | \ref SkiFileHelpConcreteAllSkyInstrument "props" | \ref AllSkyInstrument "docs"| an all-sky instrument (for observing inside a model) |
+| %FrameInstrument | \ref SkiFileHelpConcreteFrameInstrument "props" | \ref FrameInstrument "docs"| a distant instrument that outputs the surface brightness in every pixel as a data cube |
+| %FullInstrument | \ref SkiFileHelpConcreteFullInstrument "props" | \ref FullInstrument "docs"| a distant instrument that outputs both the flux density (%SED) and surface brightness (data cube) |
+| %PerspectiveInstrument | \ref SkiFileHelpConcretePerspectiveInstrument "props" | \ref PerspectiveInstrument "docs"| a perspective instrument (mostly for making movies) |
+| %SEDInstrument | \ref SkiFileHelpConcreteSEDInstrument "props" | \ref SEDInstrument "docs"| a distant instrument that outputs the spatially integrated flux density as an %SED |
+
+\subsection SkiFileHelpBaseInstrumentSystem -InstrumentSystem
+[\ref InstrumentSystem "docs"] : an instrument system 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %InstrumentSystem | \ref SkiFileHelpConcreteInstrumentSystem "props" | \ref InstrumentSystem "docs"| an instrument system |
+
+\subsection SkiFileHelpBaseLuminosityNormalization -LuminosityNormalization
+[\ref LuminosityNormalization "docs"] : the luminosity normalization for a primary source 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %BandLuminosityNormalization | \ref SkiFileHelpConcreteBandLuminosityNormalization "props" | \ref BandLuminosityNormalization "docs"| source normalization through the specific luminosity for a given wavelength band |
+| %IntegratedLuminosityNormalization | \ref SkiFileHelpConcreteIntegratedLuminosityNormalization "props" | \ref IntegratedLuminosityNormalization "docs"| source normalization through the integrated luminosity for a given wavelength range |
+| %SpecificLuminosityNormalization | \ref SkiFileHelpConcreteSpecificLuminosityNormalization "props" | \ref SpecificLuminosityNormalization "docs"| source normalization through the specific luminosity at a given wavelength |
+
+\subsection SkiFileHelpBaseMaterialMix -MaterialMix
+[\ref MaterialMix "docs"] : a material mix 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ConfigurableDustMix | \ref SkiFileHelpConcreteConfigurableDustMix "props" | \ref ConfigurableDustMix "docs"| a configurable dust mix with one or more grain populations |
+| %DraineLiDustMix | \ref SkiFileHelpConcreteDraineLiDustMix "props" | \ref DraineLiDustMix "docs"| a Draine and Li (2007) dust mix |
+| %ElectronMix | \ref SkiFileHelpConcreteElectronMix "props" | \ref ElectronMix "docs"| a population of electrons |
+| %MRNDustMix | \ref SkiFileHelpConcreteMRNDustMix "props" | \ref MRNDustMix "docs"| an MRN (1997) dust mix |
+| %MeanFileDustMix | \ref SkiFileHelpConcreteMeanFileDustMix "props" | \ref MeanFileDustMix "docs"| a dust mix with mean properties loaded from a text file |
+| %MeanInterstellarDustMix | \ref SkiFileHelpConcreteMeanInterstellarDustMix "props" | \ref MeanInterstellarDustMix "docs"| a typical interstellar dust mix (mean properties) |
+| %MeanIvezicBenchmarkDustMix | \ref SkiFileHelpConcreteMeanIvezicBenchmarkDustMix "props" | \ref MeanIvezicBenchmarkDustMix "docs"| an Ivezic 1D benchmark dust mix (mean properties) |
+| %MeanListDustMix | \ref SkiFileHelpConcreteMeanListDustMix "props" | \ref MeanListDustMix "docs"| a dust mix with mean properties specified inside the configuration file |
+| %MeanPascucciBenchmarkDustMix | \ref SkiFileHelpConcreteMeanPascucciBenchmarkDustMix "props" | \ref MeanPascucciBenchmarkDustMix "docs"| a Pascucci 2D benchmark dust mix (mean properties) |
+| %MeanPinteBenchmarkDustMix | \ref SkiFileHelpConcreteMeanPinteBenchmarkDustMix "props" | \ref MeanPinteBenchmarkDustMix "docs"| a Pinte 2D benchmark dust mix (mean properties, optionally with polarization at 1 micron) |
+| %MeanTrustBenchmarkDustMix | \ref SkiFileHelpConcreteMeanTrustBenchmarkDustMix "props" | \ref MeanTrustBenchmarkDustMix "docs"| a TRUST benchmark dust mix (mean properties, optionally with polarization) |
+| %ThemisDustMix | \ref SkiFileHelpConcreteThemisDustMix "props" | \ref ThemisDustMix "docs"| a THEMIS (Jones et al. 2017) dust mix |
+| %TrustBenchmarkDustMix | \ref SkiFileHelpConcreteTrustBenchmarkDustMix "props" | \ref TrustBenchmarkDustMix "docs"| a TRUST benchmark dust mix |
+| %WeingartnerDraineDustMix | \ref SkiFileHelpConcreteWeingartnerDraineDustMix "props" | \ref WeingartnerDraineDustMix "docs"| a Weingartner and Draine (2001) dust mix |
+| %ZubkoDustMix | \ref SkiFileHelpConcreteZubkoDustMix "props" | \ref ZubkoDustMix "docs"| a Zubko et al. (2004) dust mix |
+
+\subsection SkiFileHelpBaseMaterialMixFamily -MaterialMixFamily
+[\ref MaterialMixFamily "docs"] : a family of material mixes 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %SelectDustMixFamily | \ref SkiFileHelpConcreteSelectDustMixFamily "props" | \ref SelectDustMixFamily "docs"| a family of dust mixes specified in the configuration |
+
+\subsection SkiFileHelpBaseMaterialNormalization -MaterialNormalization
+[\ref MaterialNormalization "docs"] : a normalization for the amount of material 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %MassColumnMaterialNormalization | \ref SkiFileHelpConcreteMassColumnMaterialNormalization "props" | \ref MassColumnMaterialNormalization "docs"| normalization by defining the mass column density along a coordinate axis |
+| %MassMaterialNormalization | \ref SkiFileHelpConcreteMassMaterialNormalization "props" | \ref MassMaterialNormalization "docs"| normalization by defining the total mass |
+| %NumberColumnMaterialNormalization | \ref SkiFileHelpConcreteNumberColumnMaterialNormalization "props" | \ref NumberColumnMaterialNormalization "docs"| normalization by defining the number column density along a coordinate axis |
+| %OpticalDepthMaterialNormalization | \ref SkiFileHelpConcreteOpticalDepthMaterialNormalization "props" | \ref OpticalDepthMaterialNormalization "docs"| normalization by defining the optical depth along a coordinate axis |
+
+\subsection SkiFileHelpBaseMedium -Medium
+[\ref Medium "docs"] : a transfer medium 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AdaptiveMeshMedium | \ref SkiFileHelpConcreteAdaptiveMeshMedium "props" | \ref AdaptiveMeshMedium "docs"| a transfer medium imported from data represented on an adaptive mesh (AMR grid) |
+| %GeometricMedium | \ref SkiFileHelpConcreteGeometricMedium "props" | \ref GeometricMedium "docs"| a transfer medium with a built-in geometry |
+| %ParticleMedium | \ref SkiFileHelpConcreteParticleMedium "props" | \ref ParticleMedium "docs"| a transfer medium imported from smoothed particle data |
+| %VoronoiMeshMedium | \ref SkiFileHelpConcreteVoronoiMeshMedium "props" | \ref VoronoiMeshMedium "docs"| a transfer medium imported from data represented on a Voronoi mesh |
+
+\subsection SkiFileHelpBaseMediumSystem -MediumSystem
+[\ref MediumSystem "docs"] : a medium system 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %MediumSystem | \ref SkiFileHelpConcreteMediumSystem "props" | \ref MediumSystem "docs"| a medium system |
+
+\subsection SkiFileHelpBaseMesh -Mesh
+[\ref Mesh "docs"] : a mesh 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %FileMesh | \ref SkiFileHelpConcreteFileMesh "props" | \ref FileMesh "docs"| a mesh read from a file |
+| %LinMesh | \ref SkiFileHelpConcreteLinMesh "props" | \ref LinMesh "docs"| a linear mesh |
+| %ListMesh | \ref SkiFileHelpConcreteListMesh "props" | \ref ListMesh "docs"| a mesh specified inside the configuration file |
+| %LogMesh | \ref SkiFileHelpConcreteLogMesh "props" | \ref LogMesh "docs"| a logarithmic mesh |
+| %PowMesh | \ref SkiFileHelpConcretePowMesh "props" | \ref PowMesh "docs"| a power-law mesh |
+| %SymPowMesh | \ref SkiFileHelpConcreteSymPowMesh "props" | \ref SymPowMesh "docs"| a symmetric power-law mesh |
+
+\subsection SkiFileHelpBaseMonteCarloSimulation -MonteCarloSimulation
+[\ref MonteCarloSimulation "docs"] : a Monte Carlo simulation 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %MonteCarloSimulation | \ref SkiFileHelpConcreteMonteCarloSimulation "props" | \ref MonteCarloSimulation "docs"| a Monte Carlo simulation |
+
+\subsection SkiFileHelpBaseMoveableMesh -MoveableMesh
+[\ref MoveableMesh "docs"] : a moveable mesh 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %FileMesh | \ref SkiFileHelpConcreteFileMesh "props" | \ref FileMesh "docs"| a mesh read from a file |
+| %LinMesh | \ref SkiFileHelpConcreteLinMesh "props" | \ref LinMesh "docs"| a linear mesh |
+| %ListMesh | \ref SkiFileHelpConcreteListMesh "props" | \ref ListMesh "docs"| a mesh specified inside the configuration file |
+| %PowMesh | \ref SkiFileHelpConcretePowMesh "props" | \ref PowMesh "docs"| a power-law mesh |
+| %SymPowMesh | \ref SkiFileHelpConcreteSymPowMesh "props" | \ref SymPowMesh "docs"| a symmetric power-law mesh |
+
+\subsection SkiFileHelpBasePhotonPacketOptions -PhotonPacketOptions
+[\ref PhotonPacketOptions "docs"] : a set of options related to the photon packet lifecycle 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %PhotonPacketOptions | \ref SkiFileHelpConcretePhotonPacketOptions "props" | \ref PhotonPacketOptions "docs"| a set of options related to the photon packet lifecycle |
+
+\subsection SkiFileHelpBasePolarizationProfile -PolarizationProfile
+[\ref PolarizationProfile "docs"] : a polarized emission profile 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %NoPolarizationProfile | \ref SkiFileHelpConcreteNoPolarizationProfile "props" | \ref NoPolarizationProfile "docs"| an unpolarized emission profile |
+| %SineSquarePolarizationProfile | \ref SkiFileHelpConcreteSineSquarePolarizationProfile "props" | \ref SineSquarePolarizationProfile "docs"| an axysimmetric sine-square polarization emission profile |
+
+\subsection SkiFileHelpBaseProbe -Probe
+[\ref Probe "docs"] : a probe 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %DefaultDustTemperatureCutsProbe | \ref SkiFileHelpConcreteDefaultDustTemperatureCutsProbe "props" | \ref DefaultDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along the coordinate planes |
+| %DefaultMediaDensityCutsProbe | \ref SkiFileHelpConcreteDefaultMediaDensityCutsProbe "props" | \ref DefaultMediaDensityCutsProbe "docs"| cuts of the media densities along the coordinate planes |
+| %DefaultRadiationFieldCutsProbe | \ref SkiFileHelpConcreteDefaultRadiationFieldCutsProbe "props" | \ref DefaultRadiationFieldCutsProbe "docs"| cuts of the mean radiation field intensity along the coordinate planes |
+| %DustAbsorptionPerCellProbe | \ref SkiFileHelpConcreteDustAbsorptionPerCellProbe "props" | \ref DustAbsorptionPerCellProbe "docs"| the spectral luminosity absorbed by dust for each spatial cell |
+| %DustEmissivityProbe | \ref SkiFileHelpConcreteDustEmissivityProbe "props" | \ref DustEmissivityProbe "docs"| the emissivity spectrum for each dust mix in a range of standard fields |
+| %DustGrainPopulationsProbe | \ref SkiFileHelpConcreteDustGrainPopulationsProbe "props" | \ref DustGrainPopulationsProbe "docs"| dust grain population mass and size information |
+| %DustGrainSizeDistributionProbe | \ref SkiFileHelpConcreteDustGrainSizeDistributionProbe "props" | \ref DustGrainSizeDistributionProbe "docs"| dust grain size distribution |
+| %DustTemperaturePerCellProbe | \ref SkiFileHelpConcreteDustTemperaturePerCellProbe "props" | \ref DustTemperaturePerCellProbe "docs"| the indicative dust temperature for each spatial cell |
+| %InstrumentWavelengthGridProbe | \ref SkiFileHelpConcreteInstrumentWavelengthGridProbe "props" | \ref InstrumentWavelengthGridProbe "docs"| the instrument wavelength grids |
+| %LaunchedPacketsProbe | \ref SkiFileHelpConcreteLaunchedPacketsProbe "props" | \ref LaunchedPacketsProbe "docs"| the number of photon packets launched from primary sources |
+| %LinearDustTemperatureCutProbe | \ref SkiFileHelpConcreteLinearDustTemperatureCutProbe "props" | \ref LinearDustTemperatureCutProbe "docs"| the indicative dust temperature along a given line segment |
+| %LuminosityProbe | \ref SkiFileHelpConcreteLuminosityProbe "props" | \ref LuminosityProbe "docs"| the primary source luminosities |
+| %MeridionalDustTemperatureCutProbe | \ref SkiFileHelpConcreteMeridionalDustTemperatureCutProbe "props" | \ref MeridionalDustTemperatureCutProbe "docs"| the indicative dust temperature along a meridian line |
+| %OpticalDepthMapProbe | \ref SkiFileHelpConcreteOpticalDepthMapProbe "props" | \ref OpticalDepthMapProbe "docs"| all-sky optical depth map as seen from given location |
+| %OpticalMaterialPropertiesProbe | \ref SkiFileHelpConcreteOpticalMaterialPropertiesProbe "props" | \ref OpticalMaterialPropertiesProbe "docs"| aggregate optical material properties for each medium |
+| %RadiationFieldPerCellProbe | \ref SkiFileHelpConcreteRadiationFieldPerCellProbe "props" | \ref RadiationFieldPerCellProbe "docs"| the mean radiation field intensity for each spatial cell |
+| %SpatialCellPropertiesProbe | \ref SkiFileHelpConcreteSpatialCellPropertiesProbe "props" | \ref SpatialCellPropertiesProbe "docs"| relevant properties for all spatial cells |
+| %SpatialGridConvergenceProbe | \ref SkiFileHelpConcreteSpatialGridConvergenceProbe "props" | \ref SpatialGridConvergenceProbe "docs"| convergence information on the spatial grid |
+| %SpatialGridPlotProbe | \ref SkiFileHelpConcreteSpatialGridPlotProbe "props" | \ref SpatialGridPlotProbe "docs"| data files for plotting the structure of the grid |
+| %SpatialGridSourceDensityProbe | \ref SkiFileHelpConcreteSpatialGridSourceDensityProbe "props" | \ref SpatialGridSourceDensityProbe "docs"| primary source density discretized on spatial grid |
+| %TreeSpatialGridTopologyProbe | \ref SkiFileHelpConcreteTreeSpatialGridTopologyProbe "props" | \ref TreeSpatialGridTopologyProbe "docs"| data file representing the topology of the tree spatial grid |
+
+\subsection SkiFileHelpBaseProbeSystem -ProbeSystem
+[\ref ProbeSystem "docs"] : a probe system 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ProbeSystem | \ref SkiFileHelpConcreteProbeSystem "props" | \ref ProbeSystem "docs"| a probe system |
+
+\subsection SkiFileHelpBaseRandom -Random
+[\ref Random "docs"] : the default random generator 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %Random | \ref SkiFileHelpConcreteRandom "props" | \ref Random "docs"| the default random generator |
+
+\subsection SkiFileHelpBaseSED -SED
+[\ref SED "docs"] : a spectral energy distribution 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %BlackBodySED | \ref SkiFileHelpConcreteBlackBodySED "props" | \ref BlackBodySED "docs"| a black-body spectral energy distribution |
+| %BruzualCharlotSED | \ref SkiFileHelpConcreteBruzualCharlotSED "props" | \ref BruzualCharlotSED "docs"| a Bruzual-Charlot simple stellar population %SED |
+| %CastelliKuruczSED | \ref SkiFileHelpConcreteCastelliKuruczSED "props" | \ref CastelliKuruczSED "docs"| a Castelli-Kurucz stellar atmosphere %SED |
+| %FileSED | \ref SkiFileHelpConcreteFileSED "props" | \ref FileSED "docs"| a spectral energy distribution loaded from a text file |
+| %ListSED | \ref SkiFileHelpConcreteListSED "props" | \ref ListSED "docs"| a spectral energy distribution specified inside the configuration file |
+| %MappingsSED | \ref SkiFileHelpConcreteMappingsSED "props" | \ref MappingsSED "docs"| a star-forming region %SED from the MAPPINGS III model |
+| %MarastonSED | \ref SkiFileHelpConcreteMarastonSED "props" | \ref MarastonSED "docs"| a Maraston simple stellar population %SED |
+| %QuasarSED | \ref SkiFileHelpConcreteQuasarSED "props" | \ref QuasarSED "docs"| the spectral energy distribution of a typical quasar |
+| %Starburst99SED | \ref SkiFileHelpConcreteStarburst99SED "props" | \ref Starburst99SED "docs"| a Starburst99 simple stellar population %SED |
+| %SunSED | \ref SkiFileHelpConcreteSunSED "props" | \ref SunSED "docs"| the spectral energy distribution of the Sun |
+
+\subsection SkiFileHelpBaseSEDFamily -SEDFamily
+[\ref SEDFamily "docs"] : an %SED family 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %BlackBodySEDFamily | \ref SkiFileHelpConcreteBlackBodySEDFamily "props" | \ref BlackBodySEDFamily "docs"| a black body %SED family |
+| %BruzualCharlotSEDFamily | \ref SkiFileHelpConcreteBruzualCharlotSEDFamily "props" | \ref BruzualCharlotSEDFamily "docs"| a Bruzual-Charlot %SED family for single stellar populations |
+| %CastelliKuruczSEDFamily | \ref SkiFileHelpConcreteCastelliKuruczSEDFamily "props" | \ref CastelliKuruczSEDFamily "docs"| a Castelli-Kurucz %SED family for stellar atmospheres |
+| %MappingsSEDFamily | \ref SkiFileHelpConcreteMappingsSEDFamily "props" | \ref MappingsSEDFamily "docs"| a MAPPINGS III %SED family for star-forming regions |
+| %MarastonSEDFamily | \ref SkiFileHelpConcreteMarastonSEDFamily "props" | \ref MarastonSEDFamily "docs"| a Maraston %SED family for single stellar populations |
+| %Starburst99SEDFamily | \ref SkiFileHelpConcreteStarburst99SEDFamily "props" | \ref Starburst99SEDFamily "docs"| a Starburst99 %SED family for single stellar populations |
+
+\subsection SkiFileHelpBaseSmoothingKernel -SmoothingKernel
+[\ref SmoothingKernel "docs"] : a smoothing kernel 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %CubicSplineSmoothingKernel | \ref SkiFileHelpConcreteCubicSplineSmoothingKernel "props" | \ref CubicSplineSmoothingKernel "docs"| a cubic spline smoothing kernel |
+| %ScaledGaussianSmoothingKernel | \ref SkiFileHelpConcreteScaledGaussianSmoothingKernel "props" | \ref ScaledGaussianSmoothingKernel "docs"| a scaled Gaussian smoothing kernel |
+| %UniformSmoothingKernel | \ref SkiFileHelpConcreteUniformSmoothingKernel "props" | \ref UniformSmoothingKernel "docs"| a uniform smoothing kernel |
+
+\subsection SkiFileHelpBaseSource -Source
+[\ref Source "docs"] : a primary radiation source 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AdaptiveMeshSource | \ref SkiFileHelpConcreteAdaptiveMeshSource "props" | \ref AdaptiveMeshSource "docs"| a primary source imported from data represented on an adaptive mesh (AMR grid) |
+| %CubicalBackgroundSource | \ref SkiFileHelpConcreteCubicalBackgroundSource "props" | \ref CubicalBackgroundSource "docs"| a cubical background source with an anisotropic inward radiation field |
+| %GeometricSource | \ref SkiFileHelpConcreteGeometricSource "props" | \ref GeometricSource "docs"| a primary source with a built-in geometry |
+| %ParticleSource | \ref SkiFileHelpConcreteParticleSource "props" | \ref ParticleSource "docs"| a primary source imported from smoothed particle data |
+| %PointSource | \ref SkiFileHelpConcretePointSource "props" | \ref PointSource "docs"| a primary point source |
+| %SphericalBackgroundSource | \ref SkiFileHelpConcreteSphericalBackgroundSource "props" | \ref SphericalBackgroundSource "docs"| a spherical background source with an anisotropic inward radiation field |
+| %StellarSurfaceSource | \ref SkiFileHelpConcreteStellarSurfaceSource "props" | \ref StellarSurfaceSource "docs"| a stellar surface source with an anisotropic outward radiation field |
+| %VoronoiMeshSource | \ref SkiFileHelpConcreteVoronoiMeshSource "props" | \ref VoronoiMeshSource "docs"| a primary source imported from data represented on a Voronoi mesh |
+
+\subsection SkiFileHelpBaseSourceSystem -SourceSystem
+[\ref SourceSystem "docs"] : a primary source system 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %SourceSystem | \ref SkiFileHelpConcreteSourceSystem "props" | \ref SourceSystem "docs"| a primary source system |
+
+\subsection SkiFileHelpBaseSpatialCellLibrary -SpatialCellLibrary
+[\ref SpatialCellLibrary "docs"] : a library scheme for grouping spatial cells 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AllCellsLibrary | \ref SkiFileHelpConcreteAllCellsLibrary "props" | \ref AllCellsLibrary "docs"| a library scheme that has a separate entry for every spatial cell |
+| %FieldStrengthCellLibrary | \ref SkiFileHelpConcreteFieldStrengthCellLibrary "props" | \ref FieldStrengthCellLibrary "docs"| a library scheme for grouping spatial cells based on radiation field strength |
+| %TemperatureWavelengthCellLibrary | \ref SkiFileHelpConcreteTemperatureWavelengthCellLibrary "props" | \ref TemperatureWavelengthCellLibrary "docs"| a library scheme for grouping spatial cells based on indicative temperature and wavelength |
+
+\subsection SkiFileHelpBaseSpatialGrid -SpatialGrid
+[\ref SpatialGrid "docs"] : a spatial grid 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %AdaptiveMeshSpatialGrid | \ref SkiFileHelpConcreteAdaptiveMeshSpatialGrid "props" | \ref AdaptiveMeshSpatialGrid "docs"| a spatial grid taken from an imported adaptive mesh snapshot |
+| %CartesianSpatialGrid | \ref SkiFileHelpConcreteCartesianSpatialGrid "props" | \ref CartesianSpatialGrid "docs"| a Cartesian spatial grid |
+| %Cylinder2DSpatialGrid | \ref SkiFileHelpConcreteCylinder2DSpatialGrid "props" | \ref Cylinder2DSpatialGrid "docs"| an axisymmetric spatial grid in cylindrical coordinates |
+| %FileTreeSpatialGrid | \ref SkiFileHelpConcreteFileTreeSpatialGrid "props" | \ref FileTreeSpatialGrid "docs"| a tree-based spatial grid loaded from a topology data file |
+| %PolicyTreeSpatialGrid | \ref SkiFileHelpConcretePolicyTreeSpatialGrid "props" | \ref PolicyTreeSpatialGrid "docs"| a tree-based spatial grid |
+| %Sphere1DSpatialGrid | \ref SkiFileHelpConcreteSphere1DSpatialGrid "props" | \ref Sphere1DSpatialGrid "docs"| a spherically symmetric spatial grid |
+| %Sphere2DSpatialGrid | \ref SkiFileHelpConcreteSphere2DSpatialGrid "props" | \ref Sphere2DSpatialGrid "docs"| an axisymmetric spatial grid in spherical coordinates |
+| %VoronoiMeshSpatialGrid | \ref SkiFileHelpConcreteVoronoiMeshSpatialGrid "props" | \ref VoronoiMeshSpatialGrid "docs"| a Voronoi tessellation-based spatial grid |
+
+\subsection SkiFileHelpBaseSpheGeometry -SpheGeometry
+[\ref SpheGeometry "docs"] : a spherically symmetric geometry 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %EinastoGeometry | \ref SkiFileHelpConcreteEinastoGeometry "props" | \ref EinastoGeometry "docs"| an Einasto geometry |
+| %GammaGeometry | \ref SkiFileHelpConcreteGammaGeometry "props" | \ref GammaGeometry "docs"| a gamma geometry |
+| %GaussianGeometry | \ref SkiFileHelpConcreteGaussianGeometry "props" | \ref GaussianGeometry "docs"| a Gaussian geometry |
+| %PlummerGeometry | \ref SkiFileHelpConcretePlummerGeometry "props" | \ref PlummerGeometry "docs"| a Plummer geometry |
+| %PseudoSersicGeometry | \ref SkiFileHelpConcretePseudoSersicGeometry "props" | \ref PseudoSersicGeometry "docs"| a pseudo-Sérsic geometry |
+| %SersicGeometry | \ref SkiFileHelpConcreteSersicGeometry "props" | \ref SersicGeometry "docs"| a Sérsic geometry |
+| %ShellGeometry | \ref SkiFileHelpConcreteShellGeometry "props" | \ref ShellGeometry "docs"| a shell geometry |
+
+\subsection SkiFileHelpBaseTreePolicy -TreePolicy
+[\ref TreePolicy "docs"] : a spatial tree grid construction policy 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %DensityTreePolicy | \ref SkiFileHelpConcreteDensityTreePolicy "props" | \ref DensityTreePolicy "docs"| a tree grid construction policy using the medium density distribution |
+| %SiteListTreePolicy | \ref SkiFileHelpConcreteSiteListTreePolicy "props" | \ref SiteListTreePolicy "docs"| a tree grid construction policy using positions defined by an imported medium |
+
+\subsection SkiFileHelpBaseUnits -Units
+[\ref Units "docs"] : a units system 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ExtragalacticUnits | \ref SkiFileHelpConcreteExtragalacticUnits "props" | \ref ExtragalacticUnits "docs"| extragalactic units (length in pc, distance in Mpc) |
+| %SIUnits | \ref SkiFileHelpConcreteSIUnits "props" | \ref SIUnits "docs"| SI units |
+| %StellarUnits | \ref SkiFileHelpConcreteStellarUnits "props" | \ref StellarUnits "docs"| stellar units (length in AU, distance in pc) |
+
+\subsection SkiFileHelpBaseWavelengthDistribution -WavelengthDistribution
+[\ref WavelengthDistribution "docs"] : a wavelength probability distribution 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %DiscreteWavelengthDistribution | \ref SkiFileHelpConcreteDiscreteWavelengthDistribution "props" | \ref DiscreteWavelengthDistribution "docs"| a discrete wavelength probability distribution derived from a wavelength grid |
+| %FileWavelengthDistribution | \ref SkiFileHelpConcreteFileWavelengthDistribution "props" | \ref FileWavelengthDistribution "docs"| a wavelength probability distribution loaded from a text file |
+| %LinWavelengthDistribution | \ref SkiFileHelpConcreteLinWavelengthDistribution "props" | \ref LinWavelengthDistribution "docs"| a linear wavelength probability distribution |
+| %ListWavelengthDistribution | \ref SkiFileHelpConcreteListWavelengthDistribution "props" | \ref ListWavelengthDistribution "docs"| a wavelength probability distribution specified inside the configuration file |
+| %LogWavelengthDistribution | \ref SkiFileHelpConcreteLogWavelengthDistribution "props" | \ref LogWavelengthDistribution "docs"| a logarithmic wavelength probability distribution |
+
+\subsection SkiFileHelpBaseWavelengthGrid -WavelengthGrid
+[\ref WavelengthGrid "docs"] : a wavelength grid 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %ConfigurableBandWavelengthGrid | \ref SkiFileHelpConcreteConfigurableBandWavelengthGrid "props" | \ref ConfigurableBandWavelengthGrid "docs"| a wavelength grid including a configurable list of (broad)bands |
+| %FileWavelengthGrid | \ref SkiFileHelpConcreteFileWavelengthGrid "props" | \ref FileWavelengthGrid "docs"| a wavelength grid loaded from a text file |
+| %LinWavelengthGrid | \ref SkiFileHelpConcreteLinWavelengthGrid "props" | \ref LinWavelengthGrid "docs"| a linear wavelength grid |
+| %ListWavelengthGrid | \ref SkiFileHelpConcreteListWavelengthGrid "props" | \ref ListWavelengthGrid "docs"| a list of one or more wavelengths |
+| %LogWavelengthGrid | \ref SkiFileHelpConcreteLogWavelengthGrid "props" | \ref LogWavelengthGrid "docs"| a logarithmic wavelength grid |
+| %NestedLogWavelengthGrid | \ref SkiFileHelpConcreteNestedLogWavelengthGrid "props" | \ref NestedLogWavelengthGrid "docs"| a nested logarithmic wavelength grid |
+| %PredefinedBandWavelengthGrid | \ref SkiFileHelpConcretePredefinedBandWavelengthGrid "props" | \ref PredefinedBandWavelengthGrid "docs"| a wavelength grid including a predefined list of (broad)bands |
+
+*/

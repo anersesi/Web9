@@ -72,6 +72,13 @@ def inheritsItem(smiletree, candidate, base):
 
 # -----------------------------------------------------------------
 
+# This function returns the title string for the given item
+def titleForItem(smiletree, item):
+    title = getStringAttribute(smiletree, "//Type[@name='{}']".format(item), "title")
+    return title.replace("SED", "%SED")  # avoid hyperlink to the SED class
+
+# -----------------------------------------------------------------
+
 # This function returns a list of XML elements representing the properties of the given item,
 # including inherited properties, in the order they would appear in the Q&A
 def propertiesForItem(smiletree, item):
@@ -115,8 +122,6 @@ smiletree = etree.parse(smiledir+"skirt.smile")
 
 # get the SKIRT version
 version = getStringAttribute(smiletree, "//smile-schema", "producer")
-print (version)
-print ()
 
 # get the set of simulation items that are mentioned as a base in Item or ItemList properties
 list0 = getStringAttributes(smiletree, "//Schema", "type")
@@ -125,29 +130,109 @@ list2 = getStringAttributes(smiletree, "//ItemListProperty", "base")
 baseItems = sorted(set(list0+list1+list2))
 
 # get the list of concrete simulation items
-concreteItems = getStringAttributes(smiletree, "//Type[@concrete='true']", "name")
+concreteItems = sorted(getStringAttributes(smiletree, "//Type[@concrete='true']", "name"))
 
-# for each base item...
-for baseItem in baseItems:
-    print ("->", baseItem)
+# -----------------------------------------------------------------
 
-    # get the concrete items inheriting from it
-    inheritingItems = sorted([ item for item in concreteItems if inheritsItem(smiletree, item, baseItem) ])
+# --- Generate a file offering a list of subclasses for each base class ---
 
-    # for each inheriting item...
-    for item in inheritingItems:
-        print ("     ", item)
+with open(outdir + "SkiFileHelpSubclasses.txt", 'w') as pg:
+    # write page header
+    pg.write("/**\n")
+    pg.write("\\page SkiFileHelpSubclasses List of subclasses for each base class\n")
+    pg.write("<em>{}</em>\n".format(version))
+    pg.write("\\section SkiFileHelpSubclassesIntro Introduction\n")
+    pg.write('''This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
+             The sections are listed alphabetically on class name. To quickly locate the section for a given class,
+             use your browser's find function and precede the class name with a - (dash).
+             ''')
 
-        # get a list of XML elements representing the properties of this item, including inherited properties
+    # write links to other pages
+    #for categ in categories:
+    #    for order in orderings:
+    #        pg.write("- \\ref Publications" + categ + order + "\n")
+    #pg.write("\n")
+
+    # for each base item...
+    for baseItem in baseItems:
+        # write section header for base item
+        pg.write("\n")
+        pg.write('\\subsection SkiFileHelpBase{0} -{0}\n[\\ref {0} "docs"] : {1} \n' \
+                    .format(baseItem, titleForItem(smiletree, baseItem)))
+
+        # write table header for base item
+        pg.write("\n")
+        pg.write('| Subclass | | | Description |\n'.format(baseItem, titleForItem(smiletree, baseItem)))
+        pg.write("| :-- | :--: | :--: | :-- |\n")
+
+        # write table entry for each concrete inheriting item
+        inheritingItems = [item for item in concreteItems if inheritsItem(smiletree, item, baseItem)]
+        for item in inheritingItems:
+            pg.write('| %{0} | \\ref SkiFileHelpConcrete{0} "props" | \\ref {0} "docs"| {1} |\n' \
+                     .format(item, titleForItem(smiletree, item)))
+
+    # write page footer
+    pg.write("\n")
+    pg.write("*/\n")
+
+# -----------------------------------------------------------------
+
+# --- Generate a file offering a list of properties for each concrete class ---
+
+with open(outdir + "SkiFileHelpProperties.txt", 'w') as pg:
+    # write page header
+    pg.write("/**\n")
+    pg.write("\\page SkiFileHelpProperties List of properties for each concrete class\n")
+    pg.write("<em>{}</em>\n".format(version))
+    pg.write("\\section SkiFileHelpPropertiesIntro Introduction\n")
+    pg.write('''This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
+             The sections are listed alphabetically on class name. To quickly locate the section for a given class,
+             use your browser's find function and precede the class name with a - (dash).
+             ''')
+
+    # for each concrete item...
+    for item in concreteItems:
+        # get a list of XML elements representing the properties of this item, including inherited properties,
+        # and split the list into scalar and compound properties
         properties = propertiesForItem(smiletree, item)
-        for property in properties:
-            if "Item" in property.tag:
-                print("        ", property.tag[:-8], property.get("base"), property.get("name"), property.get("title"))
-            elif "Enum" in property.tag:
-                print("        ", property.tag[:-8], property.get("name"), property.get("title"))
-                for enumValue in property.xpath("enumValues/*"):
-                    print("           ", enumValue.get("name"), enumValue.get("title"))
-            else:
-                print("        ", property.tag[:-8], property.get("name"), property.get("title"))
+        scalarproperties = [ property for property in properties if not "Item" in property.tag]
+        compoundproperties = [ property for property in properties if "Item" in property.tag]
+
+        # write section header for item
+        pg.write("\n")
+        pg.write('\\subsection SkiFileHelpConcrete{0} -{0}\n[\\ref {0} "docs"] : {1} \n' \
+                    .format(item, titleForItem(smiletree, item)))
+
+        if len(scalarproperties) > 0:
+            # write table header for scalar properties
+            pg.write("\n")
+            pg.write("| Scalar Property | | Type | Description\n")
+            pg.write("| :-- | :--: | :-- | :-- |\n")
+
+            # write scalar properties
+            for property in scalarproperties:
+                pg.write('| {0} | \\ref {3}::{0}() "docs" | {1} | {2} |\n' \
+                         .format(property.get("name"), property.tag[:-8],
+                                 property.get("title").replace("SED", "%SED"), item))
+                if "Enum" in property.tag:
+                    for enumValue in property.xpath("enumValues/*"):
+                        pg.write("| | | --> {} | {} |\n" \
+                                 .format(enumValue.get("name"), enumValue.get("title").replace("SED", "%SED")))
+
+        if len(compoundproperties) > 0:
+            # write table header for compound properties
+            pg.write("\n")
+            pg.write("| Compound Property | | Type | Base Class | | Description\n")
+            pg.write("| :-- | :--: | :-- | :-- | :--: | :-- |\n")
+
+            # write compound properties
+            for property in compoundproperties:
+                pg.write('| {0} | \\ref {4}::{0}() "docs" | %{1} | %{2} | \\ref SkiFileHelpBase{2} "subclasses" | {3} |\n' \
+                         .format(property.get("name"), property.tag[:-8],
+                                 property.get("base"), property.get("title").replace("SED", "%SED"), item))
+
+    # write page footer
+    pg.write("\n")
+    pg.write("*/\n")
 
 # -----------------------------------------------------------------

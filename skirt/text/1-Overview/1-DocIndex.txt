@@ -39,4 +39,9 @@ of the page:
   - \em Namespaces: a list of the namespaces in the \c SKIRT code.
   - \em Macros: a list of the files defining macros in the \c SKIRT code.
 
+Quick reference help for manual ski file editing can be found here:
+
+  - \ref SkiFileHelpSubclasses
+  - \ref SkiFileHelpProperties
+
 */

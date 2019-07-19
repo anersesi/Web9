@@ -78,6 +78,11 @@ about a particular option in the \c SKIRT reference documentation, even if you a
  - An XML attribute name (except \c type) corresponds to a function name in the C++ class corresponding to the name
    of the element carrying the attribute. For example, minWavelength() is a function in the SourceSystem class.
 
+Quick reference help for manual ski file editing can be found here:
+
+  - \ref SkiFileHelpSubclasses
+  - \ref SkiFileHelpProperties
+
 \section UserParamFileUnits Supported units
 
 When \c SKIRT outputs a parameter file, it always uses the defaults of the units system selected by the ski file.

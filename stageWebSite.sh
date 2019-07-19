@@ -37,6 +37,9 @@
 # Generate Doxygen input pages from publications database
 root/text/3-Publications/makePublicationPages.py root/text/3-Publications ../../ResourcesC/Publications
 
+# Generate Doxygen input pages for ski file help from smile schema file
+skirt/text/6-SkiFileHelp/makeSkiFileHelpPages.py ../../SKIRT9/release/MakeUp/schemas skirt/text/6-SkiFileHelp
+
 # Generate html documentation in the staging area next to our git folder
 mkdir -p ../stage
 /Applications/Doxygen.app/Contents/Resources/doxygen staging/html_root.doxygen

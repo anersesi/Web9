@@ -4,11 +4,13 @@
 # Execute this script with "git" as default directory; use on Mac OS X only
 #
 
+# important note: in the interest of speed, this script does NOT update the
+#                 Doxygen input pages that are generated from python scripts
+
 # generate the html documentation in a folder next to the git folder
 mkdir -p ../html
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_skirt.doxygen
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_pts.doxygen
-root/text/3-Publications/makePublicationPages.py root/text/3-Publications ../../ResourcesC/Publications
 /Applications/Doxygen.app/Contents/Resources/doxygen doxygen/html_version.doxygen
 
 # copy redirecting index.html file
