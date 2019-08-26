@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 63a5263-dirty built on 19/07/2019 at 15:06:46)</em>
+<em>SKIRT v9.0 (git c7a14c2 built on 23/08/2019 at 15:49:40)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -26,6 +26,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importMetallicity | \ref AdaptiveMeshGeometry::importMetallicity() "docs" | Bool | import a metallicity column |
 | importTemperature | \ref AdaptiveMeshGeometry::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref AdaptiveMeshGeometry::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
+| useColumns | \ref AdaptiveMeshGeometry::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 \subsection SkiFileHelpConcreteAdaptiveMeshMedium -AdaptiveMeshMedium
 [\ref AdaptiveMeshMedium "docs"] : a transfer medium imported from data represented on an adaptive mesh (AMR grid) 
@@ -50,6 +51,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | maxTemperature | \ref AdaptiveMeshMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref AdaptiveMeshMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
 | importVariableMixParams | \ref AdaptiveMeshMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
+| useColumns | \ref AdaptiveMeshMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
@@ -69,6 +71,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | minZ | \ref AdaptiveMeshSource::minZ() "docs" | Double | the start point of the domain in the Z direction |
 | maxZ | \ref AdaptiveMeshSource::maxZ() "docs" | Double | the end point of the domain in the Z direction |
 | importVelocity | \ref AdaptiveMeshSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| useColumns | \ref AdaptiveMeshSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref AdaptiveMeshSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref AdaptiveMeshSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
 
@@ -1261,6 +1264,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importMetallicity | \ref ParticleGeometry::importMetallicity() "docs" | Bool | import a metallicity column |
 | importTemperature | \ref ParticleGeometry::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref ParticleGeometry::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
+| useColumns | \ref ParticleGeometry::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
@@ -1278,6 +1282,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | maxTemperature | \ref ParticleMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref ParticleMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
 | importVariableMixParams | \ref ParticleMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
+| useColumns | \ref ParticleMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
@@ -1292,6 +1297,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- |
 | filename | \ref ParticleSource::filename() "docs" | String | the name of the file to be imported |
 | importVelocity | \ref ParticleSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| useColumns | \ref ParticleSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref ParticleSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref ParticleSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
 
@@ -1883,6 +1889,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importMetallicity | \ref VoronoiMeshGeometry::importMetallicity() "docs" | Bool | import a metallicity column |
 | importTemperature | \ref VoronoiMeshGeometry::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref VoronoiMeshGeometry::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
+| useColumns | \ref VoronoiMeshGeometry::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 \subsection SkiFileHelpConcreteVoronoiMeshMedium -VoronoiMeshMedium
 [\ref VoronoiMeshMedium "docs"] : a transfer medium imported from data represented on a Voronoi mesh 
@@ -1907,6 +1914,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | maxTemperature | \ref VoronoiMeshMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref VoronoiMeshMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
 | importVariableMixParams | \ref VoronoiMeshMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
+| useColumns | \ref VoronoiMeshMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
@@ -1926,6 +1934,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | minZ | \ref VoronoiMeshSource::minZ() "docs" | Double | the start point of the domain in the Z direction |
 | maxZ | \ref VoronoiMeshSource::maxZ() "docs" | Double | the end point of the domain in the Z direction |
 | importVelocity | \ref VoronoiMeshSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| useColumns | \ref VoronoiMeshSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref VoronoiMeshSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref VoronoiMeshSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
 
