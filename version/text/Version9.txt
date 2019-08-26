@@ -13,6 +13,7 @@ might instead want to visit these pages:
 - \ref NewInPTS9
 - \ref OpenSource9
 - \ref StatusRoadmap9
+- \ref RecentChanges9
 
 
 \section Version9avail Availability

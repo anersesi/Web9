@@ -43,6 +43,7 @@ See also:
 - \ref NewInSKIRT9
 - \ref OpenSource9
 - \ref StatusRoadmap9
+- \ref RecentChanges9
 
 \section NewInPTS9Features Features
 
