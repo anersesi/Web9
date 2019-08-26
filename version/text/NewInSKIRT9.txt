@@ -71,8 +71,8 @@ Major dropped features:
  - FitSKIRT: similar fitting functionality could be implemented in Python, invoking the SKIRT executable as needed.
  - Importing the binary AMR-VAC snapshot file format: focusing on a generic column text file format allowed a much more
    streamlined and more powerful snapshot import mechanism.
- - Importing two or more medium components from the same file: this can be worked around by providing a
-   separate input file for each medium component.
+ - Importing multiple medium components from a single file in one go: this can be worked around by reading different
+   columns of the same input file for each individual medium component.
  - FSPS variable IMF SED families: could be added back in fairly easily if desired.
  - Data parallelization, i.e. distributing data across multiple processes to lower the amount of memory per process:
    this is extremely hard to implement in the new code structure (note that the regular form of hybrid parallelization
@@ -98,6 +98,12 @@ Minor new features:
  - Optional Voronoi grid relaxation.
  - Biasing options for wavelength sampling from source spectra.
  - User expertise levels, hiding higher-level questions while configuring a simulation.
+
+Performance
+ - More memory efficient because the number of wavelengths can be fine-tuned for each large data structure separately.
+ - Parallelization scales slighly better and has improved load balancing.
+ - Monochromatic simulations proceed at essentially the same speed.
+ - Panchromatic simulations can be slower up to about a factor of two depending on the precise configuration.
 
 
 \section NewInSKIRT9Packets Photon packet properties
@@ -472,5 +478,27 @@ distributes the largest memory data tables of the simulation across multiple pro
 requirements for complex models. To achieve this, SKIRT 8 assigns a specific set of wavelengths to each process.
 However, in SKIRT 9, photon packets can change wavelength during their life cycle, so implementing this scheme is
 impossible, or at least far from straightforward.
+
+\section NewInSKIRT9Performance Performance
+
+SKIRT 9 simulations using a single optical wavelength in oligochromatic regime proceed at essentially the same speed
+(within 10%) as those in SKIRT 8. In this special case, any overhead caused by the more complex wavelength framework
+(see below) is limited and often fully compensated by the gain obtained from the improved parallel scaling.
+
+On the other hand, simulations in panchromatic mode using the full range from UV to submm wavelengths usually run
+slower in SKIRT 9 by up to a factor of two compared to SKIRT 8. There are various reasons for this performance impact,
+and most of them are related to the new treatment of wavelengths. In SKIRT 8, the user configures a global wavelength
+grid for a simulation, and all photon packets carry an integer wavelength index into this grid. Instead, in SKIRT 9,
+for each photon packet a new wavelength is sampled from the source distribution (usually tabulated on 1000 or more
+wavelength points) in combination with a corresponding biasing mechanism to ensure that all spectral regions are
+properly sampled.
+
+The most important performance impact, however, is caused by the need to convert the photon packet wavelength (a
+floating point number) to the corresponding bin index (an integer number) in the wavelength grids encountered for each
+step along the way in the photon packet lifecycle. This includes retrieving optical media properties, storing the
+radiation field in each spatial cell, and detecting photon packets in the instruments. It is essentially impossible to
+accelerate these binning operations through, for example, caching, because of the large amount of generality and
+flexibility allowed in SKIRT models. The wavelength of a packet can change throughout its lifetime (for example, caused
+by kinematic effects), and each medium component and instrument may have its own distinct wavelength grid.
 
 */
