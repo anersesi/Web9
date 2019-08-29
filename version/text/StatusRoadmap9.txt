@@ -4,11 +4,11 @@
 
 \section StatusRoadmap9Status Status
 
-<em>August 26, 2019</em>
+<em>August 29, 2019</em>
 
-Version 9 of the SKIRT project has been publicly released a few months ago and has reached a state where it is ready to
+Version 9 of the SKIRT project has been publicly released on May 10, 2019 and has reached a state where it is ready to
 be used for science projects. SKIRT 9 properly performs hundreds of handcrafted test cases and properly runs all
-available benchmarks. SKIRT 9 and PTS 9 are fully documented, including up-to-date tutorials, concept notes and
+relevant benchmarks. SKIRT 9 and PTS 9 are fully documented, including up-to-date tutorials, concept notes and
 reference material. This new version is now being used for its first actual science projects. However, unknown problems
 may still be waiting to surface when the code is put to more extensive use. We therefore specifically invite you to
 perform further testing, evaluation, and proof-reading, and we look forward to hearing from you.
@@ -32,17 +32,16 @@ existing onces. This allows, for example, reusing the infrastructure for handlin
 geometries, importing snapshots, adaptive grids) and for mananaging the Monte Carlo photon cycle from launch to
 detection. Providing such integration with an existing code base often requires extra design and implementation
 efforts. However, the resulting code should offer maximum configuration flexibility and should allow combining various
-media types and many physical processes in a single simulation.
+media types and different physical processes in a single simulation.
 
 Generally speaking, regardless of their origin, features requests and ideas should be entered as a issue on GitHub in
 the category "feature suggestion". This way, it becomes possible to have public discussions about feasibility and
 desirability of the various ideas, and items may be picked up by any contributor inside or outside the core SKIRT team.
 
-The sections below briefly outline a number of larger projects that are scheduled to start in 2019 -- without offering
-any commitment towards results nor predicting any completion dates. We will be able to allocate resources from within
-the Ghent University SKIRT research team to most of these projects. In all cases, however, a substantial fraction of
-the work will be accomplished by and in cooperation with other teams, who will also provide the necessary expertise to
-evaluate the results in the context of a particular science application.
+The sections below briefly outline a number of larger projects that are currently being considered -- without offering
+any commitment towards results nor predicting any completion dates. In most cases, the work will be accomplished in a
+cooperation between the Ghent University SKIRT research team and other teams, who will also provide the necessary
+expertise to evaluate the results in the context of a particular science application.
 
 If you are interested in participating in any of these projects, please contact us. Remember that contributions can
 take many forms and are not limited to writing code. For example, adding domain expertise and insight or validating
@@ -53,15 +52,16 @@ The core SKIRT team.
 
 \subsection StatusRoadmap9Kinematics Kinematics in simulated galaxies
 
-The goal of this project is to evaluate the effect of dust on the (mock-)observed kinematics in selected simulated
-galaxies with various morphologies. This project will use the new kinematics capabilities in SKIRT 9, possibly with
-some further extensions such as, perhaps, allowing a velocity dispersion in addition to the average velocity vector
-imported for each particle from the hydro snapshot.
+The goal of this project is to evaluate the effect of dust on the (mock-)observed kinematics in selected galaxies with
+various morphologies produced by cosmological simulations. This project will use the new kinematics capabilities in
+SKIRT 9, possibly with some further extensions such as, perhaps, allowing a velocity dispersion in addition to the
+average velocity vector imported for each particle from the hydrodynamical snapshot.
 
 
 \subsection StatusRoadmap9Spheroidal Polarization effects of spheroidal dust grains
 
-We intend to support the effects of aligned spheroidal (i.e. non-spherical) dust grains on the polarization of
+SKIRT 9 can already trace polarization effects resulting from scattering by spherical dust grains. We intend to
+additionally support the effects of aligned spheroidal (i.e. non-spherical) dust grains on the polarization of
 radiation in SKIRT. This entails a number of subprojects. A first step is to obtain or calculate the required optical
 material properties as a function of wavelength, grain format, and radiation-grain interaction geometry. We also need a
 way to model the direction and degree of alignment of the dust grains in each location, probably derived from the
@@ -72,7 +72,7 @@ processes, including polarized emission, polarization through scattering, and di
 \subsection StatusRoadmap9StarFormation Subgrid models for star formation regions
 
 This project aims to improve our current approach for modeling star formation regions in radiative transfer simulations
-of galaxies. These regions are typically very compact and contain a lot of dust. It is therefore not feasible to
+of galaxies. These regions are typically very compact and very dusty. It is therefore not feasible to
 include their detailed geometry in the galaxy simulation, and one needs to resort to subgrid emission templates. These
 templates include both the primary stellar emission (after extinction by the dust) and the secondary dust emission
 generated in the star formation region. As a result, an important challenge is to properly couple these templates with
@@ -89,7 +89,7 @@ besides the stellar populations. Hydrodynamic simulations usually yield a number
 at every location (such as density and metallicity), but this does not suffice to calculate the emission spectrum of
 the gas. The emission spectrum also depends on the intensity and shape of the radiation field at that location. We
 intend to use a library of template models for the gas emission, with an iterative approach in SKIRT to calculate the
-emission and radiation field state self-consistenly.
+emission and radiation field state self-consistently.
 
 
 \subsection StatusRoadmap9LymanAlpha Lyman-alpha line transfer
@@ -105,7 +105,7 @@ effects of both the dust and (the Lyman-alpha line of) the hydrogen gas in the i
 \subsection StatusRoadmap9SHydrogen Hydrogen line transfer
 
 We are developing a gas module that calculates the state of the hydrogen gas (abundances of ionized and non-ionized
-atomic and molecular hydrogen; electronic states; kinematic temperature, ...) as a function of the local radiation
+atomic and molecular hydrogen; electronic states; kinetic temperature, ...) as a function of the local radiation
 field and the material density and composition, as well as the resulting emission spectrum. We hope to include most
 physical processes (formation, destruction, heating, cooling, electronic state transitions, ...) that have a
 significant impact on the hydrogen emission spectrum (including the most important line ratios) in a parameter range
@@ -113,6 +113,14 @@ relevant for typical galaxy simulations. The goal of this project is to incorpor
 it self-consistently calulate the gas state and resulting emission spectrum for each of the spatial cells in the
 simulation, in an iterative process. Because these simulations will consume a lot of resources (memory and processing
 time), the spatial resolution will be severely limited, at least initially.
+
+\subsection StatusRoadmap9XRay X-ray radiation transfer
+
+In this project we aim to introduce proper treatment of X-rays in SKIRT. This requires implementing several physical
+processes, such as Compton and Rayleigh scattering, photoelectric absorption, and recombination. This involves
+generalizing Thomson scattering to the Klein-Nishina formula and implementing proper cross sections for free electrons
+and for electrons in different atomic shells. Adding this feature could be of particular interest for studying active
+galactic nuclei (AGNs).
 
 
 */

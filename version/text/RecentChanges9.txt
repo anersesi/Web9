@@ -4,12 +4,12 @@
 
 \section RecentChanges9Intro Introduction
 
-<em>August 26, 2019</em>
+<em>August 29, 2019</em>
 
 The tables below list the most relevant recent changes to SKIRT 9 and PTS 9, respectively, since the code was publicly
-released. In case a change comprises multiple commits, the date and commit hash in the table indicate the most recent
-commit that includes all the changes implied by the corresponding description. For details, refer to the commit history
-in the respective GitHub repositories.
+released on May 10, 2019. In case a change comprises multiple commits, the date and commit hash in the table indicate
+the most recent commit that includes all the changes implied by the corresponding description. For details, refer to
+the commit history in the respective GitHub repositories.
 
 See also:
 
@@ -30,6 +30,7 @@ Aug 23, 2019 | c7a14c2 | Various minor performance optimizations
 
 Date | Commit | Description
 -----|--------|------------
+Jun 20, 2019 | 716613d | Command script 'plot_seds' allows specifying an instrument name
 Aug 13, 2019 | c839f74 | Add MovieFile class based on ffmpeg
 Aug 13, 2019 | c839f74 | Provide facilities for making "wavelength movies"
 Aug 22, 2019 | eae0e63 | Add optional title and format to saveColumns() function
