@@ -6,6 +6,14 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+Optical depth in polarised Monte Carlo radiative transfer
+Baes et al.
+A&A
+10 2019
+Technical
+Baes2019b
+2019A&A...630A..61B
+
 The nature of submillimetre and highly star-forming galaxies in the EAGLE simulation
 McAlpine et al.
 MNRAS
