@@ -10,6 +10,7 @@
 
 | Title | Author(s) | Date | Journal | Category | PDF | ADS |
 |--|--|--|--|--|--|--|
+| Optical depth in polarised Monte Carlo radiative transfer | Baes et al. | Oct 2019 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2019b.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019A&A...630A..61B/abstract) |
 | SKIRT: Hybrid parallelization of radiative transfer simulations | Verstocken et al. | Jul 2017 | A&C | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Verstocken2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26C....20...16V/abstract) |
 | TRUST I. A 3D externally illuminated slab benchmark for dust radiative transfer | Gordon et al. | Jul 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Gordon2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...603A.114G/abstract) |
 | Polarization in Monte Carlo radiative transfer and dust scattering polarization signatures of spiral galaxies | Peest et al. | May 2017 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Peest2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A..92P/abstract) |

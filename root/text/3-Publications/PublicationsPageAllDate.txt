@@ -10,6 +10,7 @@
 
 | Title | Author(s) | Date | Journal | Category | PDF | ADS |
 |--|--|--|--|--|--|--|
+| Optical depth in polarised Monte Carlo radiative transfer | Baes et al. | Oct 2019 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2019b.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019A&A...630A..61B/abstract) |
 | The nature of submillimetre and highly star-forming galaxies in the EAGLE simulation | McAlpine et al. | Sep 2019 | MNRAS | Application | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/McAlpine2019.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.2440M/abstract) |
 | High-resolution radiative transfer modelling of M33 | Williams et al. | Aug 2019 | MNRAS | Application | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Williams2019.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.2753W/abstract) |
 | Dust attenuation, dust emission, and dust temperature in galaxies at z ≥ 5: a view from the FIRE-2 simulations | Ma et al. | Aug 2019 | MNRAS | Application | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Ma2019.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1844M/abstract) |

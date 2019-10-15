@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git c7a14c2 built on 29/08/2019 at 16:59:17)</em>
+<em>SKIRT v9.0 (git 6c9e318 built on 15/10/2019 at 16:37:07)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -319,6 +319,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %DefaultMediaDensityCutsProbe | \ref SkiFileHelpConcreteDefaultMediaDensityCutsProbe "props" | \ref DefaultMediaDensityCutsProbe "docs"| cuts of the media densities along the coordinate planes |
 | %DefaultRadiationFieldCutsProbe | \ref SkiFileHelpConcreteDefaultRadiationFieldCutsProbe "props" | \ref DefaultRadiationFieldCutsProbe "docs"| cuts of the mean radiation field intensity along the coordinate planes |
 | %DustAbsorptionPerCellProbe | \ref SkiFileHelpConcreteDustAbsorptionPerCellProbe "props" | \ref DustAbsorptionPerCellProbe "docs"| the spectral luminosity absorbed by dust for each spatial cell |
+| %DustEmissionWavelengthGridProbe | \ref SkiFileHelpConcreteDustEmissionWavelengthGridProbe "props" | \ref DustEmissionWavelengthGridProbe "docs"| the dust emission wavelength grid |
 | %DustEmissivityProbe | \ref SkiFileHelpConcreteDustEmissivityProbe "props" | \ref DustEmissivityProbe "docs"| the emissivity spectrum for each dust mix in a range of standard fields |
 | %DustGrainPopulationsProbe | \ref SkiFileHelpConcreteDustGrainPopulationsProbe "props" | \ref DustGrainPopulationsProbe "docs"| dust grain population mass and size information |
 | %DustGrainSizeDistributionProbe | \ref SkiFileHelpConcreteDustGrainSizeDistributionProbe "props" | \ref DustGrainSizeDistributionProbe "docs"| dust grain size distribution |
@@ -330,7 +331,9 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %MeridionalDustTemperatureCutProbe | \ref SkiFileHelpConcreteMeridionalDustTemperatureCutProbe "props" | \ref MeridionalDustTemperatureCutProbe "docs"| the indicative dust temperature along a meridian line |
 | %OpticalDepthMapProbe | \ref SkiFileHelpConcreteOpticalDepthMapProbe "props" | \ref OpticalDepthMapProbe "docs"| all-sky optical depth map as seen from given location |
 | %OpticalMaterialPropertiesProbe | \ref SkiFileHelpConcreteOpticalMaterialPropertiesProbe "props" | \ref OpticalMaterialPropertiesProbe "docs"| aggregate optical material properties for each medium |
+| %PlanarMediaDensityCutsProbe | \ref SkiFileHelpConcretePlanarMediaDensityCutsProbe "props" | \ref PlanarMediaDensityCutsProbe "docs"| cuts of the media densities through the center of the grid coordinate positions, parallel to the coordinate planes |
 | %RadiationFieldPerCellProbe | \ref SkiFileHelpConcreteRadiationFieldPerCellProbe "props" | \ref RadiationFieldPerCellProbe "docs"| the mean radiation field intensity for each spatial cell |
+| %RadiationFieldWavelengthGridProbe | \ref SkiFileHelpConcreteRadiationFieldWavelengthGridProbe "props" | \ref RadiationFieldWavelengthGridProbe "docs"| the radiation field wavelength grid |
 | %SpatialCellPropertiesProbe | \ref SkiFileHelpConcreteSpatialCellPropertiesProbe "props" | \ref SpatialCellPropertiesProbe "docs"| relevant properties for all spatial cells |
 | %SpatialGridConvergenceProbe | \ref SkiFileHelpConcreteSpatialGridConvergenceProbe "props" | \ref SpatialGridConvergenceProbe "docs"| convergence information on the spatial grid |
 | %SpatialGridPlotProbe | \ref SkiFileHelpConcreteSpatialGridPlotProbe "props" | \ref SpatialGridPlotProbe "docs"| data files for plotting the structure of the grid |
@@ -359,6 +362,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %BlackBodySED | \ref SkiFileHelpConcreteBlackBodySED "props" | \ref BlackBodySED "docs"| a black-body spectral energy distribution |
 | %BruzualCharlotSED | \ref SkiFileHelpConcreteBruzualCharlotSED "props" | \ref BruzualCharlotSED "docs"| a Bruzual-Charlot simple stellar population %SED |
 | %CastelliKuruczSED | \ref SkiFileHelpConcreteCastelliKuruczSED "props" | \ref CastelliKuruczSED "docs"| a Castelli-Kurucz stellar atmosphere %SED |
+| %FSPSSED | \ref SkiFileHelpConcreteFSPSSED "props" | \ref FSPSSED "docs"| an FSPS simple stellar population %SED |
 | %FileSED | \ref SkiFileHelpConcreteFileSED "props" | \ref FileSED "docs"| a spectral energy distribution loaded from a text file |
 | %ListSED | \ref SkiFileHelpConcreteListSED "props" | \ref ListSED "docs"| a spectral energy distribution specified inside the configuration file |
 | %MappingsSED | \ref SkiFileHelpConcreteMappingsSED "props" | \ref MappingsSED "docs"| a star-forming region %SED from the MAPPINGS III model |
@@ -375,6 +379,8 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %BlackBodySEDFamily | \ref SkiFileHelpConcreteBlackBodySEDFamily "props" | \ref BlackBodySEDFamily "docs"| a black body %SED family |
 | %BruzualCharlotSEDFamily | \ref SkiFileHelpConcreteBruzualCharlotSEDFamily "props" | \ref BruzualCharlotSEDFamily "docs"| a Bruzual-Charlot %SED family for single stellar populations |
 | %CastelliKuruczSEDFamily | \ref SkiFileHelpConcreteCastelliKuruczSEDFamily "props" | \ref CastelliKuruczSEDFamily "docs"| a Castelli-Kurucz %SED family for stellar atmospheres |
+| %FSPSSEDFamily | \ref SkiFileHelpConcreteFSPSSEDFamily "props" | \ref FSPSSEDFamily "docs"| an FSPS %SED family for single stellar populations |
+| %FileSSPSEDFamily | \ref SkiFileHelpConcreteFileSSPSEDFamily "props" | \ref FileSSPSEDFamily "docs"| a user-provided %SED family for single stellar populations |
 | %MappingsSEDFamily | \ref SkiFileHelpConcreteMappingsSEDFamily "props" | \ref MappingsSEDFamily "docs"| a MAPPINGS III %SED family for star-forming regions |
 | %MarastonSEDFamily | \ref SkiFileHelpConcreteMarastonSEDFamily "props" | \ref MarastonSEDFamily "docs"| a Maraston %SED family for single stellar populations |
 | %Starburst99SEDFamily | \ref SkiFileHelpConcreteStarburst99SEDFamily "props" | \ref Starburst99SEDFamily "docs"| a Starburst99 %SED family for single stellar populations |
