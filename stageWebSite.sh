@@ -66,6 +66,9 @@ cp staging/index_skirt9.html ../stage/skirt9/index.html
 mkdir -p ../stage/makeup8 && cp staging/index_makeup8.html ../stage/makeup8/index.html
 mkdir -p ../stage/makeup9 && cp staging/index_makeup9.html ../stage/makeup9/index.html
 
+# Copy dustpedia files
+rsync -qrt --delete dustpedia ../stage
+
 # Obtain the MathJax repository if it is not yet present
 if [ ! -d ../stage/mathjax ]; then
 

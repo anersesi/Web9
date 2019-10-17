@@ -31,7 +31,7 @@ fi
 
 # Make local copy, using checksums to update only files that were actually changed
 rsync -chr --delete ../stage/ ../public/
-rm -f ../public/.DS_Store  # remove hidden file created by Mac OS finder
+find ../public -name "*.DS_Store" -type f -delete  # remove hidden files created by Mac OS finder
 
 # Make remote copy, updating only files with a different time stamp
 rsync -hrtv --delete-after ../public/ ../webhost/WWW/

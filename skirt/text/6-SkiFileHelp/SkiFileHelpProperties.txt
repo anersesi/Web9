@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 6c9e318 built on 15/10/2019 at 16:37:07)</em>
+<em>SKIRT v9.0 (git 5d71d73 built on 17/10/2019 at 16:55:40)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
