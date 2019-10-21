@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 5d71d73 built on 17/10/2019 at 16:55:40)</em>
+<em>SKIRT v9.0 (git 7d3db33 built on 21/10/2019 at 09:41:12)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -1380,12 +1380,45 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | minScattEvents | \ref PhotonPacketOptions::minScattEvents() "docs" | Int | the minimum number of forced scattering events before a photon packet is terminated |
 | pathLengthBias | \ref PhotonPacketOptions::pathLengthBias() "docs" | Double | the fraction of path lengths sampled from a stretched distribution |
 
+\subsection SkiFileHelpConcretePlanarDustTemperatureCutsProbe -PlanarDustTemperatureCutsProbe
+[\ref PlanarDustTemperatureCutsProbe "docs"] : cuts of the indicative dust temperature along planes parallel to the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref PlanarDustTemperatureCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarDustTemperatureCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarDustTemperatureCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarDustTemperatureCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarDustTemperatureCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarDustTemperatureCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarDustTemperatureCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+
 \subsection SkiFileHelpConcretePlanarMediaDensityCutsProbe -PlanarMediaDensityCutsProbe
-[\ref PlanarMediaDensityCutsProbe "docs"] : cuts of the media densities through the center of the grid coordinate positions, parallel to the coordinate planes 
+[\ref PlanarMediaDensityCutsProbe "docs"] : cuts of the media densities along planes parallel to the coordinate planes 
 
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
 | probeName | \ref PlanarMediaDensityCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarMediaDensityCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarMediaDensityCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarMediaDensityCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarMediaDensityCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarMediaDensityCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarMediaDensityCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+
+\subsection SkiFileHelpConcretePlanarRadiationFieldCutsProbe -PlanarRadiationFieldCutsProbe
+[\ref PlanarRadiationFieldCutsProbe "docs"] : cuts of the mean radiation field intensity along planes parallel to the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref PlanarRadiationFieldCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarRadiationFieldCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarRadiationFieldCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarRadiationFieldCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarRadiationFieldCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarRadiationFieldCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarRadiationFieldCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+| writeWavelengthGrid | \ref PlanarRadiationFieldCutsProbe::writeWavelengthGrid() "docs" | Bool | output a text file with the radiation field wavelength grid |
 
 \subsection SkiFileHelpConcretePlummerGeometry -PlummerGeometry
 [\ref PlummerGeometry "docs"] : a Plummer geometry 

@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git 5d71d73 built on 17/10/2019 at 16:55:40)</em>
+<em>SKIRT v9.0 (git 7d3db33 built on 21/10/2019 at 09:41:12)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -331,7 +331,9 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %MeridionalDustTemperatureCutProbe | \ref SkiFileHelpConcreteMeridionalDustTemperatureCutProbe "props" | \ref MeridionalDustTemperatureCutProbe "docs"| the indicative dust temperature along a meridian line |
 | %OpticalDepthMapProbe | \ref SkiFileHelpConcreteOpticalDepthMapProbe "props" | \ref OpticalDepthMapProbe "docs"| all-sky optical depth map as seen from given location |
 | %OpticalMaterialPropertiesProbe | \ref SkiFileHelpConcreteOpticalMaterialPropertiesProbe "props" | \ref OpticalMaterialPropertiesProbe "docs"| aggregate optical material properties for each medium |
-| %PlanarMediaDensityCutsProbe | \ref SkiFileHelpConcretePlanarMediaDensityCutsProbe "props" | \ref PlanarMediaDensityCutsProbe "docs"| cuts of the media densities through the center of the grid coordinate positions, parallel to the coordinate planes |
+| %PlanarDustTemperatureCutsProbe | \ref SkiFileHelpConcretePlanarDustTemperatureCutsProbe "props" | \ref PlanarDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along planes parallel to the coordinate planes |
+| %PlanarMediaDensityCutsProbe | \ref SkiFileHelpConcretePlanarMediaDensityCutsProbe "props" | \ref PlanarMediaDensityCutsProbe "docs"| cuts of the media densities along planes parallel to the coordinate planes |
+| %PlanarRadiationFieldCutsProbe | \ref SkiFileHelpConcretePlanarRadiationFieldCutsProbe "props" | \ref PlanarRadiationFieldCutsProbe "docs"| cuts of the mean radiation field intensity along planes parallel to the coordinate planes |
 | %RadiationFieldPerCellProbe | \ref SkiFileHelpConcreteRadiationFieldPerCellProbe "props" | \ref RadiationFieldPerCellProbe "docs"| the mean radiation field intensity for each spatial cell |
 | %RadiationFieldWavelengthGridProbe | \ref SkiFileHelpConcreteRadiationFieldWavelengthGridProbe "props" | \ref RadiationFieldWavelengthGridProbe "docs"| the radiation field wavelength grid |
 | %SpatialCellPropertiesProbe | \ref SkiFileHelpConcreteSpatialCellPropertiesProbe "props" | \ref SpatialCellPropertiesProbe "docs"| relevant properties for all spatial cells |
