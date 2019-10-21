@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 7d3db33 built on 21/10/2019 at 09:41:12)</em>
+<em>SKIRT v9.0 (git 9c40ce6 built on 21/10/2019 at 15:03:56)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -71,6 +71,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | minZ | \ref AdaptiveMeshSource::minZ() "docs" | Double | the start point of the domain in the Z direction |
 | maxZ | \ref AdaptiveMeshSource::maxZ() "docs" | Double | the end point of the domain in the Z direction |
 | importVelocity | \ref AdaptiveMeshSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importVelocityDispersion | \ref AdaptiveMeshSource::importVelocityDispersion() "docs" | Bool | import velocity dispersion (spherically symmetric) |
 | useColumns | \ref AdaptiveMeshSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref AdaptiveMeshSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref AdaptiveMeshSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
@@ -1333,6 +1334,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- |
 | filename | \ref ParticleSource::filename() "docs" | String | the name of the file to be imported |
 | importVelocity | \ref ParticleSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importVelocityDispersion | \ref ParticleSource::importVelocityDispersion() "docs" | Bool | import velocity dispersion (spherically symmetric) |
 | useColumns | \ref ParticleSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref ParticleSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref ParticleSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
@@ -2017,6 +2019,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | minZ | \ref VoronoiMeshSource::minZ() "docs" | Double | the start point of the domain in the Z direction |
 | maxZ | \ref VoronoiMeshSource::maxZ() "docs" | Double | the end point of the domain in the Z direction |
 | importVelocity | \ref VoronoiMeshSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importVelocityDispersion | \ref VoronoiMeshSource::importVelocityDispersion() "docs" | Bool | import velocity dispersion (spherically symmetric) |
 | useColumns | \ref VoronoiMeshSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 | sourceWeight | \ref VoronoiMeshSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref VoronoiMeshSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
