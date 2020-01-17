@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git fda5749 built on 29/10/2019 at 15:01:14)</em>
+<em>SKIRT v9.0 (git 8f41754 built on 17/01/2020 at 11:35:33)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -50,6 +50,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importTemperature | \ref AdaptiveMeshMedium::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref AdaptiveMeshMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref AdaptiveMeshMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importMagneticField | \ref AdaptiveMeshMedium::importMagneticField() "docs" | Bool | import magnetic field components (3 columns) |
 | importVariableMixParams | \ref AdaptiveMeshMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
 | useColumns | \ref AdaptiveMeshMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
@@ -273,6 +274,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | | | --> HenyeyGreenstein | use the Henyey-Greenstein phase function (unpolarized) |
 | | | --> MaterialPhaseFunction | use the phase function derived from actual material properties (unpolarized) |
 | | | --> SphericalPolarization | support polarization through scattering by spherical grains |
+| | | --> SpheroidalPolarization | support polarization through scattering, absorption and emission by spheroidal grains |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
@@ -360,6 +362,9 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | geometry | \ref CylindricalClipGeometryDecorator::geometry() "docs" | %Item | %Geometry | \ref SkiFileHelpBaseGeometry "subclasses" | the geometry to be clipped |
 
+\subsection SkiFileHelpConcreteCylindricalVectorField -CylindricalVectorField
+[\ref CylindricalVectorField "docs"] : a vector field rotating clockwise around the z-axis 
+
 \subsection SkiFileHelpConcreteDefaultDustTemperatureCutsProbe -DefaultDustTemperatureCutsProbe
 [\ref DefaultDustTemperatureCutsProbe "docs"] : cuts of the indicative dust temperature along the coordinate planes 
 
@@ -367,12 +372,26 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- |
 | probeName | \ref DefaultDustTemperatureCutsProbe::probeName() "docs" | String | the name for this probe |
 
+\subsection SkiFileHelpConcreteDefaultMagneticFieldCutsProbe -DefaultMagneticFieldCutsProbe
+[\ref DefaultMagneticFieldCutsProbe "docs"] : cuts of the magnetic field along the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref DefaultMagneticFieldCutsProbe::probeName() "docs" | String | the name for this probe |
+
 \subsection SkiFileHelpConcreteDefaultMediaDensityCutsProbe -DefaultMediaDensityCutsProbe
 [\ref DefaultMediaDensityCutsProbe "docs"] : cuts of the media densities along the coordinate planes 
 
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
 | probeName | \ref DefaultMediaDensityCutsProbe::probeName() "docs" | String | the name for this probe |
+
+\subsection SkiFileHelpConcreteDefaultMediumVelocityCutsProbe -DefaultMediumVelocityCutsProbe
+[\ref DefaultMediumVelocityCutsProbe "docs"] : cuts of the medium velocity along the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref DefaultMediumVelocityCutsProbe::probeName() "docs" | String | the name for this probe |
 
 \subsection SkiFileHelpConcreteDefaultRadiationFieldCutsProbe -DefaultRadiationFieldCutsProbe
 [\ref DefaultRadiationFieldCutsProbe "docs"] : cuts of the mean radiation field intensity along the coordinate planes 
@@ -720,30 +739,30 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
-| velocityX | \ref GeometricMedium::velocityX() "docs" | Double | the bulk velocity of the medium, x component |
-| velocityY | \ref GeometricMedium::velocityY() "docs" | Double | the bulk velocity of the medium, y component |
-| velocityZ | \ref GeometricMedium::velocityZ() "docs" | Double | the bulk velocity of the medium, z component |
+| velocityMagnitude | \ref GeometricMedium::velocityMagnitude() "docs" | Double | the magnitude of the velocity (multiplier) |
+| magneticFieldStrength | \ref GeometricMedium::magneticFieldStrength() "docs" | Double | the strength of the magnetic field  (multiplier) |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | geometry | \ref GeometricMedium::geometry() "docs" | %Item | %Geometry | \ref SkiFileHelpBaseGeometry "subclasses" | the geometry of the spatial density distribution for the medium |
 | materialMix | \ref GeometricMedium::materialMix() "docs" | %Item | %MaterialMix | \ref SkiFileHelpBaseMaterialMix "subclasses" | the material type and properties throughout the medium |
 | normalization | \ref GeometricMedium::normalization() "docs" | %Item | %MaterialNormalization | \ref SkiFileHelpBaseMaterialNormalization "subclasses" | the type of normalization for the amount of material |
+| velocityDistribution | \ref GeometricMedium::velocityDistribution() "docs" | %Item | %VectorField | \ref SkiFileHelpBaseVectorField "subclasses" | the spatial distribution of the velocity, if any |
+| magneticFieldDistribution | \ref GeometricMedium::magneticFieldDistribution() "docs" | %Item | %VectorField | \ref SkiFileHelpBaseVectorField "subclasses" | the spatial distribution of the magnetic field, if any |
 
 \subsection SkiFileHelpConcreteGeometricSource -GeometricSource
 [\ref GeometricSource "docs"] : a primary source with a built-in geometry 
 
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
-| velocityX | \ref GeometricSource::velocityX() "docs" | Double | the bulk velocity of the source, x component |
-| velocityY | \ref GeometricSource::velocityY() "docs" | Double | the bulk velocity of the source, y component |
-| velocityZ | \ref GeometricSource::velocityZ() "docs" | Double | the bulk velocity of the source, z component |
+| velocityMagnitude | \ref GeometricSource::velocityMagnitude() "docs" | Double | the magnitude of the velocity (multiplier) |
 | sourceWeight | \ref GeometricSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
 | wavelengthBias | \ref GeometricSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | geometry | \ref GeometricSource::geometry() "docs" | %Item | %Geometry | \ref SkiFileHelpBaseGeometry "subclasses" | the geometry of the spatial luminosity distribution for the source |
+| velocityDistribution | \ref GeometricSource::velocityDistribution() "docs" | %Item | %VectorField | \ref SkiFileHelpBaseVectorField "subclasses" | the spatial distribution of the velocity, if any |
 | sed | \ref GeometricSource::sed() "docs" | %Item | %SED | \ref SkiFileHelpBaseSED "subclasses" | the spectral energy distribution for the source |
 | normalization | \ref GeometricSource::normalization() "docs" | %Item | %LuminosityNormalization | \ref SkiFileHelpBaseLuminosityNormalization "subclasses" | the type of luminosity normalization for the source |
 | wavelengthBiasDistribution | \ref GeometricSource::wavelengthBiasDistribution() "docs" | %Item | %WavelengthDistribution | \ref SkiFileHelpBaseWavelengthDistribution "subclasses" | the bias distribution for sampling photon packet wavelengths |
@@ -984,6 +1003,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | numSilicateSizes | \ref MRNDustMix::numSilicateSizes() "docs" | Int | the number of silicate grain size bins |
 | numGraphiteSizes | \ref MRNDustMix::numGraphiteSizes() "docs" | Int | the number of graphite grain size bins |
 
+\subsection SkiFileHelpConcreteMagneticFieldPerCellProbe -MagneticFieldPerCellProbe
+[\ref MagneticFieldPerCellProbe "docs"] : the magnetic field for each spatial cell 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref MagneticFieldPerCellProbe::probeName() "docs" | String | the name for this probe |
+
 \subsection SkiFileHelpConcreteMappingsSED -MappingsSED
 [\ref MappingsSED "docs"] : a star-forming region %SED from the MAPPINGS III model 
 
@@ -1096,6 +1122,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | dustSelfAbsorptionOptions | \ref MediumSystem::dustSelfAbsorptionOptions() "docs" | %Item | %DustSelfAbsorptionOptions | \ref SkiFileHelpBaseDustSelfAbsorptionOptions "subclasses" | the dust self-absorption options |
 | media | \ref MediumSystem::media() "docs" | %ItemList | %Medium | \ref SkiFileHelpBaseMedium "subclasses" | the transfer media |
 | grid | \ref MediumSystem::grid() "docs" | %Item | %SpatialGrid | \ref SkiFileHelpBaseSpatialGrid "subclasses" | the spatial grid |
+
+\subsection SkiFileHelpConcreteMediumVelocityPerCellProbe -MediumVelocityPerCellProbe
+[\ref MediumVelocityPerCellProbe "docs"] : the medium velocity for each spatial cell 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref MediumVelocityPerCellProbe::probeName() "docs" | String | the name for this probe |
 
 \subsection SkiFileHelpConcreteMeridionalDustTemperatureCutProbe -MeridionalDustTemperatureCutProbe
 [\ref MeridionalDustTemperatureCutProbe "docs"] : the indicative dust temperature along a meridian line 
@@ -1227,6 +1260,19 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | geometry | \ref OffsetGeometryDecorator::geometry() "docs" | %Item | %Geometry | \ref SkiFileHelpBaseGeometry "subclasses" | the geometry to be offset |
 
+\subsection SkiFileHelpConcreteOffsetVectorFieldDecorator -OffsetVectorFieldDecorator
+[\ref OffsetVectorFieldDecorator "docs"] : a decorator that adds an offset to any vector field 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| offsetX | \ref OffsetVectorFieldDecorator::offsetX() "docs" | Double | the offset in the x direction |
+| offsetY | \ref OffsetVectorFieldDecorator::offsetY() "docs" | Double | the offset in the y direction |
+| offsetZ | \ref OffsetVectorFieldDecorator::offsetZ() "docs" | Double | the offset in the z direction |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| vectorField | \ref OffsetVectorFieldDecorator::vectorField() "docs" | %Item | %VectorField | \ref SkiFileHelpBaseVectorField "subclasses" | the vector field to be offset |
+
 \subsection SkiFileHelpConcreteOpticalDepthMapProbe -OpticalDepthMapProbe
 [\ref OpticalDepthMapProbe "docs"] : all-sky optical depth map as seen from given location 
 
@@ -1318,6 +1364,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importTemperature | \ref ParticleMedium::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref ParticleMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref ParticleMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importMagneticField | \ref ParticleMedium::importMagneticField() "docs" | Bool | import magnetic field components (3 columns) |
 | importVariableMixParams | \ref ParticleMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
 | useColumns | \ref ParticleMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 
@@ -1395,6 +1442,19 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | numPixelsY | \ref PlanarDustTemperatureCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
 | numPixelsZ | \ref PlanarDustTemperatureCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
 
+\subsection SkiFileHelpConcretePlanarMagneticFieldCutsProbe -PlanarMagneticFieldCutsProbe
+[\ref PlanarMagneticFieldCutsProbe "docs"] : cuts of the magnetic field along planes parallel to the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref PlanarMagneticFieldCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarMagneticFieldCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarMagneticFieldCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarMagneticFieldCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarMagneticFieldCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarMagneticFieldCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarMagneticFieldCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+
 \subsection SkiFileHelpConcretePlanarMediaDensityCutsProbe -PlanarMediaDensityCutsProbe
 [\ref PlanarMediaDensityCutsProbe "docs"] : cuts of the media densities along planes parallel to the coordinate planes 
 
@@ -1407,6 +1467,19 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | numPixelsX | \ref PlanarMediaDensityCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
 | numPixelsY | \ref PlanarMediaDensityCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
 | numPixelsZ | \ref PlanarMediaDensityCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+
+\subsection SkiFileHelpConcretePlanarMediumVelocityCutsProbe -PlanarMediumVelocityCutsProbe
+[\ref PlanarMediumVelocityCutsProbe "docs"] : cuts of the medium velocity along planes parallel to the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref PlanarMediumVelocityCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarMediumVelocityCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarMediumVelocityCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarMediumVelocityCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarMediumVelocityCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarMediumVelocityCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarMediumVelocityCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
 
 \subsection SkiFileHelpConcretePlanarRadiationFieldCutsProbe -PlanarRadiationFieldCutsProbe
 [\ref PlanarRadiationFieldCutsProbe "docs"] : cuts of the mean radiation field intensity along planes parallel to the coordinate planes 
@@ -1454,8 +1527,16 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 \subsection SkiFileHelpConcretePolarizedGraphiteGrainComposition -PolarizedGraphiteGrainComposition
 [\ref PolarizedGraphiteGrainComposition "docs"] : a graphite dust grain composition with support for polarization 
 
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| spheroidalEmissionTable | \ref PolarizedGraphiteGrainComposition::spheroidalEmissionTable() "docs" | String | the name of the file tabulating properties for polarized emission by spheroidal grains |
+
 \subsection SkiFileHelpConcretePolarizedSilicateGrainComposition -PolarizedSilicateGrainComposition
 [\ref PolarizedSilicateGrainComposition "docs"] : a silicate dust grain composition with support for polarization 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| spheroidalEmissionTable | \ref PolarizedSilicateGrainComposition::spheroidalEmissionTable() "docs" | String | the name of the file tabulating properties for polarized emission by spheroidal grains |
 
 \subsection SkiFileHelpConcretePolicyTreeSpatialGrid -PolicyTreeSpatialGrid
 [\ref PolicyTreeSpatialGrid "docs"] : a tree-based spatial grid 
@@ -1522,6 +1603,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 \subsection SkiFileHelpConcreteQuasarSED -QuasarSED
 [\ref QuasarSED "docs"] : the spectral energy distribution of a typical quasar 
 
+\subsection SkiFileHelpConcreteRadialVectorField -RadialVectorField
+[\ref RadialVectorField "docs"] : a vector field pointing away from the origin 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| unityRadius | \ref RadialVectorField::unityRadius() "docs" | Double | the radius where the magnitude of the vectors is unity |
+
 \subsection SkiFileHelpConcreteRadiationFieldPerCellProbe -RadiationFieldPerCellProbe
 [\ref RadiationFieldPerCellProbe "docs"] : the mean radiation field intensity for each spatial cell 
 
@@ -1580,6 +1668,19 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | geometry | \ref RotateGeometryDecorator::geometry() "docs" | %Item | %Geometry | \ref SkiFileHelpBaseGeometry "subclasses" | the geometry to be rotated |
+
+\subsection SkiFileHelpConcreteRotateVectorFieldDecorator -RotateVectorFieldDecorator
+[\ref RotateVectorFieldDecorator "docs"] : a decorator that adds a rotation to any vector field 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| eulerAlpha | \ref RotateVectorFieldDecorator::eulerAlpha() "docs" | Double | the first Euler angle α |
+| eulerBeta | \ref RotateVectorFieldDecorator::eulerBeta() "docs" | Double | the second Euler angle β |
+| eulerGamma | \ref RotateVectorFieldDecorator::eulerGamma() "docs" | Double | the third Euler angle γ |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| vectorField | \ref RotateVectorFieldDecorator::vectorField() "docs" | %Item | %VectorField | \ref SkiFileHelpBaseVectorField "subclasses" | the vector field to be rotated |
 
 \subsection SkiFileHelpConcreteSEDInstrument -SEDInstrument
 [\ref SEDInstrument "docs"] : a distant instrument that outputs the spatially integrated flux density as an %SED 
@@ -1939,6 +2040,15 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 \subsection SkiFileHelpConcreteTrustSilicateGrainComposition -TrustSilicateGrainComposition
 [\ref TrustSilicateGrainComposition "docs"] : a TRUST benchmark silicate dust grain composition 
 
+\subsection SkiFileHelpConcreteUnidirectionalVectorField -UnidirectionalVectorField
+[\ref UnidirectionalVectorField "docs"] : a vector field uniformly pointing in a given direction 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| fieldX | \ref UnidirectionalVectorField::fieldX() "docs" | Double | the field direction, x component |
+| fieldY | \ref UnidirectionalVectorField::fieldY() "docs" | Double | the field direction, y component |
+| fieldZ | \ref UnidirectionalVectorField::fieldZ() "docs" | Double | the field direction, z component |
+
 \subsection SkiFileHelpConcreteUniformBoxGeometry -UniformBoxGeometry
 [\ref UniformBoxGeometry "docs"] : a geometry with uniform density inside a box 
 
@@ -1998,6 +2108,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | importTemperature | \ref VoronoiMeshMedium::importTemperature() "docs" | Bool | import a temperature column |
 | maxTemperature | \ref VoronoiMeshMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
 | importVelocity | \ref VoronoiMeshMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importMagneticField | \ref VoronoiMeshMedium::importMagneticField() "docs" | Bool | import magnetic field components (3 columns) |
 | importVariableMixParams | \ref VoronoiMeshMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
 | useColumns | \ref VoronoiMeshMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
 

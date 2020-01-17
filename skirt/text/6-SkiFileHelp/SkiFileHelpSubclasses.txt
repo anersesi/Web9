@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git fda5749 built on 29/10/2019 at 15:01:14)</em>
+<em>SKIRT v9.0 (git 8f41754 built on 17/01/2020 at 11:35:33)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -316,7 +316,9 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | Subclass | | | Description |
 | :-- | :--: | :--: | :-- |
 | %DefaultDustTemperatureCutsProbe | \ref SkiFileHelpConcreteDefaultDustTemperatureCutsProbe "props" | \ref DefaultDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along the coordinate planes |
+| %DefaultMagneticFieldCutsProbe | \ref SkiFileHelpConcreteDefaultMagneticFieldCutsProbe "props" | \ref DefaultMagneticFieldCutsProbe "docs"| cuts of the magnetic field along the coordinate planes |
 | %DefaultMediaDensityCutsProbe | \ref SkiFileHelpConcreteDefaultMediaDensityCutsProbe "props" | \ref DefaultMediaDensityCutsProbe "docs"| cuts of the media densities along the coordinate planes |
+| %DefaultMediumVelocityCutsProbe | \ref SkiFileHelpConcreteDefaultMediumVelocityCutsProbe "props" | \ref DefaultMediumVelocityCutsProbe "docs"| cuts of the medium velocity along the coordinate planes |
 | %DefaultRadiationFieldCutsProbe | \ref SkiFileHelpConcreteDefaultRadiationFieldCutsProbe "props" | \ref DefaultRadiationFieldCutsProbe "docs"| cuts of the mean radiation field intensity along the coordinate planes |
 | %DustAbsorptionPerCellProbe | \ref SkiFileHelpConcreteDustAbsorptionPerCellProbe "props" | \ref DustAbsorptionPerCellProbe "docs"| the spectral luminosity absorbed by dust for each spatial cell |
 | %DustEmissionWavelengthGridProbe | \ref SkiFileHelpConcreteDustEmissionWavelengthGridProbe "props" | \ref DustEmissionWavelengthGridProbe "docs"| the dust emission wavelength grid |
@@ -328,11 +330,15 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %LaunchedPacketsProbe | \ref SkiFileHelpConcreteLaunchedPacketsProbe "props" | \ref LaunchedPacketsProbe "docs"| the number of photon packets launched from primary sources |
 | %LinearDustTemperatureCutProbe | \ref SkiFileHelpConcreteLinearDustTemperatureCutProbe "props" | \ref LinearDustTemperatureCutProbe "docs"| the indicative dust temperature along a given line segment |
 | %LuminosityProbe | \ref SkiFileHelpConcreteLuminosityProbe "props" | \ref LuminosityProbe "docs"| the primary source luminosities |
+| %MagneticFieldPerCellProbe | \ref SkiFileHelpConcreteMagneticFieldPerCellProbe "props" | \ref MagneticFieldPerCellProbe "docs"| the magnetic field for each spatial cell |
+| %MediumVelocityPerCellProbe | \ref SkiFileHelpConcreteMediumVelocityPerCellProbe "props" | \ref MediumVelocityPerCellProbe "docs"| the medium velocity for each spatial cell |
 | %MeridionalDustTemperatureCutProbe | \ref SkiFileHelpConcreteMeridionalDustTemperatureCutProbe "props" | \ref MeridionalDustTemperatureCutProbe "docs"| the indicative dust temperature along a meridian line |
 | %OpticalDepthMapProbe | \ref SkiFileHelpConcreteOpticalDepthMapProbe "props" | \ref OpticalDepthMapProbe "docs"| all-sky optical depth map as seen from given location |
 | %OpticalMaterialPropertiesProbe | \ref SkiFileHelpConcreteOpticalMaterialPropertiesProbe "props" | \ref OpticalMaterialPropertiesProbe "docs"| aggregate optical material properties for each medium |
 | %PlanarDustTemperatureCutsProbe | \ref SkiFileHelpConcretePlanarDustTemperatureCutsProbe "props" | \ref PlanarDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along planes parallel to the coordinate planes |
+| %PlanarMagneticFieldCutsProbe | \ref SkiFileHelpConcretePlanarMagneticFieldCutsProbe "props" | \ref PlanarMagneticFieldCutsProbe "docs"| cuts of the magnetic field along planes parallel to the coordinate planes |
 | %PlanarMediaDensityCutsProbe | \ref SkiFileHelpConcretePlanarMediaDensityCutsProbe "props" | \ref PlanarMediaDensityCutsProbe "docs"| cuts of the media densities along planes parallel to the coordinate planes |
+| %PlanarMediumVelocityCutsProbe | \ref SkiFileHelpConcretePlanarMediumVelocityCutsProbe "props" | \ref PlanarMediumVelocityCutsProbe "docs"| cuts of the medium velocity along planes parallel to the coordinate planes |
 | %PlanarRadiationFieldCutsProbe | \ref SkiFileHelpConcretePlanarRadiationFieldCutsProbe "props" | \ref PlanarRadiationFieldCutsProbe "docs"| cuts of the mean radiation field intensity along planes parallel to the coordinate planes |
 | %RadiationFieldPerCellProbe | \ref SkiFileHelpConcreteRadiationFieldPerCellProbe "props" | \ref RadiationFieldPerCellProbe "docs"| the mean radiation field intensity for each spatial cell |
 | %RadiationFieldWavelengthGridProbe | \ref SkiFileHelpConcreteRadiationFieldWavelengthGridProbe "props" | \ref RadiationFieldWavelengthGridProbe "docs"| the radiation field wavelength grid |
@@ -469,6 +475,17 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %ExtragalacticUnits | \ref SkiFileHelpConcreteExtragalacticUnits "props" | \ref ExtragalacticUnits "docs"| extragalactic units (length in pc, distance in Mpc) |
 | %SIUnits | \ref SkiFileHelpConcreteSIUnits "props" | \ref SIUnits "docs"| SI units |
 | %StellarUnits | \ref SkiFileHelpConcreteStellarUnits "props" | \ref StellarUnits "docs"| stellar units (length in AU, distance in pc) |
+
+\subsection SkiFileHelpBaseVectorField -VectorField
+[\ref VectorField "docs"] : a vector field 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %CylindricalVectorField | \ref SkiFileHelpConcreteCylindricalVectorField "props" | \ref CylindricalVectorField "docs"| a vector field rotating clockwise around the z-axis |
+| %OffsetVectorFieldDecorator | \ref SkiFileHelpConcreteOffsetVectorFieldDecorator "props" | \ref OffsetVectorFieldDecorator "docs"| a decorator that adds an offset to any vector field |
+| %RadialVectorField | \ref SkiFileHelpConcreteRadialVectorField "props" | \ref RadialVectorField "docs"| a vector field pointing away from the origin |
+| %RotateVectorFieldDecorator | \ref SkiFileHelpConcreteRotateVectorFieldDecorator "props" | \ref RotateVectorFieldDecorator "docs"| a decorator that adds a rotation to any vector field |
+| %UnidirectionalVectorField | \ref SkiFileHelpConcreteUnidirectionalVectorField "props" | \ref UnidirectionalVectorField "docs"| a vector field uniformly pointing in a given direction |
 
 \subsection SkiFileHelpBaseWavelengthDistribution -WavelengthDistribution
 [\ref WavelengthDistribution "docs"] : a wavelength probability distribution 
