@@ -110,6 +110,7 @@ abbreviations for physical quantities (don't forget the space between the number
 | time | <tt>s, yr, Myr, Gyr</tt> |
 | temperature | <tt>K</tt> |
 | energy | <tt>J, erg</tt> |
+| magnetic field | <tt>T, mT, uT, nT, G, mG, uG, nG</tt> |
 | pressure | <tt>Pa, N/m2, J/m3, bar, mbar, hPa, Ba, erg/cm3, K/m3</tt> |
 | bolometric luminosity | <tt>W, erg/s, Lsun</tt> |
 | neutral monochromatic luminosity \f$(\lambda L_\lambda = \nu L_\nu)\f$ | <tt>W, erg/s, Lsun</tt> |
