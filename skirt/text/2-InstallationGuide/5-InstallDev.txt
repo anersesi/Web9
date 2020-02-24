@@ -11,9 +11,79 @@ use Qt Creator as an integrated development environment, and to follow the proce
       \ref InstallQt (and any references therein).
 
 This advanced topic contains the following sections:
+- \ref InstallDevClangFormat
+- \ref InstallDevDoxstyle
+- \ref InstallDevDoxygen
 - \ref InstallDevQt
 - \ref InstallDevRepo
-- \ref InstallDevDoxygen
+
+
+\section InstallDevClangFormat Install the source code formatter (optional)
+
+If you plan on writing or updating \c SKIRT source code, you may wish to install \c clang-format, the tool used to
+automatically format all C++ source code in the \c SKIRT repository, as described in this section.
+
+For information on how to use the source code formatter, see \ref DevCodingStyleFormat.
+
+XXX
+
+
+\section InstallDevDoxstyle Build the documentation formatter (optional)
+
+If you plan on writing or updating the documentation in the \c SKIRT code, you may wish to build \c doxstyle, a tool to
+assist with formatting "/ **"-style documentation blocks in .hpp header files. The \c doxstyle tool is included as part
+of the \c SKIRT code tree and can be enabled through a build option.
+
+To build the \c doxstyle tool, turn on the "BUILD_DOX_STYLE" build option and rebuild the \c SKIRT project. For
+information about build options, see \ref InstallOptions. For instructions on how to configure build options, see \ref
+InstallQtBuild.
+
+For information on how to use the documentation formatter, see \ref DevCodingStyleFormat.
+
+
+\section InstallDevDoxygen Install the documentation generator (optional)
+
+The reference documentation for the \c SKIRT code is generated from the source code files by the freely available
+application \c Doxygen, which uses the \c dot tool (part of the Graphviz graph visualization software) to generate
+diagrams. Most \c SKIRT users and developers do not need to (re-)generate the documentation. However, if you wish to
+verify that the formatting instructions and formulae in your source code comments are properly rendered in the final
+documentation, you can install the appropriate tools as described in this section.
+
+For information on how to actually generate the documentation for the \c SKIRT code after installing
+these tools, see \ref DevDocs.
+
+\subsection InstallDevDoxygenVersion Version info
+
+The documentation on this web site has been generated with Doxygen version 1.8.13 and \c dot - graphviz version 2.36.0
+on Mac OS X 10.14 (Mojave). Earlier versions of these tools might not support all options and commands used in the
+documentation.
+
+\subsection InstallDevDoxygenMac Mac OS X
+
+<b> Installing Doxygen </b>
+
+- Navigate to the <a href="http://www.doxygen.nl/download.html">Doxygen download page</a>.
+- Scroll down and download the most recent binary distribution for Mac OS X.
+- After the download completes, open the '.dmg' file to mount the Doxygen installation disk.
+- In the Finder window that appears, drag the DoxyGen application to your applications folder.
+
+<b> Installing the Graphviz Graph Visualization Software </b>
+
+- Navigate to the <a href="http://www.graphviz.org/download/">Graphviz download page</a>.
+- Locate the graphviz-2.36.0.pkg package and download it.
+- Open the package and follow the instructions.
+- If the package fails open in response to a double-click, right-click the package file and choose 'Open'.
+  In the warning window that pops up, press 'Open' again to proceed with the installation.
+
+\subsection InstallDevDoxygenOther Other systems
+
+On Ubuntu a version of Doxygen including the Graphviz tools can be installed by entering:
+
+    sudo apt-get install doxygen
+
+On other systems, the package manager might offer similar capabilities. Otherwise, refer to the installation
+instructions on the <a href="http://www.stack.nl/~dimitri/doxygen">Doxygen</a> and
+<a href="http://www.graphviz.org">Graphviz</a> web sites.
 
 
 \section InstallDevQt Configure Qt Creator for development
@@ -52,23 +122,30 @@ other settings untouched), and at the end press the OK button to confirm the cha
     - Merge stderr and stdout: On
     - Default build directory: "../%{CurrentBuild:Name}"
 
-\subsection InstallDevQtDoxstyle The documentation streamliner
+\subsection InstallDevQtFormat The source code and documentation formatters
 
-If you plan on writing or updating \c SKIRT code documentation, you may wish to configure \c doxstyle,
-a tool to assist with formatting "/ **"-style documentation blocks in .hpp header files.
-The \c doxstyle tool is included as part of the \c SKIRT code tree and is enabled through a build option.
+If you installed the source code formatter and/or the documentation formatter (see sections at the top of this page),
+you can easily use these tools from within Qt Creator after performing the additional configuration steps described in
+this section. For information on how to use actually use these formatters, see \ref DevCodingStyleFormat.
 
-As the first step, turn on the "BUILD_DOX_STYLE" build option and rebuild the \c SKIRT project. For information about
-build options, see \ref InstallOptions. For instructions on how to configure build options, see \ref InstallQtBuild.
-
-To configure Qt Creator so that you can easily use the documentation streamliner, open the preferences panel and make
-the adjustments on the various tabs as listed below. Press the OK button at the end to confirm the changes.
+Launch Qt Creator, open the preferences panel, and make the adjustments on the various tabs as listed below. Press the
+OK button at the end to confirm the changes.
 
  - "Environment -> External Tools" tab
-   - Add a new category called "DoxStyle"
-   - Add a new item called "Streamline Selection" to this category
+   - Add a new category called "Formatting"
+   - Add a new item called "Format C++ code in file" to this category
    - Configure the attributes for this item as follows:
-     - Description: "Streamlines the doxygen blocks in the selection"
+     - Description: "Formats the C++ code in the complete file"
+     - Executable: path to the clang-format executable, e.g: ~/clang/bin/clang-format
+     - Arguments: "-style=file -i %{CurrentDocument:FilePath}"
+     - Working directory: empty
+     - Output: Show in pane
+     - Error output: Show in pane
+     - Modifies current document: on
+     - Input: empty
+   - Add another item called "Format comments in selection" to the same category
+   - Configure the attributes for this item as follows:
+     - Description: "Formats the doxygen blocks in the selection"
      - Executable: path to the DoxStyle executable: ~/SKIRT/release/Docs/doxstyle/doxstyle
      - Arguments: empty
      - Working directory: empty
@@ -78,11 +155,12 @@ the adjustments on the various tabs as listed below. Press the OK button at the 
      - Input: "%{CurrentDocument:Selection}"
 
  - "Environment -> Keyboard" tab
-    - In the long item list, select "Tools -> External.Streamline_Selection"
-    - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd + [I]</tt> (on Mac)
-      or <tt>[Alt] + [Ctrl] + [I]</tt> (on Linux)
-
-For information on how to use the documentation streamliner, see \ref DevCodingStyleFormat.
+   - In the long item list, select "Tools -> External.Format_C++_code_in_file"
+   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd + [J]</tt> (on Mac)
+     or <tt>[Alt] + [Ctrl] + [J]</tt> (on Linux)
+   - In the long item list, select "Tools -> External.Format_comments_in_selection"
+   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd + [I]</tt> (on Mac)
+     or <tt>[Alt] + [Ctrl] + [I]</tt> (on Linux)
 
 
 \section InstallDevRepo Setup the source code repository for development purposes
@@ -161,50 +239,5 @@ link the forked repository to your existing local repository:
       git push forked master
 
   where "master" is the name of the main branch of your local repository.
-
-
-\section InstallDevDoxygen Install the documentation generator
-
-The reference documentation for the \c SKIRT code is generated from the source code files by the freely available
-application \c Doxygen, which uses the \c dot tool (part of the Graphviz graph visualization software) to generate
-diagrams. Most \c SKIRT users and developers do not need to (re-)generate the documentation. However, if you wish to
-verify that the formatting instructions and formulae in your source code comments are properly rendered in the final
-documentation, you can install the appropriate tools as described in this section.
-
-For information on how to actually generate the documentation for the \c SKIRT code after installing
-these tools, see \ref DevDocs.
-
-\subsection InstallDevDoxygenVersion Version info
-
-The documentation on this web site has been generated with Doxygen version 1.8.13 and \c dot - graphviz version 2.36.0
-on Mac OS X 10.14 (Mojave). Earlier versions of these tools might not support all options and commands used in the
-documentation.
-
-\subsection InstallDevDoxygenMac Mac OS X
-
-<b> Installing Doxygen </b>
-
-- Navigate to the <a href="http://www.doxygen.nl/download.html">Doxygen download page</a>.
-- Scroll down and download the most recent binary distribution for Mac OS X.
-- After the download completes, open the '.dmg' file to mount the Doxygen installation disk.
-- In the Finder window that appears, drag the DoxyGen application to your applications folder.
-
-<b> Installing the Graphviz Graph Visualization Software </b>
-
-- Navigate to the <a href="http://www.graphviz.org/download/">Graphviz download page</a>.
-- Locate the graphviz-2.36.0.pkg package and download it.
-- Open the package and follow the instructions.
-- If the package fails open in response to a double-click, right-click the package file and choose 'Open'.
-  In the warning window that pops up, press 'Open' again to proceed with the installation.
-
-\subsection InstallDevDoxygenOther Other systems
-
-On Ubuntu a version of Doxygen including the Graphviz tools can be installed by entering:
-
-    sudo apt-get install doxygen
-
-On other systems, the package manager might offer similar capabilities. Otherwise, refer to the installation
-instructions on the <a href="http://www.stack.nl/~dimitri/doxygen">Doxygen</a> and
-<a href="http://www.graphviz.org">Graphviz</a> web sites.
 
 */

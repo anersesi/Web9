@@ -146,7 +146,7 @@ In .cpp files regular //-style comments are used for annotating the implementati
 Doxygen documentation blocks are used to document the code. These structured comments are used to
 generate HTML formatted documentation.
 
-Assuming you installed the doxstyle tool as described in \ref InstallDevQtDoxstyle,
+Assuming you installed the doxstyle tool as described in \ref InstallDevDoxstyle,
 you can automatically reformat documentation blocks in the Qt Creator editor as follows:
  - select a section of code that contains one or more "/ **"-style documentation blocks (you may select regular code
    as well, possibly even the whole file)

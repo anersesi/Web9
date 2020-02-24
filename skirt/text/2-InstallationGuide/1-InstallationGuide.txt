@@ -8,10 +8,10 @@ The \c SKIRT code is intended to be truly cross-platform. It is written in stand
 recent C++ compilers, and it uses the \c CMake build system, which is widely available. As a result, the \c SKIRT
 code should compile and run on any recent 64-bit version of Unix, Mac OS X, and Microsoft Windows.
 
-The source code for \c SKIRT is hosted on GitHub. You can download the code as a ZIP archive, but the
-recommended method is to use a \em git client, which is widely available. The documentation on this web site is
-generated from the source code through \em Doxygen. You don't need to install Doxygen and the related tools unless you
-are a substantial contributor to the SKIRT project.
+The source code for \c SKIRT is hosted on GitHub. You can download the code as a ZIP archive, but the recommended
+method is to use a \em git client, which is widely available. The source code is formatted using \c clang-format amd
+the documentation on this web site is generated from the source code through \c Doxygen. You don't need to install
+these tools unless you are a substantial contributor to the SKIRT project.
 
 The default and most basic build configuration includes a fully-functional version of the \c SKIRT command-line program
 with support for multiple parallel threads in a single process. In this configuration, the code has no external

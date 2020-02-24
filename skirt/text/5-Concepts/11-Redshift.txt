@@ -62,7 +62,7 @@ this selection, the \c DistantInstrument class allows its \em distance property 
  recorded in the instrument, and flux/surface brightness calibration takes into account the relevant relativistic
  effects including the luminosity distance.
 
-- If \em distance is zero and the model redshift is zero as well, a fatal error is issued during setup.
+ - If \em distance is zero and the model redshift is zero as well, a fatal error is issued during setup.
 
 This approach allows the on-the-fly convolution for a broadband-based instrument to occur in either the rest frame or
 the observer frame depending on the instrument's settings. A configuration might even include both type of instruments
