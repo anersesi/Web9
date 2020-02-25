@@ -176,10 +176,10 @@ OK button at the end to confirm the changes.
 
  - "Environment -> Keyboard" tab
    - In the long item list, select "Tools -> External.Format_C++_code_in_file"
-   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd + [J]</tt> (on Mac)
+   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd] + [J]</tt> (on Mac)
      or <tt>[Alt] + [Ctrl] + [J]</tt> (on Linux)
    - In the long item list, select "Tools -> External.Format_comments_in_selection"
-   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd + [I]</tt> (on Mac)
+   - In the "Key sequence" field, enter the shortcut combination <tt>[Alt] + [Cmd] + [I]</tt> (on Mac)
      or <tt>[Alt] + [Ctrl] + [I]</tt> (on Linux)
 
 

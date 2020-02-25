@@ -53,7 +53,7 @@ Each of these files starts with the standard license template provided as part o
 Function implementations in a .cpp file are seperated by a line of forward slashes as wide as the license template.
 
 Combining additional classes in the same header or source file is permissible only in extraordinary circumstances.
-For example, a small private utility class, used only from within a single class, may sometimes meaningfully be
+For example, a private utility class, used only from within a single class, may sometimes meaningfully be
 placed inside the implementation of the client class.
 
 Private variables, functions and classes that are not declared inside a class declaration in the header file,
@@ -66,9 +66,9 @@ guards and for including headers. Specifically, there are no conditional compila
 constant definitions.
 
 The exceptions to this rule are:
- - The implementation of the System class, which uses conditional compilation for adjusting to the current host system.
  - The ItemInfo.hpp header and its users, which employ macro definitions to generate the code and metadata related to
    discoverable SMILE properties.
+ - The implementation of the System class, which uses conditional compilation for adjusting to the current host system.
  - The implementation (\em not the interface) of a very small number of classes that support build-time options
    through conditional compilation. For example, the ProcessManager class
    is implemented differently when the code is built with support for MPI.
@@ -77,14 +77,10 @@ Unnecessary \#include directives are avoided, especially in header files because
 dependencies and increases compilation time. Where possible, a forward class declaration is used in the header file
 and the \#include directive is placed in the implementation file.
 
-\#include directives are placed in the beginning of each file, sorted alphabetically within each group,
-with the groups in the following order:
- - .hpp file for this class (in .cpp file) or for the base class(es) (in .hpp file)
- - other .hpp files within the \c SKIRT project
- - any .h files within the \c SKIRT project
- - C++ standard library headers
+\#include directives are placed in the beginning of each file as a single block, i.e. without any intervening empty
+lines. They are sorted automatically by the source code formatter, see \ref DevCodingStyleFormat.
 
-The \#include directives are followed by forward class declarations, if needed.
+Forward class declarations are placed just after the \#include directives, and they are sorted alphabetically.
 
 \subsection DevCodingStyleUsing 'using' directives and declarations
 
@@ -105,6 +101,7 @@ The code adheres to the following naming conventions:
   - class names and enumeration values start with an uppercase letter
   - function and variable names start with a lowercase letter
   - the names of class data members (variables declared as part of a class) have an underscore prefix, as in \c _x
+  - the names of variables with thread_local scope have a \c t_ prefix, as in \c t_cell
   - getters and setters are named for the property: \c _property leads to \c property() and \c setProperty()
   - function names other than getters usually start with a verb, as in \c createPackage() or \c run()
   - preprocessor macro names (used only in exceptional cases) have all-uppercase names, as in \c ITEM_PROPERTY
@@ -125,33 +122,42 @@ override the initialization of one or more data members, but there is no need to
 
 \subsection DevCodingStyleFormat Formatting the code
 
-The code adheres to the following indentation conventions:
-  - there are \em no tabs in the code; spaces are used instead
-  - each nesting level gets an extra indent of 4 spaces
-  - the curly braces starting and ending a nesting level are placed on a line of their own, as in
-\verbatim
-void run(bool flag)
-{
-    if (flag)
-    {
-        // run ...
-    }
-}
-\endverbatim
+<b> C++ source code </b>
 
-All lines of code and comments are kept within a 120 character limit. Continuation lines are indented for readability
-(e.g. lined up to the right of the assignment sign on the first line).
+All C++ code in the \c SKIRT repository has been automatically formatted by the \c clang-format tool (version 9). The
+formatting conventions are defined in a configuration file residing in the \c SKIRT build tree. For example, all lines
+of code and comments are kept within a 120 character limit, indentation is used for readability, and curly braces
+starting and ending a nesting level are usually placed on a line of their own. Newly submitted code must adhere to all
+formatting conventions. This is verified by an automated procedure on GitHub.
+
+The best (and often the only) way to ensure the correct result is to perform automated formatting before submission.
+Assuming you have installed the \c clang-format tool (see \ref InstallDevClangFormat) and you configured Qt Creator for
+using it (see \ref InstallDevQtFormat), you can automatically format the C++ source code in a given file as follows:
+
+  - select the source file in a Qt Creator editor pane
+  - save any changes to the file
+  - choose the "Tools->External->Formatting->Format C++ code in file" menu item \em or use the keyboard shortcut
+    assigned to this menu item: <tt>[Alt] + [Cmd] + [J]</tt> (on Mac) or <tt>[Alt] + [Ctrl] + [J]</tt> (on Linux).
+
+Alternatively, you can run the \c formatSourceCode.sh shell script to format all C++ source code in your local branch
+of the \c SKIRT repository:
+
+    cd ~/SKIRT/git
+    ./formatSourceCode.sh
+
+<b> Comment blocks </b>
 
 In .cpp files regular //-style comments are used for annotating the implementation. In .hpp files /**-style
 Doxygen documentation blocks are used to document the code. These structured comments are used to
-generate HTML formatted documentation.
+generate HTML formatted documentation (see \ref DevDocs).
 
-Assuming you installed the doxstyle tool as described in \ref InstallDevDoxstyle,
-you can automatically reformat documentation blocks in the Qt Creator editor as follows:
+Assuming you built the \c doxstyle tool (see \ref InstallDevDoxstyle) and you configured Qt Creator for using it (see
+\ref InstallDevQtFormat), you can automatically reformat documentation blocks in the Qt Creator editor as follows:
+
  - select a section of code that contains one or more "/ **"-style documentation blocks (you may select regular code
    as well, possibly even the whole file)
- - choose the "Tools->External->DoxStyle->Streamline Selection" menu item \em or use the keyboard shortcut
-   assigned to this menu item.
+ - choose the "Tools->External->Formatting->Format comments in selection" menu item \em or use the keyboard shortcut
+   assigned to this menu item: <tt>[Alt] + [Cmd] + [I]</tt> (on Mac) or <tt>[Alt] + [Ctrl] + [I]</tt> (on Linux)
 
 
 \section DevCodingLang Language recommendations
