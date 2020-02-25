@@ -10,7 +10,7 @@
 
 | Title | Author(s) | Date | Journal | Category | PDF | ADS |
 |--|--|--|--|--|--|--|
-| SKIRT: The design of a suite of input models for Monte Carlo radiative transfer simulations | Baes and Camps | Sep 2015 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2015.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2015A%26C....12...33B/abstract) |
+| SKIRT: The design of a suite of input models for Monte Carlo radiative transfer simulations | Baes and Camps | Sep 2015 | A&C | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2015.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2015A%26C....12...33B/abstract) |
 | Radiative transfer in disc galaxies – III. The observed kinematics of dusty disc galaxies | Baes et al. | Aug 2003 | MNRAS | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2003.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2003MNRAS.343.1081B/abstract) |
 | Radiative equilibrium in Monte Carlo radiative transfer using frequency distribution adjustment | Baes et al. | Jun 2005 | NewA | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2005.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2005NewA...10..523B/abstract) |
 | Efficient three-dimensional NLTE dust radiative transfer with SKIRT | Baes et al. | Oct 2011 | ApJS | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2011.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2011ApJS..196...22B/abstract) |

@@ -6,6 +6,86 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+Predictions for the spatial distribution of the dust continuum emission in 1 < z < 5 star-forming galaxies
+Cochrane et al.
+MNRAS
+09 2019
+Application
+Cochrane2019
+2019MNRAS.488.1779C
+
+Balmer breaks in simulated galaxies at z > 6
+Binggeli et al.
+MNRAS
+11 2019
+Application
+Binggeli2019
+2019MNRAS.489.3827B
+
+Deep learning predictions of galaxy merger stage and the importance of observational realism
+Bottrell et al.
+MNRAS
+12 2019
+Application
+Bottrell2019
+2019MNRAS.490.5390B
+
+Fade to grey: systematic variation of galaxy attenuation curves with galaxy properties in the EAGLE simulations
+Trayford et al.
+MNRAS
+01 2020
+Application
+Trayford2020
+2020MNRAS.491.3937T
+
+Non-parametric morphologies of galaxies in the EAGLE simulation
+Bignone et al.
+MNRAS
+01 2020
+Application
+Bignone2020
+2020MNRAS.491.3624B
+
+X-CIGALE: Fitting AGN/galaxy SEDs from X-ray to infrared
+Yang et al.
+MNRAS
+01 2020
+Application
+Yang2020
+2020MNRAS.491..740Y
+
+Galaxy sizes and the galaxy-halo connection - I. The remarkable tightness of the size distributions
+Zanisi et al.
+MNRAS
+02 2020
+Application
+Zanisi2020
+2020MNRAS.492.1671Z
+
+High-redshift JWST predictions from IllustrisTNG: dust modelling and galaxy luminosity functions
+Vogelsberger et al.
+MNRAS
+03 2020
+Application
+Vogelsberger2020
+2020MNRAS.492.5167V
+
+Feedback from supermassive black holes transforms centrals into passive galaxies by ejecting circumgalactic gas
+Oppenheimer et al.
+MNRAS
+01 2020
+Application
+Oppenheimer2020
+2020MNRAS.491.2939O
+
+The high-redshift SFR-M* relation is sensitive to the employed star formation rate and stellar mass indicators: towards addressing the tension between observations and simulations
+Katsianis et al.
+MNRAS
+03 2020
+Application
+Katsianis2020
+2020MNRAS.492.5592K
+
 Optical depth in polarised Monte Carlo radiative transfer
 Baes et al.
 A&A
@@ -368,7 +448,7 @@ Baes2016
 
 SKIRT: The design of a suite of input models for Monte Carlo radiative transfer simulations
 Baes and Camps
-A&A
+A&C
 09 2015
 Technical
 Baes2015
