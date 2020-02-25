@@ -20,12 +20,32 @@ This advanced topic contains the following sections:
 
 \section InstallDevClangFormat Install the source code formatter (optional)
 
-If you plan on writing or updating \c SKIRT source code, you may wish to install \c clang-format, the tool used to
-automatically format all C++ source code in the \c SKIRT repository, as described in this section.
+If you plan on writing or updating \c SKIRT source code, you may wish to install \c clang-format version 9, the tool
+used to automatically format all C++ source code in the \c SKIRT repository, as described in this section.
+The \c clang-format tool is part of the open source Clang C/C++ compiler effort.
 
 For information on how to use the source code formatter, see \ref DevCodingStyleFormat.
 
-XXX
+\subsection InstallDevClangFormatMac Mac OS X
+
+Apple's Xcode development environment includes an Apple-specific version of the Clang compiler. Unfortunately, it does
+not include the \c clang-format tool. The best option therfore is to install the pre-built binaries of the complete
+Clang distribution for the Mac OS operating system, which can be obtained from the LLVM download page:
+http://releases.llvm.org/download.html. To avoid confusion with the default Apple-specific clang++ installation, do not
+install this extra version of Clang in any of the directories that are (or may be) part of your \c PATH. Instead,
+install it in your home directory in such a way that the binaries are reachable at \c ~/clang/bin. The \c SKIRT
+procedure that formats the source code looks for the binary in this directory.
+
+\subsection InstallDevClangFormatOther Other systems
+
+On recent Ubuntu systems, \c clang-format version 9 can be installed by entering:
+
+    sudo apt-get install clang-format
+
+On other systems, the package manager might offer similar capabilities. Otherwise, refer to the installation
+instructions on the <a href="http://clang.llvm.org">Clang LLVM</a> web site. One option is to install the pre-built
+binaries of the complete Clang distribution for the appropriate operating system, which can be obtained from the LLVM
+download page: http://releases.llvm.org/download.html.
 
 
 \section InstallDevDoxstyle Build the documentation formatter (optional)
