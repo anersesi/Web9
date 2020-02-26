@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git 8b4920a built on 17/01/2020 at 15:17:55)</em>
+<em>SKIRT v9.0 (git 52e3285 built on 26/02/2020 at 11:47:03)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -50,6 +50,14 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %BroadBand | \ref SkiFileHelpConcreteBroadBand "props" | \ref BroadBand "docs"| a standard built-in broadband (transmission curve) |
 | %FileBand | \ref SkiFileHelpConcreteFileBand "props" | \ref FileBand "docs"| a wavelength band (transmission curve) loaded from a text file |
 | %ListBand | \ref SkiFileHelpConcreteListBand "props" | \ref ListBand "docs"| a wavelength band (transmission curve) specified inside the configuration file |
+
+\subsection SkiFileHelpBaseCosmology -Cosmology
+[\ref Cosmology "docs"] : a set of cosmology parameters, including redshift 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %FlatUniverseCosmology | \ref SkiFileHelpConcreteFlatUniverseCosmology "props" | \ref FlatUniverseCosmology "docs"| the model is at a given redshift in a flat universe |
+| %LocalUniverseCosmology | \ref SkiFileHelpConcreteLocalUniverseCosmology "props" | \ref LocalUniverseCosmology "docs"| the model is at redshift zero in the Local Universe |
 
 \subsection SkiFileHelpBaseDisjointWavelengthGrid -DisjointWavelengthGrid
 [\ref DisjointWavelengthGrid "docs"] : a wavelength grid with non-overlapping bins 
@@ -373,6 +381,9 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %FSPSSED | \ref SkiFileHelpConcreteFSPSSED "props" | \ref FSPSSED "docs"| an FSPS simple stellar population %SED |
 | %FileSED | \ref SkiFileHelpConcreteFileSED "props" | \ref FileSED "docs"| a spectral energy distribution loaded from a text file |
 | %ListSED | \ref SkiFileHelpConcreteListSED "props" | \ref ListSED "docs"| a spectral energy distribution specified inside the configuration file |
+| %LyaDoublePeakedSED | \ref SkiFileHelpConcreteLyaDoublePeakedSED "props" | \ref LyaDoublePeakedSED "docs"| a double-peaked spectrum around the central Lyman-alpha wavelength |
+| %LyaGaussianSED | \ref SkiFileHelpConcreteLyaGaussianSED "props" | \ref LyaGaussianSED "docs"| a Gaussian spectrum around the central Lyman-alpha wavelength |
+| %LyaSEDDecorator | \ref SkiFileHelpConcreteLyaSEDDecorator "props" | \ref LyaSEDDecorator "docs"| an %SED decorator replacing ionizing radiation with Lyman-alpha line emission |
 | %MappingsSED | \ref SkiFileHelpConcreteMappingsSED "props" | \ref MappingsSED "docs"| a star-forming region %SED from the MAPPINGS III model |
 | %MarastonSED | \ref SkiFileHelpConcreteMarastonSED "props" | \ref MarastonSED "docs"| a Maraston simple stellar population %SED |
 | %QuasarSED | \ref SkiFileHelpConcreteQuasarSED "props" | \ref QuasarSED "docs"| the spectral energy distribution of a typical quasar |
@@ -389,6 +400,9 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %CastelliKuruczSEDFamily | \ref SkiFileHelpConcreteCastelliKuruczSEDFamily "props" | \ref CastelliKuruczSEDFamily "docs"| a Castelli-Kurucz %SED family for stellar atmospheres |
 | %FSPSSEDFamily | \ref SkiFileHelpConcreteFSPSSEDFamily "props" | \ref FSPSSEDFamily "docs"| an FSPS %SED family for single stellar populations |
 | %FileSSPSEDFamily | \ref SkiFileHelpConcreteFileSSPSEDFamily "props" | \ref FileSSPSEDFamily "docs"| a user-provided %SED family for single stellar populations |
+| %LyaDoublePeakedSEDFamily | \ref SkiFileHelpConcreteLyaDoublePeakedSEDFamily "props" | \ref LyaDoublePeakedSEDFamily "docs"| a family of double-peaked spectra around the central Lyman-alpha wavelength |
+| %LyaGaussianSEDFamily | \ref SkiFileHelpConcreteLyaGaussianSEDFamily "props" | \ref LyaGaussianSEDFamily "docs"| a family of Gaussian spectra around the central Lyman-alpha wavelength |
+| %LyaSEDFamilyDecorator | \ref SkiFileHelpConcreteLyaSEDFamilyDecorator "props" | \ref LyaSEDFamilyDecorator "docs"| an %SED family decorator replacing ionizing radiation with Lyman-alpha line emission |
 | %MappingsSEDFamily | \ref SkiFileHelpConcreteMappingsSEDFamily "props" | \ref MappingsSEDFamily "docs"| a MAPPINGS III %SED family for star-forming regions |
 | %MarastonSEDFamily | \ref SkiFileHelpConcreteMarastonSEDFamily "props" | \ref MarastonSEDFamily "docs"| a Maraston %SED family for single stellar populations |
 | %Starburst99SEDFamily | \ref SkiFileHelpConcreteStarburst99SEDFamily "props" | \ref Starburst99SEDFamily "docs"| a Starburst99 %SED family for single stellar populations |

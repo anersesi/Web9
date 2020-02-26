@@ -4,7 +4,7 @@
 
 \section RecentChanges9Intro Introduction
 
-<em>January 17, 2020</em>
+<em>February 26, 2020</em>
 
 The tables below list the most relevant recent changes to SKIRT 9 and PTS 9, respectively, since the code was publicly
 released on May 10, 2019. In case a change comprises multiple commits, the date and commit hash in the table indicate
@@ -34,6 +34,13 @@ Oct 29, 2019 | fda5749 | Use hydrid parallellization for building Voronoi grids
 Jan 17, 2020 | 8b4920a | Introduce a set of basic vector fields, including decorators
 Jan 17, 2020 | 8b4920a | Add magnetic fields to geometric and imported media, including probes
 Jan 17, 2020 | 8b4920a | Add velocity fields to geometric sources and media, including probes
+Jan 28, 2020 | d9c0c65 | (*) Add SEDs to model Lyman-alpha sources
+Feb  5, 2020 | 2c8fc14 | (*) Add polarised dust emission for aligned grains to SecondarySourceSystem
+Feb 20, 2020 | d2af8ae | Add minimum radius to Sphere1DSpatialGrid
+Feb 26, 2020 | 52e3285 | (*) Allow placing models at nonzero redshift; support dust heating by CMB
+
+(*) Although these new features seem to produce reasonable results, please don't use them for 'production'
+simulations until the accuracy of their results has been verified in more detail.
 
 
 \section RecentChanges9PTS Recent changes in PTS 9

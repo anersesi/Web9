@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 8b4920a built on 17/01/2020 at 15:17:55)</em>
+<em>SKIRT v9.0 (git 52e3285 built on 26/02/2020 at 11:47:03)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -476,6 +476,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | dustEmissionType | \ref DustEmissionOptions::dustEmissionType() "docs" | Enum | the method used for dust emission calculations |
 | | | --> Equilibrium | assume local thermal equilibrium (LTE) |
 | | | --> Stochastic | handle stochastically heated grains (non-LTE) |
+| includeHeatingByCMB | \ref DustEmissionOptions::includeHeatingByCMB() "docs" | Bool | add the cosmic microwave background (CMB) as a dust heating source term |
 | storeEmissionRadiationField | \ref DustEmissionOptions::storeEmissionRadiationField() "docs" | Bool | store the radiation field during emission so that it can be probed for output |
 | secondaryPacketsMultiplier | \ref DustEmissionOptions::secondaryPacketsMultiplier() "docs" | Double | the multiplier on the number of photon packets launched for secondary emission from dust |
 | spatialBias | \ref DustEmissionOptions::spatialBias() "docs" | Double | the fraction of secondary photon packets distributed uniformly across spatial cells |
@@ -668,6 +669,15 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- |
 | filename | \ref FileWavelengthGrid::filename() "docs" | String | the name of the file with the characteristic wavelengths |
 | relativeHalfWidth | \ref FileWavelengthGrid::relativeHalfWidth() "docs" | Double | the relative half width for discrete bins, or zero for a consecutive range |
+
+\subsection SkiFileHelpConcreteFlatUniverseCosmology -FlatUniverseCosmology
+[\ref FlatUniverseCosmology "docs"] : the model is at a given redshift in a flat universe 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| redshift | \ref FlatUniverseCosmology::redshift() "docs" | Double | the redshift z of the model coordinate frame |
+| reducedHubbleConstant | \ref FlatUniverseCosmology::reducedHubbleConstant() "docs" | Double | the reduced Hubble constant h |
+| matterDensityFraction | \ref FlatUniverseCosmology::matterDensityFraction() "docs" | Double | the cosmological matter density fraction Ω_m |
 
 \subsection SkiFileHelpConcreteFrameInstrument -FrameInstrument
 [\ref FrameInstrument "docs"] : a distant instrument that outputs the surface brightness in every pixel as a data cube 
@@ -949,6 +959,9 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | wavelengths | \ref ListWavelengthGrid::wavelengths() "docs" | DoubleList | the characteristic wavelength for each bin |
 | relativeHalfWidth | \ref ListWavelengthGrid::relativeHalfWidth() "docs" | Double | the relative half width for discrete bins, or zero for a consecutive range |
 
+\subsection SkiFileHelpConcreteLocalUniverseCosmology -LocalUniverseCosmology
+[\ref LocalUniverseCosmology "docs"] : the model is at redshift zero in the Local Universe 
+
 \subsection SkiFileHelpConcreteLogMesh -LogMesh
 [\ref LogMesh "docs"] : a logarithmic mesh 
 
@@ -994,6 +1007,50 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | wavelengthGrid | \ref LuminosityProbe::wavelengthGrid() "docs" | %Item | %WavelengthGrid | \ref SkiFileHelpBaseWavelengthGrid "subclasses" | the wavelength grid for this probe |
+
+\subsection SkiFileHelpConcreteLyaDoublePeakedSED -LyaDoublePeakedSED
+[\ref LyaDoublePeakedSED "docs"] : a double-peaked spectrum around the central Lyman-alpha wavelength 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| scale | \ref LyaDoublePeakedSED::scale() "docs" | Double | the velocity scale |
+
+\subsection SkiFileHelpConcreteLyaDoublePeakedSEDFamily -LyaDoublePeakedSEDFamily
+[\ref LyaDoublePeakedSEDFamily "docs"] : a family of double-peaked spectra around the central Lyman-alpha wavelength 
+
+\subsection SkiFileHelpConcreteLyaGaussianSED -LyaGaussianSED
+[\ref LyaGaussianSED "docs"] : a Gaussian spectrum around the central Lyman-alpha wavelength 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| dispersion | \ref LyaGaussianSED::dispersion() "docs" | Double | the Gaussian velocity dispersion |
+
+\subsection SkiFileHelpConcreteLyaGaussianSEDFamily -LyaGaussianSEDFamily
+[\ref LyaGaussianSEDFamily "docs"] : a family of Gaussian spectra around the central Lyman-alpha wavelength 
+
+\subsection SkiFileHelpConcreteLyaSEDDecorator -LyaSEDDecorator
+[\ref LyaSEDDecorator "docs"] : an %SED decorator replacing ionizing radiation with Lyman-alpha line emission 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| conversionFraction | \ref LyaSEDDecorator::conversionFraction() "docs" | Double | the fraction of ionizing radiation replaced by Lyman-alpha emission |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| sedOriginal | \ref LyaSEDDecorator::sedOriginal() "docs" | %Item | %SED | \ref SkiFileHelpBaseSED "subclasses" | the original %SED being adjusted |
+| sedLymanAlpha | \ref LyaSEDDecorator::sedLymanAlpha() "docs" | %Item | %SED | \ref SkiFileHelpBaseSED "subclasses" | the %SED representing the Lyman-alpha line emission |
+
+\subsection SkiFileHelpConcreteLyaSEDFamilyDecorator -LyaSEDFamilyDecorator
+[\ref LyaSEDFamilyDecorator "docs"] : an %SED family decorator replacing ionizing radiation with Lyman-alpha line emission 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| conversionFraction | \ref LyaSEDFamilyDecorator::conversionFraction() "docs" | Double | the fraction of ionizing radiation replaced by Lyman-alpha emission |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| sedFamilyOriginal | \ref LyaSEDFamilyDecorator::sedFamilyOriginal() "docs" | %Item | %SEDFamily | \ref SkiFileHelpBaseSEDFamily "subclasses" | the original %SED family being adjusted |
+| sedLymanAlpha | \ref LyaSEDFamilyDecorator::sedLymanAlpha() "docs" | %Item | %SED | \ref SkiFileHelpBaseSED "subclasses" | the %SED representing the Lyman-alpha line emission |
 
 \subsection SkiFileHelpConcreteMRNDustMix -MRNDustMix
 [\ref MRNDustMix "docs"] : an MRN (1997) dust mix 
@@ -1198,6 +1255,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | random | \ref MonteCarloSimulation::random() "docs" | %Item | %Random | \ref SkiFileHelpBaseRandom "subclasses" | the random number generator |
 | units | \ref MonteCarloSimulation::units() "docs" | %Item | %Units | \ref SkiFileHelpBaseUnits "subclasses" | the units system |
+| cosmology | \ref MonteCarloSimulation::cosmology() "docs" | %Item | %Cosmology | \ref SkiFileHelpBaseCosmology "subclasses" | the cosmology parameters |
 | sourceSystem | \ref MonteCarloSimulation::sourceSystem() "docs" | %Item | %SourceSystem | \ref SkiFileHelpBaseSourceSystem "subclasses" | the source system |
 | mediumSystem | \ref MonteCarloSimulation::mediumSystem() "docs" | %Item | %MediumSystem | \ref SkiFileHelpBaseMediumSystem "subclasses" | the medium system |
 | instrumentSystem | \ref MonteCarloSimulation::instrumentSystem() "docs" | %Item | %InstrumentSystem | \ref SkiFileHelpBaseInstrumentSystem "subclasses" | the instrument system |
@@ -1827,6 +1885,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
 | maxRadius | \ref Sphere1DSpatialGrid::maxRadius() "docs" | Double | the outer radius of the grid |
+| minRadius | \ref Sphere1DSpatialGrid::minRadius() "docs" | Double | the inner radius of the grid |
 
 | Compound Property | | Type | Base Class | | Description
 | :-- | :--: | :-- | :-- | :--: | :-- |
