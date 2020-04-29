@@ -40,6 +40,7 @@ Feb 20, 2020 | d2af8ae | Add minimum radius to Sphere1DSpatialGrid
 Mar 19, 2020 | 767fb95 | Allow placing models at nonzero redshift
 Mar 19, 2020 | 767fb95 | Support dust heating by the CMB radiation
 Mar 19, 2020 | 767fb95 | Parallel instruments output the extent of the spatial axes in angular units
+Apr 20, 2020 | 69b5c6e | Fix bug in optimization of instruments with the same line of sight
 
 (*) Although these new features seem to produce reasonable results, please don't use them for 'production'
 simulations until the accuracy of their results has been verified in more detail.
