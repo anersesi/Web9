@@ -6,6 +6,22 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+SKIRT 9: Redesigning an advanced dust radiative transfer code to allow kinematics, line transfer and polarization by aligned dust grains
+Camps and Baes
+A&C
+04 2020
+Technical
+Camps2020
+2020A&C....3100381C
+
+Infrared luminosity functions and dust mass functions in the EAGLE simulation
+Baes et al.
+MNRAS
+04 2020
+Application
+Baes2020
+2020MNRAS.tmp.1138B
+
 Predictions for the spatial distribution of the dust continuum emission in 1 < z < 5 star-forming galaxies
 Cochrane et al.
 MNRAS
@@ -124,7 +140,7 @@ MNRAS
 06 2019
 Application
 Mackenzie2019
-2019MNRAS.tmp.1435M
+2019MNRAS.487.5070M
 
 Dust attenuation, dust emission, and dust temperature in galaxies at z ≥ 5: a view from the FIRE-2 simulations
 Ma et al.
