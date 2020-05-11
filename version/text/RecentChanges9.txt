@@ -4,7 +4,7 @@
 
 \section RecentChanges9Intro Introduction
 
-<em>March 19, 2020</em>
+<em>May 11, 2020</em>
 
 The tables below list the most relevant recent changes to SKIRT 9 and PTS 9, respectively, since the code was publicly
 released on May 10, 2019. In case a change comprises multiple commits, the date and commit hash in the table indicate
@@ -41,6 +41,7 @@ Mar 19, 2020 | 767fb95 | Allow placing models at nonzero redshift
 Mar 19, 2020 | 767fb95 | Support dust heating by the CMB radiation
 Mar 19, 2020 | 767fb95 | Parallel instruments output the extent of the spatial axes in angular units
 Apr 20, 2020 | 69b5c6e | Fix bug in optimization of instruments with the same line of sight
+May 11, 2020 | 247b3fb | Remove the carbon emission lines from the Mappings dust continuum
 
 (*) Although these new features seem to produce reasonable results, please don't use them for 'production'
 simulations until the accuracy of their results has been verified in more detail.
@@ -59,5 +60,6 @@ Oct 11, 2019 | 50de868 | Support conversion from FSPS output to SKIRT stored tab
 Oct 15, 2019 | 01cd541 | Add facilities for plotting the spectral resolution of a wavelength grid
 Oct 21, 2019 | 70b262f | Support plotting the new planar cuts at arbitrary positions in the model
 Jan 17, 2020 | b60c3d8 | Allow plotting magnetic field and velocity cuts produced by the respective probes
+May 11, 2020 | 021456b | Remove the carbon emission lines from the Mappings dust continuum
 
 */

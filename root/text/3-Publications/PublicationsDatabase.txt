@@ -6,6 +6,14 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+Reproducing the Universe: a comparison between the EAGLE simulations and the nearby DustPedia galaxy sample
+Trčka et al.
+MNRAS
+04 2020
+Application
+Trcka2020
+2020MNRAS.494.2823T
+
 SKIRT 9: Redesigning an advanced dust radiative transfer code to allow kinematics, line transfer and polarization by aligned dust grains
 Camps and Baes
 A&C
