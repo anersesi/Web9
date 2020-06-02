@@ -1,0 +1,93 @@
+/**
+
+\page Lya Lyman-alpha line transfer
+
+\section LyaIntro Introduction
+
+This concept note describes SKIRT's Lyman-alpha line radiation transfer capabilities. We indicate the assumptions about
+(or rather restrictions on) the simulated model, summarize the relevant physics, and discuss various aspects of the
+implementation and the numerical recipes used. The text is organized in sections as follows:
+
+- \ref LyaAssu
+- \ref LyaPhys
+- \ref LyaImpl
+
+
+\section LyaAssu Assumptions
+
+Hydrogen is the most abundant element in our Universe and, correspondingly, the Lyman-alpha (Lyα) transition serves as
+an important observational tool. Because Lyα is a resonance line, and because typical astrophysical environments are
+optically thick to Lyα, its radiative transfer (RT) is nontrivial. The implementation of Lyα capabilities in SKIRT is
+limited to models that conform to the following important assumptions (or rather restrictions):
+
+  - The spatial extent of the model is small relative to the distance to the observer (i.e. to the instruments in
+  SKIRT). This allows considering all locations in the model to have the same distance to the observer and it allows
+  using parallel projection.
+
+  - The spatial extent of the model is small relative to a cosmological volume and the spatial grid in SKIRT is
+  well-resolved across the model, implying a maximum size of the order of a single galaxy. This allows assuming that
+  the wavelength shifts caused by cosmic expansion within each spatial cell are small relative to the width of the
+  local Lya cross section profile. (If this would not be the case, a photon packet might inadvertently 'skip' over the
+  cross section profile rather than being scattered.)
+
+  - The model is intended to trace the Lyα emerging from the interstellar medium (ISM) that is part of the
+  astrophysical object under study, while ignoring the effects of the circumgalactic and intergalactic medium (CGM/IGM)
+  outside of the object. This avoids the need for providing a larger simulation box and/or including a subgrid recipe
+  for handling the effects of the CGM/IGM.
+
+  - The density distribution of neutral hydrogen is defined by the input model and remains fixed during the simulation.
+  In other words, there is no self-consistent calculation of the ionized hydrogen fraction. Instead, the user is
+  responsible for determining this ahead of the RT simulation.
+
+Within these limitations, the model can be placed at any redshift supported by SKIRT (see \ref Redshift)
+
+
+\section LyaPhys Physics
+
+\subsection LyaPhysEmission Emission
+
+\image html HydrogenEnergyLevels.png
+
+The above diagram illustrates some of the energy levels of atomic hydrogen (labeled with quantum numbers \f$n,\ell\f$)
+and the allowed transitions between them. Whenever the electron ends up on a higher energy level, it cascades down to
+either the 2s or the 2p state. From the 2p state, the final transition to the ground state produces a Lyα photon,
+correspondign to a wavelength of \f$\lambda_\alpha = 1215.67\,\text{\AA}\f$. From the 2s state, single-photon
+transitions are forbidden (because they require \f$\Delta\ell=\pm1\f$), but two-photon transitions allow the electron
+to decay to the ground state. These transitions are much less probable but still occur frequently enough to justify the
+assumption that essentially all neutral hydrogen atoms in astrophysical contexts reside in the ground state.
+
+Electrons can end up in a higher energy state in two different ways. The first possibility is by collisions between a
+free electron and a neutral hydrogen atom, exciting the atom at the expense of kinetic energy of the free electron. The
+process converts thermal energy of the electrons, and thus of the gas as whole, into radiation. It is therefore also
+referred to as cooling by producing Lyα radiation. The efficiency of this process depends on the number densities of
+electrons and neutral hydrogen atoms and on the velocity distribution of the electrons.
+
+The second mechanism is recombination of a free proton and a free electron, which again can leave the electron in any
+energy state. It is possible to compute the probability that a Lyα photon is produced during the radiative cascade down
+to the ground-state by summing (and properly weighing) the probabilities for each of the excited states. One usually
+assumes that astrophysical gases efficiently re-absorb higher order Lyman series and ionizing photons, effectively
+canceling out these transitions. This on the spot approximation is referred to as Case-B recombination.
+
+For both emission mechanisms, the calculations are complicated and we don't discuss further details here. Instead, we
+briefly consider the most important astrophysical sites of Lyα production.
+
+Interstellar HII regions are the most prominent sources of Lyα in the Universe. Young stars produce ionizing photons in
+their atmospheres which are efficiently absorbed in the ISM, and thus create regions of ionized hydrogen. Recombining
+protons and electrons give rise to Lyα emission (among lines caused by other electronic transitions). For a fixed
+initial mass function, the Lyα production rate increases towards lower metallicities. Stellar evolution models combined
+with stellar atmosphere models show that the effective temperature of stars of fixed mass become hotter with decreasing
+gas metallicity. The increased effective temperature causes a larger fraction of the bolometric luminosity to be
+emitted as ionizing radiation.
+
+The (usually small) neutral hydrogen fraction in the CGM and IGM can produce spatially extended Lyα emission resulting
+from cooling (collisions with electrons) or triggered by ionizing radiation from other external sources such as the
+Universal ultraviolet (UV) background. This internal CGM/IGM emission usually has a low surface brightness, however,
+and it is often dominated by scattered Lyα radiation that actually originated in remote sources.
+
+
+
+\section LyaImpl Implementation
+
+Blabla.
+
+*/

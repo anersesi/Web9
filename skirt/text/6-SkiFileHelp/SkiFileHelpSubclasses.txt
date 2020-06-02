@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git 08bceb8-dirty built on 11/05/2020 at 13:03:53)</em>
+<em>SKIRT v9.0 (git acba6ba built on 02/06/2020 at 08:31:03)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -218,6 +218,13 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %IntegratedLuminosityNormalization | \ref SkiFileHelpConcreteIntegratedLuminosityNormalization "props" | \ref IntegratedLuminosityNormalization "docs"| source normalization through the integrated luminosity for a given wavelength range |
 | %SpecificLuminosityNormalization | \ref SkiFileHelpConcreteSpecificLuminosityNormalization "props" | \ref SpecificLuminosityNormalization "docs"| source normalization through the specific luminosity at a given wavelength |
 
+\subsection SkiFileHelpBaseLyaOptions -LyaOptions
+[\ref LyaOptions "docs"] : a set of options related to Lyman-alpha line transfer 
+
+| Subclass | | | Description |
+| :-- | :--: | :--: | :-- |
+| %LyaOptions | \ref SkiFileHelpConcreteLyaOptions "props" | \ref LyaOptions "docs"| a set of options related to Lyman-alpha line transfer |
+
 \subsection SkiFileHelpBaseMaterialMix -MaterialMix
 [\ref MaterialMix "docs"] : a material mix 
 
@@ -226,6 +233,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %ConfigurableDustMix | \ref SkiFileHelpConcreteConfigurableDustMix "props" | \ref ConfigurableDustMix "docs"| a configurable dust mix with one or more grain populations |
 | %DraineLiDustMix | \ref SkiFileHelpConcreteDraineLiDustMix "props" | \ref DraineLiDustMix "docs"| a Draine and Li (2007) dust mix |
 | %ElectronMix | \ref SkiFileHelpConcreteElectronMix "props" | \ref ElectronMix "docs"| a population of electrons |
+| %LyaNeutralHydrogenMaterialMix | \ref SkiFileHelpConcreteLyaNeutralHydrogenMaterialMix "props" | \ref LyaNeutralHydrogenMaterialMix "docs"| neutral hydrogen for Lyman-alpha line transfer |
 | %MRNDustMix | \ref SkiFileHelpConcreteMRNDustMix "props" | \ref MRNDustMix "docs"| an MRN (1997) dust mix |
 | %MeanFileDustMix | \ref SkiFileHelpConcreteMeanFileDustMix "props" | \ref MeanFileDustMix "docs"| a dust mix with mean properties loaded from a text file |
 | %MeanInterstellarDustMix | \ref SkiFileHelpConcreteMeanInterstellarDustMix "props" | \ref MeanInterstellarDustMix "docs"| a typical interstellar dust mix (mean properties) |
@@ -324,6 +332,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | Subclass | | | Description |
 | :-- | :--: | :--: | :-- |
 | %DefaultDustTemperatureCutsProbe | \ref SkiFileHelpConcreteDefaultDustTemperatureCutsProbe "props" | \ref DefaultDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along the coordinate planes |
+| %DefaultGasTemperatureCutsProbe | \ref SkiFileHelpConcreteDefaultGasTemperatureCutsProbe "props" | \ref DefaultGasTemperatureCutsProbe "docs"| cuts of the gas temperature along the coordinate planes |
 | %DefaultMagneticFieldCutsProbe | \ref SkiFileHelpConcreteDefaultMagneticFieldCutsProbe "props" | \ref DefaultMagneticFieldCutsProbe "docs"| cuts of the magnetic field along the coordinate planes |
 | %DefaultMediaDensityCutsProbe | \ref SkiFileHelpConcreteDefaultMediaDensityCutsProbe "props" | \ref DefaultMediaDensityCutsProbe "docs"| cuts of the media densities along the coordinate planes |
 | %DefaultMediumVelocityCutsProbe | \ref SkiFileHelpConcreteDefaultMediumVelocityCutsProbe "props" | \ref DefaultMediumVelocityCutsProbe "docs"| cuts of the medium velocity along the coordinate planes |
@@ -334,6 +343,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %DustGrainPopulationsProbe | \ref SkiFileHelpConcreteDustGrainPopulationsProbe "props" | \ref DustGrainPopulationsProbe "docs"| dust grain population mass and size information |
 | %DustGrainSizeDistributionProbe | \ref SkiFileHelpConcreteDustGrainSizeDistributionProbe "props" | \ref DustGrainSizeDistributionProbe "docs"| dust grain size distribution |
 | %DustTemperaturePerCellProbe | \ref SkiFileHelpConcreteDustTemperaturePerCellProbe "props" | \ref DustTemperaturePerCellProbe "docs"| the indicative dust temperature for each spatial cell |
+| %GasTemperaturePerCellProbe | \ref SkiFileHelpConcreteGasTemperaturePerCellProbe "props" | \ref GasTemperaturePerCellProbe "docs"| the gas temperature for each spatial cell |
 | %InstrumentWavelengthGridProbe | \ref SkiFileHelpConcreteInstrumentWavelengthGridProbe "props" | \ref InstrumentWavelengthGridProbe "docs"| the instrument wavelength grids |
 | %LaunchedPacketsProbe | \ref SkiFileHelpConcreteLaunchedPacketsProbe "props" | \ref LaunchedPacketsProbe "docs"| the number of photon packets launched from primary sources |
 | %LinearDustTemperatureCutProbe | \ref SkiFileHelpConcreteLinearDustTemperatureCutProbe "props" | \ref LinearDustTemperatureCutProbe "docs"| the indicative dust temperature along a given line segment |
@@ -344,6 +354,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %OpticalDepthMapProbe | \ref SkiFileHelpConcreteOpticalDepthMapProbe "props" | \ref OpticalDepthMapProbe "docs"| all-sky optical depth map as seen from given location |
 | %OpticalMaterialPropertiesProbe | \ref SkiFileHelpConcreteOpticalMaterialPropertiesProbe "props" | \ref OpticalMaterialPropertiesProbe "docs"| aggregate optical material properties for each medium |
 | %PlanarDustTemperatureCutsProbe | \ref SkiFileHelpConcretePlanarDustTemperatureCutsProbe "props" | \ref PlanarDustTemperatureCutsProbe "docs"| cuts of the indicative dust temperature along planes parallel to the coordinate planes |
+| %PlanarGasTemperatureCutsProbe | \ref SkiFileHelpConcretePlanarGasTemperatureCutsProbe "props" | \ref PlanarGasTemperatureCutsProbe "docs"| cuts of the gas temperature along planes parallel to the coordinate planes |
 | %PlanarMagneticFieldCutsProbe | \ref SkiFileHelpConcretePlanarMagneticFieldCutsProbe "props" | \ref PlanarMagneticFieldCutsProbe "docs"| cuts of the magnetic field along planes parallel to the coordinate planes |
 | %PlanarMediaDensityCutsProbe | \ref SkiFileHelpConcretePlanarMediaDensityCutsProbe "props" | \ref PlanarMediaDensityCutsProbe "docs"| cuts of the media densities along planes parallel to the coordinate planes |
 | %PlanarMediumVelocityCutsProbe | \ref SkiFileHelpConcretePlanarMediumVelocityCutsProbe "props" | \ref PlanarMediumVelocityCutsProbe "docs"| cuts of the medium velocity along planes parallel to the coordinate planes |
@@ -387,6 +398,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %MappingsSED | \ref SkiFileHelpConcreteMappingsSED "props" | \ref MappingsSED "docs"| a star-forming region %SED from the MAPPINGS III model |
 | %MarastonSED | \ref SkiFileHelpConcreteMarastonSED "props" | \ref MarastonSED "docs"| a Maraston simple stellar population %SED |
 | %QuasarSED | \ref SkiFileHelpConcreteQuasarSED "props" | \ref QuasarSED "docs"| the spectral energy distribution of a typical quasar |
+| %SingleWavelengthSED | \ref SkiFileHelpConcreteSingleWavelengthSED "props" | \ref SingleWavelengthSED "docs"| a single-wavelength %SED in the form of a Dirac-delta function |
 | %Starburst99SED | \ref SkiFileHelpConcreteStarburst99SED "props" | \ref Starburst99SED "docs"| a Starburst99 simple stellar population %SED |
 | %SunSED | \ref SkiFileHelpConcreteSunSED "props" | \ref SunSED "docs"| the spectral energy distribution of the Sun |
 

@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 08bceb8-dirty built on 11/05/2020 at 13:03:53)</em>
+<em>SKIRT v9.0 (git acba6ba built on 02/06/2020 at 08:31:03)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -372,6 +372,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- |
 | probeName | \ref DefaultDustTemperatureCutsProbe::probeName() "docs" | String | the name for this probe |
 
+\subsection SkiFileHelpConcreteDefaultGasTemperatureCutsProbe -DefaultGasTemperatureCutsProbe
+[\ref DefaultGasTemperatureCutsProbe "docs"] : cuts of the gas temperature along the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref DefaultGasTemperatureCutsProbe::probeName() "docs" | String | the name for this probe |
+
 \subsection SkiFileHelpConcreteDefaultMagneticFieldCutsProbe -DefaultMagneticFieldCutsProbe
 [\ref DefaultMagneticFieldCutsProbe "docs"] : cuts of the magnetic field along the coordinate planes 
 
@@ -737,6 +744,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | scaleLength | \ref GammaGeometry::scaleLength() "docs" | Double | the scale length |
 | gamma | \ref GammaGeometry::gamma() "docs" | Double | the central density slope γ |
 
+\subsection SkiFileHelpConcreteGasTemperaturePerCellProbe -GasTemperaturePerCellProbe
+[\ref GasTemperaturePerCellProbe "docs"] : the gas temperature for each spatial cell 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref GasTemperaturePerCellProbe::probeName() "docs" | String | the name for this probe |
+
 \subsection SkiFileHelpConcreteGaussianGeometry -GaussianGeometry
 [\ref GaussianGeometry "docs"] : a Gaussian geometry 
 
@@ -1028,6 +1042,26 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 \subsection SkiFileHelpConcreteLyaGaussianSEDFamily -LyaGaussianSEDFamily
 [\ref LyaGaussianSEDFamily "docs"] : a family of Gaussian spectra around the central Lyman-alpha wavelength 
 
+\subsection SkiFileHelpConcreteLyaNeutralHydrogenMaterialMix -LyaNeutralHydrogenMaterialMix
+[\ref LyaNeutralHydrogenMaterialMix "docs"] : neutral hydrogen for Lyman-alpha line transfer 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| defaultTemperature | \ref LyaNeutralHydrogenMaterialMix::defaultTemperature() "docs" | Double | the default temperature of the neutral hydrogen gas |
+| includePolarization | \ref LyaNeutralHydrogenMaterialMix::includePolarization() "docs" | Bool | include support for polarization |
+
+\subsection SkiFileHelpConcreteLyaOptions -LyaOptions
+[\ref LyaOptions "docs"] : a set of options related to Lyman-alpha line transfer 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| lyaAccelerationScheme | \ref LyaOptions::lyaAccelerationScheme() "docs" | Enum | the Lyman-alpha line transfer acceleration scheme |
+| | | --> None | no acceleration |
+| | | --> Constant | acceleration scheme with a constant critical value |
+| | | --> Variable | acceleration scheme depending on local gas temperature and density |
+| lyaAccelerationStrength | \ref LyaOptions::lyaAccelerationStrength() "docs" | Double | the acceleration strength; higher is faster but less accurate |
+| includeHubbleFlow | \ref LyaOptions::includeHubbleFlow() "docs" | Bool | include the Doppler shift caused by the expansion of the universe |
+
 \subsection SkiFileHelpConcreteLyaSEDDecorator -LyaSEDDecorator
 [\ref LyaSEDDecorator "docs"] : an %SED decorator replacing ionizing radiation with Lyman-alpha line emission 
 
@@ -1177,6 +1211,7 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | extinctionOnlyOptions | \ref MediumSystem::extinctionOnlyOptions() "docs" | %Item | %ExtinctionOnlyOptions | \ref SkiFileHelpBaseExtinctionOnlyOptions "subclasses" | the extinction-only options |
 | dustEmissionOptions | \ref MediumSystem::dustEmissionOptions() "docs" | %Item | %DustEmissionOptions | \ref SkiFileHelpBaseDustEmissionOptions "subclasses" | the dust emission options |
 | dustSelfAbsorptionOptions | \ref MediumSystem::dustSelfAbsorptionOptions() "docs" | %Item | %DustSelfAbsorptionOptions | \ref SkiFileHelpBaseDustSelfAbsorptionOptions "subclasses" | the dust self-absorption options |
+| lyaOptions | \ref MediumSystem::lyaOptions() "docs" | %Item | %LyaOptions | \ref SkiFileHelpBaseLyaOptions "subclasses" | the Lyman-alpha line transfer options |
 | media | \ref MediumSystem::media() "docs" | %ItemList | %Medium | \ref SkiFileHelpBaseMedium "subclasses" | the transfer media |
 | grid | \ref MediumSystem::grid() "docs" | %Item | %SpatialGrid | \ref SkiFileHelpBaseSpatialGrid "subclasses" | the spatial grid |
 
@@ -1244,11 +1279,12 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | | | --> Expert | Expert: for expert users (hides no options) |
 | simulationMode | \ref MonteCarloSimulation::simulationMode() "docs" | Enum | the overall simulation mode |
 | | | --> OligoNoMedium | No medium - oligochromatic regime (a few discrete wavelengths) |
-| | | --> OligoExtinctionOnly | Extinction only - oligochromatic regime (a few discrete wavelengths) |
+| | | --> OligoExtinctionOnly | Dust extinction only - oligochromatic regime (a few discrete wavelengths) |
 | | | --> NoMedium | No medium (primary sources only) |
-| | | --> ExtinctionOnly | Extinction-only (no secondary emission) |
+| | | --> ExtinctionOnly | Dust extinction only (no secondary emission) |
 | | | --> DustEmission | With secondary emission from dust |
 | | | --> DustEmissionWithSelfAbsorption | With secondary emission from dust and iterations for dust self-absorption |
+| | | --> LyaWithDustExtinction | Lyman-alpha line transfer and dust extinction |
 | numPackets | \ref MonteCarloSimulation::numPackets() "docs" | Double | the default number of photon packets launched per simulation segment |
 
 | Compound Property | | Type | Base Class | | Description
@@ -1499,6 +1535,19 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | numPixelsX | \ref PlanarDustTemperatureCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
 | numPixelsY | \ref PlanarDustTemperatureCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
 | numPixelsZ | \ref PlanarDustTemperatureCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
+
+\subsection SkiFileHelpConcretePlanarGasTemperatureCutsProbe -PlanarGasTemperatureCutsProbe
+[\ref PlanarGasTemperatureCutsProbe "docs"] : cuts of the gas temperature along planes parallel to the coordinate planes 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| probeName | \ref PlanarGasTemperatureCutsProbe::probeName() "docs" | String | the name for this probe |
+| positionX | \ref PlanarGasTemperatureCutsProbe::positionX() "docs" | Double | the x position of the cut parallel to the yz plane |
+| positionY | \ref PlanarGasTemperatureCutsProbe::positionY() "docs" | Double | the y position of the cut parallel to the xz plane |
+| positionZ | \ref PlanarGasTemperatureCutsProbe::positionZ() "docs" | Double | the z position of the cut parallel to the xy plane |
+| numPixelsX | \ref PlanarGasTemperatureCutsProbe::numPixelsX() "docs" | Int | the number of pixels in the x direction |
+| numPixelsY | \ref PlanarGasTemperatureCutsProbe::numPixelsY() "docs" | Int | the number of pixels in the y direction |
+| numPixelsZ | \ref PlanarGasTemperatureCutsProbe::numPixelsZ() "docs" | Int | the number of pixels in the z direction |
 
 \subsection SkiFileHelpConcretePlanarMagneticFieldCutsProbe -PlanarMagneticFieldCutsProbe
 [\ref PlanarMagneticFieldCutsProbe "docs"] : cuts of the magnetic field along planes parallel to the coordinate planes 
@@ -1813,6 +1862,13 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | Scalar Property | | Type | Description
 | :-- | :--: | :-- | :-- |
 | size | \ref SingleGrainSizeDistribution::size() "docs" | Double | the single grain size for this distribution |
+
+\subsection SkiFileHelpConcreteSingleWavelengthSED -SingleWavelengthSED
+[\ref SingleWavelengthSED "docs"] : a single-wavelength %SED in the form of a Dirac-delta function 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| wavelength | \ref SingleWavelengthSED::wavelength() "docs" | Double | the single emission wavelength |
 
 \subsection SkiFileHelpConcreteSiteListTreePolicy -SiteListTreePolicy
 [\ref SiteListTreePolicy "docs"] : a tree grid construction policy using positions defined by an imported medium 
