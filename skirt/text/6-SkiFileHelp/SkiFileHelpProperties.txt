@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git efcaaee built on 10/06/2020 at 16:18:31)</em>
+<em>SKIRT v9.0 (git 2fb8543 built on 17/06/2020 at 08:38:28)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -809,6 +809,32 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 | :-- | :--: | :-- | :-- | :--: | :-- |
 | composition | \ref GrainPopulation::composition() "docs" | %Item | %GrainComposition | \ref SkiFileHelpBaseGrainComposition "subclasses" | the dust grain composition |
 | sizeDistribution | \ref GrainPopulation::sizeDistribution() "docs" | %Item | %GrainSizeDistribution | \ref SkiFileHelpBaseGrainSizeDistribution "subclasses" | the dust grain size distribution |
+
+\subsection SkiFileHelpConcreteHEALPixSkyInstrument -HEALPixSkyInstrument
+[\ref HEALPixSkyInstrument "docs"] : a HEALPix all-sky instrument (for Planck-like observations inside a model) 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| instrumentName | \ref HEALPixSkyInstrument::instrumentName() "docs" | String | the name for this instrument |
+| order | \ref HEALPixSkyInstrument::order() "docs" | Int | HEALPix order |
+| radius | \ref HEALPixSkyInstrument::radius() "docs" | Double | the radius of the observer's all-sky sphere |
+| observerX | \ref HEALPixSkyInstrument::observerX() "docs" | Double | the position of the observer, x component |
+| observerY | \ref HEALPixSkyInstrument::observerY() "docs" | Double | the position of the observer, y component |
+| observerZ | \ref HEALPixSkyInstrument::observerZ() "docs" | Double | the position of the observer, z component |
+| crossX | \ref HEALPixSkyInstrument::crossX() "docs" | Double | the position of the crosshair, x component |
+| crossY | \ref HEALPixSkyInstrument::crossY() "docs" | Double | the position of the crosshair, y component |
+| crossZ | \ref HEALPixSkyInstrument::crossZ() "docs" | Double | the position of the crosshair, z component |
+| upX | \ref HEALPixSkyInstrument::upX() "docs" | Double | the upwards direction, x component |
+| upY | \ref HEALPixSkyInstrument::upY() "docs" | Double | the upwards direction, y component |
+| upZ | \ref HEALPixSkyInstrument::upZ() "docs" | Double | the upwards direction, z component |
+| recordComponents | \ref HEALPixSkyInstrument::recordComponents() "docs" | Bool | record flux components separately |
+| numScatteringLevels | \ref HEALPixSkyInstrument::numScatteringLevels() "docs" | Int | the number of individually recorded scattering levels |
+| recordPolarization | \ref HEALPixSkyInstrument::recordPolarization() "docs" | Bool | record polarization (Stokes vector elements) |
+| recordStatistics | \ref HEALPixSkyInstrument::recordStatistics() "docs" | Bool | record information for calculating statistical properties |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| wavelengthGrid | \ref HEALPixSkyInstrument::wavelengthGrid() "docs" | %Item | %WavelengthGrid | \ref SkiFileHelpBaseWavelengthGrid "subclasses" | the wavelength grid for this instrument |
 
 \subsection SkiFileHelpConcreteHammerAitoffProjection -HammerAitoffProjection
 [\ref HammerAitoffProjection "docs"] : the Hammer-Aitoff all-sky projection 
