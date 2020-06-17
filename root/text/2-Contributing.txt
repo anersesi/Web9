@@ -57,6 +57,7 @@ extensively using the code and offering feedback. They are listed in alphabetica
 - Marko Stalevski
 - James Trayford
 </TD><TD>
+- Bert Vandenbroucke
 - Dries Van De Putte
 - Sebastiaan Vandewoude
 - Sam Verstocken
