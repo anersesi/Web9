@@ -72,11 +72,16 @@ rsync -qrt --delete dustpedia ../stage
 # Obtain the MathJax repository if it is not yet present
 if [ ! -d ../stage/mathjax ]; then
 
-    # Clone the repository and checkout version 2.4
-    git clone git://github.com/mathjax/MathJax.git ../stage/mathjax
-    git -C ../stage/mathjax checkout -b v2.4-latest origin/v2.4-latest
+    # Clone the repository and checkout version 3.0.5 (April 2020)
+    git clone git://github.com/mathjax/MathJax.git ../stage/mathjaxtmp
+    git -C ../stage/mathjaxtmp checkout 3.0.5
 
-    # Remove unnecessary files and folders
-    xargs -I fname rm -r fname < staging/mathjax_delete.txt
+    # Move the required files
+    mkdir -p ../stage/mathjax
+    mv ../stage/mathjaxtmp/es5/tex-chtml.js ../stage/mathjax/MathJax.js
+    mv ../stage/mathjaxtmp/es5/input ../stage/mathjax/
+    mv ../stage/mathjaxtmp/es5/output ../stage/mathjax/
 
+    # Remove the repository
+    rm -rf ../stage/mathjaxtmp
 fi
