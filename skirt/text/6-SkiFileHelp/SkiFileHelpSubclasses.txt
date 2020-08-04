@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpSubclasses List of subclasses for each base class
-<em>SKIRT v9.0 (git 87f6d12 built on 25/06/2020 at 20:07:04)</em>
+<em>SKIRT v9.0 (git b1ccc21 built on 04/08/2020 at 12:09:10)</em>
 \section SkiFileHelpSubclassesIntro Introduction
 This page lists the subclasses for each SKIRT class that may occur as base class name a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -119,6 +119,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | %AdaptiveMeshGeometry | \ref SkiFileHelpConcreteAdaptiveMeshGeometry "props" | \ref AdaptiveMeshGeometry "docs"| a geometry imported from data represented on an adaptive mesh (AMR grid) |
 | %BoxClipGeometryDecorator | \ref SkiFileHelpConcreteBoxClipGeometryDecorator "props" | \ref BoxClipGeometryDecorator "docs"| a decorator that clips another geometry using a cubodial box |
 | %BrokenExpDiskGeometry | \ref SkiFileHelpConcreteBrokenExpDiskGeometry "props" | \ref BrokenExpDiskGeometry "docs"| a broken exponential disk geometry |
+| %CellGeometry | \ref SkiFileHelpConcreteCellGeometry "props" | \ref CellGeometry "docs"| a geometry imported from cuboidal cell data |
 | %ClumpyGeometryDecorator | \ref SkiFileHelpConcreteClumpyGeometryDecorator "props" | \ref ClumpyGeometryDecorator "docs"| a decorator that adds clumpiness to any geometry |
 | %CombineGeometryDecorator | \ref SkiFileHelpConcreteCombineGeometryDecorator "props" | \ref CombineGeometryDecorator "docs"| a decorator that combines two different geometries |
 | %ConicalShellGeometry | \ref SkiFileHelpConcreteConicalShellGeometry "props" | \ref ConicalShellGeometry "docs"| a conical shell geometry |
@@ -271,6 +272,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | Subclass | | | Description |
 | :-- | :--: | :--: | :-- |
 | %AdaptiveMeshMedium | \ref SkiFileHelpConcreteAdaptiveMeshMedium "props" | \ref AdaptiveMeshMedium "docs"| a transfer medium imported from data represented on an adaptive mesh (AMR grid) |
+| %CellMedium | \ref SkiFileHelpConcreteCellMedium "props" | \ref CellMedium "docs"| a transfer medium imported from cuboidal cell data |
 | %GeometricMedium | \ref SkiFileHelpConcreteGeometricMedium "props" | \ref GeometricMedium "docs"| a transfer medium with a built-in geometry |
 | %ParticleMedium | \ref SkiFileHelpConcreteParticleMedium "props" | \ref ParticleMedium "docs"| a transfer medium imported from smoothed particle data |
 | %VoronoiMeshMedium | \ref SkiFileHelpConcreteVoronoiMeshMedium "props" | \ref VoronoiMeshMedium "docs"| a transfer medium imported from data represented on a Voronoi mesh |
@@ -435,6 +437,7 @@ This page lists the subclasses for each SKIRT class that may occur as base class
 | Subclass | | | Description |
 | :-- | :--: | :--: | :-- |
 | %AdaptiveMeshSource | \ref SkiFileHelpConcreteAdaptiveMeshSource "props" | \ref AdaptiveMeshSource "docs"| a primary source imported from data represented on an adaptive mesh (AMR grid) |
+| %CellSource | \ref SkiFileHelpConcreteCellSource "props" | \ref CellSource "docs"| a primary source imported from cuboidal cell data |
 | %CubicalBackgroundSource | \ref SkiFileHelpConcreteCubicalBackgroundSource "props" | \ref CubicalBackgroundSource "docs"| a cubical background source with an anisotropic inward radiation field |
 | %GeometricSource | \ref SkiFileHelpConcreteGeometricSource "props" | \ref GeometricSource "docs"| a primary source with a built-in geometry |
 | %ParticleSource | \ref SkiFileHelpConcreteParticleSource "props" | \ref ParticleSource "docs"| a primary source imported from smoothed particle data |

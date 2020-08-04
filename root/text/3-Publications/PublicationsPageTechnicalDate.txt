@@ -10,6 +10,7 @@
 
 | Title | Author(s) | Date | Journal | Category | PDF | ADS |
 |--|--|--|--|--|--|--|
+| CosTuuM: Polarized Thermal Dust Emission by Magnetically Oriented Spheroidal Grains | Vandenbroucke et al. | Jul 2020 | AJ | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Vandenbroucke2020.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2020AJ....160...55V/abstract) |
 | SKIRT 9: Redesigning an advanced dust radiative transfer code to allow kinematics, line transfer and polarization by aligned dust grains | Camps and Baes | Apr 2020 | A&C | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Camps2020.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2020A&C....3100381C/abstract) |
 | Optical depth in polarised Monte Carlo radiative transfer | Baes et al. | Oct 2019 | A&A | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Baes2019b.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2019A&A...630A..61B/abstract) |
 | SKIRT: Hybrid parallelization of radiative transfer simulations | Verstocken et al. | Jul 2017 | A&C | Technical | [PDF](http://sciences.ugent.be/skirtextdat/SKIRTC/Publications/Verstocken2017.pdf) | [ADS](https://ui.adsabs.harvard.edu/abs/2017A%26C....20...16V/abstract) |

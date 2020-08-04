@@ -6,6 +6,62 @@
 # PDF (filename body without directory nor filename extension)
 # ADS (bibcode reference without the other portions of the URL)
 
+High-resolution, 3D radiative transfer modelling. IV. AGN-powered dust heating in NGC 1068
+Viaene et al.
+A&A
+06 2020
+Application
+Viaene2020
+2020A&A...638A.150V
+
+High-resolution, 3D radiative transfer modelling. III. The DustPedia barred galaxies
+Nersesian et al.
+A&A
+05 2020
+Application
+Nersesian2020
+2020A&A...637A..25N
+
+Galaxy formation with BECDM - II. Cosmic filaments and first galaxies
+Mocz et al.
+MNRAS
+04 2020
+Application
+Mocz2020
+2020MNRAS.494.2027M
+
+Rapid early coeval star formation and assembly of the most-massive galaxies in the Universe
+Rennehan at al.
+MNRAS
+04 2020
+Application
+Rennehan2020
+2020MNRAS.493.4607R
+
+Massive low-surface-brightness galaxies in the EAGLE simulation
+Kulier et al.
+MNRAS
+06 2020
+Application
+Kulier2020
+2020MNRAS.496.3996K
+
+High-resolution, 3D radiative transfer modelling. II. The early-type spiral galaxy M 81
+Verstocken et al.
+A&A
+05 2020
+Application
+Verstocken2020
+2020A&A...637A..24V
+
+CosTuuM: Polarized Thermal Dust Emission by Magnetically Oriented Spheroidal Grains
+Vandenbroucke et al.
+AJ
+07 2020
+Technical
+Vandenbroucke2020
+2020AJ....160...55V
+
 Reproducing the Universe: a comparison between the EAGLE simulations and the nearby DustPedia galaxy sample
 Trčka et al.
 MNRAS

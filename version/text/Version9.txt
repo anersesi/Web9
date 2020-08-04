@@ -4,7 +4,7 @@
 
 \section Version9New What's new
 
-Version 9 is the latest, exciting version of the \c SKIRT project that has been redesigned to allow simulating a wider
+Version 9 is the latest version of the \c SKIRT project that has been designed to allow simulating a wider
 range of physics. The \ref Version9Intro on this page describes the \c SKIRT project without assuming any knowledge
 about previous versions. Readers familiar with \c SKIRT, or readers interested in the status of version 9 development,
 might instead want to visit these pages:

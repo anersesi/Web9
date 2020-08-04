@@ -29,44 +29,20 @@ automated contexts.
 The SKIRT project is fully open source, including all C++ and Python code and the contents of this web site, and
 publicly available under liberal licensing conditions (see \ref LegalInfo). We invite you to use the SKIRT project's
 software for your work, and to interact with other users and/or contribute to the project (see \ref Contributing).
-Results of applying SKIRT to various astrophysical models have been reported in over 50 refereed publications so far
+Results of applying SKIRT to various astrophysical models have been reported in over 80 refereed publications so far
 (see \ref PublicationsAllDate "Publications").
 
 \section LandingVersions Project versions
 
-This web site includes documentation for two versions of the SKIRT project.
+This web site includes documentation for two versions of the SKIRT project. Version 9 is the current stable version and
+is recommended for any new projects. SKIRT 9 has been designed to allow a wider range of physics than previous
+versions. For example, it already implements kinematics, and the long-term goal is to include extra dust physics (e.g.,
+polarization caused by aligned spheroidal dust grains) and other transfer media (e.g., some aspects of hydrogen line
+transfer). The code has been extensively tested, runs all available benchmarks, and is actively used for various
+science projects. It is fully documented, including tutorials, concept notes and reference material. PTS 9 is the
+corresponding new version of the Python toolkit for SKIRT.
 
-<TABLE>
-<TR><TD><center><b><a href="../version8/_version8.html">Version 8</a>: mature and stable</b></center>
-</TD><TD><center><b><a href="../version9/_version9.html">Version 9</a>: new and exciting</b></center>
-</TD></TR>
-<TR><TD>
-
-SKIRT 8 is a mature and stable dust continuum radiative transfer code. It is fully documented and has been actively
-used for science applications for over a year without reports of any significant problems.
-
-The corresponding PTS code historically did not carry a version number but as of now is informally labeled "version 8"
-for clarity. In addition to supporting basic SKIRT-related functions, it includes modules for working with astronomical
-data and for advanced modeling.
-
-SKIRT 8 and PTS 8 are now in maintenance mode. We do not plan to add new features to version 8 of the code base. On the
-other hand, signifant problems will still be addressed if and when the need arises.
-
-</TD><TD>
-
-SKIRT 9 is a new and exciting version of the code that has been redesigned to allow a wider range of physics. It
-already implements kinematics, and the long-term goal is to include extra dust physics (e.g., polarization caused by
-aligned spheroidal dust grains) and other transfer media (e.g., some aspects of hydrogen line transfer).
-
-SKIRT 9 has been extensively tested in the lab and it runs all available benchmarks. It is also fully documented,
-including up-to-date tutorials, concept notes and reference material. This new version is now being used for its first
-actual science projects.
-
-PTS 9 is the corresponding new version of the Python toolkit. It also underwent a substantial redesign, and includes
-the full subset of functionality directly related to SKIRT.
-
-</TD></TR>
-</TABLE>
+Version 8 of the SKIRT project is now outdated; its documentation is provided here for legacy reasons.
 
 \section LandingNavigating Navigating this web site
 

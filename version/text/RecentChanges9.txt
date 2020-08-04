@@ -4,7 +4,7 @@
 
 \section RecentChanges9Intro Introduction
 
-<em>June 25, 2020</em>
+<em>August 4, 2020</em>
 
 The tables below list the most relevant recent changes to SKIRT 9 and PTS 9, respectively, since the code was publicly
 released on May 10, 2019. In case a change comprises multiple commits, the date and commit hash in the table indicate
@@ -35,7 +35,6 @@ Jan 17, 2020 | 8b4920a | Introduce a set of basic vector fields, including decor
 Jan 17, 2020 | 8b4920a | Add magnetic fields to geometric and imported media, including probes
 Jan 17, 2020 | 8b4920a | Add velocity fields to geometric sources and media, including probes
 Jan 28, 2020 | d9c0c65 | (*) Add SEDs to model Lyman-alpha sources
-Feb  5, 2020 | 2c8fc14 | (*) Add polarised dust emission for aligned grains to SecondarySourceSystem
 Feb 20, 2020 | d2af8ae | Add minimum radius to Sphere1DSpatialGrid
 Mar 19, 2020 | 767fb95 | Allow placing models at nonzero redshift
 Mar 19, 2020 | 767fb95 | Support dust heating by the CMB radiation
@@ -44,7 +43,9 @@ Apr 20, 2020 | 69b5c6e | Fix bug in optimization of instruments with the same li
 May 11, 2020 | 247b3fb | Remove the carbon emission lines from the Mappings dust continuum
 Jun 10, 2020 | efcaaee | (*) Add Lyman-alpha photon cycle and import capabilities
 Jun 17, 2020 | 2fb8543 | Add HEALPixSkyInstrument
-Jun 25, 2020 | 87f6d12 | Repeat warnings and non-fatal errors at the end of the simulation log
+Jul 16, 2020 | 58c16ec | Repeat warnings and non-fatal errors at the end of the simulation log
+Jul 29, 2020 | 9db9d51 | Add polarised secondary emission for aligned dust grains
+Aug  4, 2020 | b1ccc21 | Add snapshot import from list of cuboidal cells (as alternative for AMR)
 
 (*) Although these new features seem to produce reasonable results, please don't use them for 'production'
 simulations until the accuracy of their results has been verified in more detail.
@@ -64,6 +65,6 @@ Oct 15, 2019 | 01cd541 | Add facilities for plotting the spectral resolution of 
 Oct 21, 2019 | 70b262f | Support plotting the new planar cuts at arbitrary positions in the model
 Jan 17, 2020 | b60c3d8 | Allow plotting magnetic field and velocity cuts produced by the respective probes
 May 11, 2020 | 021456b | Remove the carbon emission lines from the Mappings dust continuum
-Jun 17, 2020 | 099f263 | Add script to convert HEALPixSkyInstrument output to a projected image
+Jul  8, 2020 | 8de8b34 | Add script to convert HEALPixSkyInstrument output to a projected image
 
 */

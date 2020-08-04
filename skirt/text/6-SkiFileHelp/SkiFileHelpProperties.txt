@@ -1,6 +1,6 @@
 /**
 \page SkiFileHelpProperties List of properties for each concrete class
-<em>SKIRT v9.0 (git 87f6d12 built on 25/06/2020 at 20:07:04)</em>
+<em>SKIRT v9.0 (git b1ccc21 built on 04/08/2020 at 12:09:10)</em>
 \section SkiFileHelpPropertiesIntro Introduction
 This page lists the properties for each concrete SKIRT class that may occur as an object in a ski file. <p>
              The sections are listed alphabetically on class name. To quickly locate the section for a given class,
@@ -229,6 +229,64 @@ This page lists the properties for each concrete SKIRT class that may occur as a
 
 \subsection SkiFileHelpConcreteCastelliKuruczSEDFamily -CastelliKuruczSEDFamily
 [\ref CastelliKuruczSEDFamily "docs"] : a Castelli-Kurucz %SED family for stellar atmospheres 
+
+\subsection SkiFileHelpConcreteCellGeometry -CellGeometry
+[\ref CellGeometry "docs"] : a geometry imported from cuboidal cell data 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| filename | \ref CellGeometry::filename() "docs" | String | the name of the file to be imported |
+| massType | \ref CellGeometry::massType() "docs" | Enum | the type of mass quantity to be imported |
+| | | --> MassDensity | mass density |
+| | | --> Mass | mass (volume-integrated mass density) |
+| | | --> NumberDensity | number density |
+| | | --> Number | number (volume-integrated number density) |
+| importMetallicity | \ref CellGeometry::importMetallicity() "docs" | Bool | import a metallicity column |
+| importTemperature | \ref CellGeometry::importTemperature() "docs" | Bool | import a temperature column |
+| maxTemperature | \ref CellGeometry::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
+| useColumns | \ref CellGeometry::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
+
+\subsection SkiFileHelpConcreteCellMedium -CellMedium
+[\ref CellMedium "docs"] : a transfer medium imported from cuboidal cell data 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| filename | \ref CellMedium::filename() "docs" | String | the name of the file to be imported |
+| massType | \ref CellMedium::massType() "docs" | Enum | the type of mass quantity to be imported |
+| | | --> MassDensity | mass density |
+| | | --> Mass | mass (volume-integrated mass density) |
+| | | --> NumberDensity | number density |
+| | | --> Number | number (volume-integrated number density) |
+| massFraction | \ref CellMedium::massFraction() "docs" | Double | the fraction of the mass to be included (or one to include all) |
+| importMetallicity | \ref CellMedium::importMetallicity() "docs" | Bool | import a metallicity column |
+| importTemperature | \ref CellMedium::importTemperature() "docs" | Bool | import a temperature column |
+| maxTemperature | \ref CellMedium::maxTemperature() "docs" | Double | the maximum temperature for included mass (or zero to include all) |
+| importVelocity | \ref CellMedium::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importMagneticField | \ref CellMedium::importMagneticField() "docs" | Bool | import magnetic field components (3 columns) |
+| importVariableMixParams | \ref CellMedium::importVariableMixParams() "docs" | Bool | import parameter(s) to select a spatially varying material mix |
+| useColumns | \ref CellMedium::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| materialMix | \ref CellMedium::materialMix() "docs" | %Item | %MaterialMix | \ref SkiFileHelpBaseMaterialMix "subclasses" | the material type and properties throughout the medium |
+| materialMixFamily | \ref CellMedium::materialMixFamily() "docs" | %Item | %MaterialMixFamily | \ref SkiFileHelpBaseMaterialMixFamily "subclasses" | the material mix family addressed by the imported parameter(s) |
+
+\subsection SkiFileHelpConcreteCellSource -CellSource
+[\ref CellSource "docs"] : a primary source imported from cuboidal cell data 
+
+| Scalar Property | | Type | Description
+| :-- | :--: | :-- | :-- |
+| filename | \ref CellSource::filename() "docs" | String | the name of the file to be imported |
+| importVelocity | \ref CellSource::importVelocity() "docs" | Bool | import velocity components (3 columns) |
+| importVelocityDispersion | \ref CellSource::importVelocityDispersion() "docs" | Bool | import velocity dispersion (spherically symmetric) |
+| useColumns | \ref CellSource::useColumns() "docs" | String | a list of names corresponding to columns in the file to be imported |
+| sourceWeight | \ref CellSource::sourceWeight() "docs" | Double | the weight of this source for the number of photon packets launched |
+| wavelengthBias | \ref CellSource::wavelengthBias() "docs" | Double | the fraction of photon packet wavelengths sampled from a bias distribution |
+
+| Compound Property | | Type | Base Class | | Description
+| :-- | :--: | :-- | :-- | :--: | :-- |
+| sedFamily | \ref CellSource::sedFamily() "docs" | %Item | %SEDFamily | \ref SkiFileHelpBaseSEDFamily "subclasses" | the %SED family for assigning spectra to the imported sources |
+| wavelengthBiasDistribution | \ref CellSource::wavelengthBiasDistribution() "docs" | %Item | %WavelengthDistribution | \ref SkiFileHelpBaseWavelengthDistribution "subclasses" | the bias distribution for sampling photon packet wavelengths |
 
 \subsection SkiFileHelpConcreteClumpyGeometryDecorator -ClumpyGeometryDecorator
 [\ref ClumpyGeometryDecorator "docs"] : a decorator that adds clumpiness to any geometry 
